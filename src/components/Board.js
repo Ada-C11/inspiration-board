@@ -16,14 +16,13 @@ class Board extends Component {
     };
   }
 
-
-
   render() {
+    console.log(this.state.cards);
     const cardList = this.state.cards.map((card, i) => {
 
       return (
         <li key={i}>
-          <Card quote={card.quote} emoji={card.emoji} />
+          <Card quote={card.text} emoji={card.emoji} />
         </li>
       );
     });
