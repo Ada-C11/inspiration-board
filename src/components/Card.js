@@ -14,12 +14,17 @@ class Card extends Component {
   }
   render() {
     console.log(this.state.text)
-    console.log(emoji.getUnicode(this.state.emoji))
+    console.log(this.state.emoji)
+    let emojiUni = (this.state.emoji) ? emoji.getUnicode(this.state.emoji) : emoji.getUnicode("dog");
+
+
+    // console.log(emoji.getUnicode(this.state.emoji))
+    // console.log(emoji.unicode)
     return (
       <div className="card">
         <section className="card__content">
           <div className="card__content-text">{this.state.text}</div>
-          <div className="card__content-emoji">{this.state.emoji}</div>
+          <div className="card__content-emoji">{emojiUni}</div>
         </section>
       </div>
     )

@@ -36,7 +36,7 @@ class Board extends Component {
   render() {
     const cardComponents = this.generateCardComponents()
     return (
-      <div>
+      <div className="board">
         {cardComponents}
       </div>
     )
