@@ -18,6 +18,16 @@ class Board extends Component {
     };
   }
 
+  componentDidMount() {
+    axios.get('')
+    .then((response) => {
+
+    })
+    .catch((error) => {
+
+    });
+  }
+
   render() {
     const boardCards = this.state.cards.map((card, index) => {
       return <Card key={index} card={card} />
@@ -33,7 +43,7 @@ class Board extends Component {
 }
 
 Board.propTypes = {
-
+  boardName: PropTypes.string.isRequired,
 };
 
 export default Board;
