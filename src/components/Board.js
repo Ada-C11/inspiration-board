@@ -12,14 +12,20 @@ class Board extends Component {
     super();
 
     this.state = {
-      cards: [],
+      cards: [
+        'Ore wa kaizoku ou ni naru!'
+      ],
     };
   }
 
   render() {
+    const boardCards = this.state.cards.map((card, index) => {
+      return <Card key={index} card={card} />
+    })
+
     return (
       <div>
-        Board
+        {boardCards}
       </div>
     )
   }
