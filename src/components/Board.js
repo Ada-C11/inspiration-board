@@ -16,10 +16,24 @@ class Board extends Component {
     };
   }
 
+  componentDidMount() {
+    axios.get()
+      .then(response) {
+        
+      }
+      .catch(error) {
+
+      }
+  }
+
+  generateCards() {
+    
+  }
+
   render() {
     return (
       <div>
-        Board
+        
       </div>
     )
   }
