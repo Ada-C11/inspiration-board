@@ -13,6 +13,7 @@ class Board extends Component {
 
     this.state = {
       cards: [],
+      cardText: 'hello!'
     };
   }
 
@@ -20,6 +21,13 @@ class Board extends Component {
     return (
       <div>
         Board
+
+        <div>
+          <Card text={this.state.cardText} />
+        </div>
+        <div>
+          <Card text={this.state.cardText} />
+        </div>
       </div>
     )
   }

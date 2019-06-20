@@ -9,6 +9,7 @@ class Card extends Component {
     return (
       <div className="card">
         Card
+        {this.props.text}
       </div>
     )
   }
