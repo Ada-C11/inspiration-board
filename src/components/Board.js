@@ -31,10 +31,15 @@ class Board extends Component {
 
 
   render() {
-    console.log(this.state.cards)
+    const allCards = this.state.cards.map((card, i) => {
+      return <Card
+      key={i}
+      content={card}
+      />
+    })
     return (
       <div>
-        Board
+        {allCards}
       </div>
     )
   }

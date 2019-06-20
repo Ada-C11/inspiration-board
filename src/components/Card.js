@@ -6,10 +6,16 @@ import './Card.css';
 
 
 class Card extends Component {
+
   render() {
+    let foundEmoji = ""
+    if(this.props.content["emoji"]){
+      foundEmoji = emoji.getUnicode(this.props.content["emoji"])
+    }
     return (
       <div className="card">
-        Card
+        {this.props.content["text"]}
+        {foundEmoji}
       </div>
     )
   }
