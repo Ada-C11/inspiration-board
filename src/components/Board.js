@@ -16,10 +16,30 @@ class Board extends Component {
     };
   }
 
+  generateCards = (cards) => {
+    const cardsArray = cards.map((card) => {
+      return <Card 
+      text={card.text} 
+      emoji={card.emoji}
+      />
+    });
+    return cardsArray;
+    // this.setState({ cards: cardsArray });
+  }
+
+
+
   render() {
+
+
     return (
       <div>
-        Board
+        <div>
+          Board
+      </div>
+        <div className='card-container'>
+          {this.generateCards(CARD_DATA.cards)}
+        </div>
       </div>
     )
   }
