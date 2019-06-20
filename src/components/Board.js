@@ -17,6 +17,46 @@ class Board extends Component {
     };
   }
 
+  componentDidMount() {
+    axios.get(this.props.url + this.props.boardName)
+      .then((response) => {
+        console.log("Here is my response!!!!!!!!!!", response);
+
+        // const pets = response.data.flatMap(pet => {
+        //   if (pet.name && pet.breed && pet.about) {
+        //     return [{
+        //       ...pet,
+        //       species: pet.breed.toLowerCase()
+        //     }];
+        //   } else {
+        //     return [];
+        //   }
+        // });
+
+        // this.setState({ petList: pets });
+
+        const cards = response.data.map(card => {
+
+          return [
+            {
+              ...card
+            }];
+        })
+        this.setState({
+          cards: cards
+        })
+
+      })
+      .catch((error) => {
+        this.setState({
+          errorMessage: error.message
+        })
+      })
+      console.log('here are all your cards!!!!!', this.state.cards)
+    }
+    
+
+
   render() {
     return (
       <div>
