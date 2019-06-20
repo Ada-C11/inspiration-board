@@ -8,14 +8,14 @@ class Card extends Component {
   render() {
     return (
       <div className="card">
-        Card
+        {this.props.individualCard}
       </div>
     )
   }
 }
 
 Card.propTypes = {
-
+  individualCard: PropTypes.string.isRequired,
 };
 
 export default Card;

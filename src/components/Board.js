@@ -12,22 +12,35 @@ class Board extends Component {
     super();
 
     this.state = {
-      cards: [],
+      cards: [
+        "Good Job!", 
+        "You're awesome!",
+        "You Matter!",
+        "Take a Deep Breath and let the stress melt away"
+      ],
     };
   }
 
+  
   render() {
-    return (
+    const mappedCards = this.state.cards.map((card, i) => {
+      return <Card 
+        key={i}
+        individualCard={card}
+      />
+    });
+
+    return(
       <div>
-        Board
+        {mappedCards}
       </div>
-    )
+    );
   }
 
 }
 
 Board.propTypes = {
-
+  
 };
 
 export default Board;
