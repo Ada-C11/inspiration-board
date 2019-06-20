@@ -12,9 +12,7 @@ class Card extends Component {
       return (
         emoji.getUnicode(emojiInput)
       )
-    } else {
-      return (null) 
-    }
+    } 
   }
 
   render() {
@@ -22,7 +20,6 @@ class Card extends Component {
       <div className="card">
         <p> {this.props.cardText} </p>
         <p> {this.displayEmoji(this.props.cardEmoji)} </p>
-        {/* <p> {emoji.unicode} </p> */}
       </div>
     )
   }

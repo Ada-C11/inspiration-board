@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import './App.css';
+import axios from 'axios';
+
 import Board from './components/Board';
 
 class App extends Component {
+
   render() {
     return (
       <section>
@@ -12,6 +15,7 @@ class App extends Component {
         <Board
           url="https://inspiration-board.herokuapp.com/boards/"
           boardName={`salamander`}
+          // cards={this.state.cards}
           />
       </section>
     );
