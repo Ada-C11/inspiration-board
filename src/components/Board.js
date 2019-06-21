@@ -46,7 +46,15 @@ class Board extends Component {
       cards: updatedCards
     })
 
-
+    axios.delete(`https://inspiration-board.herokuapp.com/cards/${id}`)
+    .then((response) => {
+      console.log('ID of card deleted:', response.data.card.id)
+    })
+    .catch((error) => {
+      this.setState({
+        errorMessage: error.message
+      })
+    })
   }
 
   render() {
