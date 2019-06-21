@@ -23,18 +23,17 @@ class Board extends Component {
       .then((response) => {
         console.log("Here is my response!!!!!!!!!!", response);
 
-        const cards = response.data.map(card => {
+        // const cards = response.data.map(card => {
 
-          let allCards = this.state.cards;
+        //   let allCards = this.state.cards;
 
-          return (
-            allCards.push(card)
-          );
-        })
+        //   return (
+        //     allCards.push(card)
+        //   );
+        // })
 
         this.setState({
-          // cards: cards
-          cards
+          cards: response.data
         })
 
       })
@@ -44,7 +43,10 @@ class Board extends Component {
         })
       })
     console.log('here are all your cards!!!!!', this.state.cards)
+
   }
+
+
 
   // allIndividualCards = this.state.cards
   //map through all of these cards and include JSX. Put them below where card components are.
@@ -52,15 +54,26 @@ class Board extends Component {
 
 
   render() {
+   
+
+
+    const showCard = this.state.cards.map((card, i) => {
+      return (
+        <div className='card' key={i}>
+          <Card
+           id={card.card.id}
+           text={card.card.text}
+           emoji={card.card.emoji}
+           />
+        </div>
+      );
+    })
     return (
       <div>
         Board
 
-        <div>
-          <Card text={this.state.cardText} />
-        </div>
-        <div>
-          <Card text={this.state.cardText} />
+        <div className='board'>
+          {showCard}
         </div>
       </div>
     )
