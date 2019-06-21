@@ -77,10 +77,10 @@ class Board extends Component {
     console.log(this.state.cards)
     const allCards = this.state.cards.map((card, i) => {
       return <Card
-      key={i}
-      id={i}
-      content={card}
-      deleteCardCallBack = {this.state.deleteCardCallBack}
+                key={i}
+                id={i}
+                content={card}
+                deleteCardCallBack = {this.state.deleteCardCallBack}
       />
     })
     return (
@@ -96,7 +96,6 @@ class Board extends Component {
 Board.propTypes = {
   url: PropTypes.string.isRequired,
   boardName: PropTypes.string.isRequired
-
 };
 
 export default Board;

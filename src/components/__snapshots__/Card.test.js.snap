@@ -1,0 +1,74 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Card that it matches an existing snapshot 1`] = `
+<div
+  className="card"
+>
+  <div
+    className="card__content"
+  >
+    <div
+      className="card__content-text"
+    >
+       
+    </div>
+    <div
+      className="card__content-emoji"
+    >
+       
+    </div>
+  </div>
+  <button
+    className="btn btn-primary card__delete"
+    onClick={[Function]}
+  >
+    Delete
+  </button>
+</div>
+`;
+
+exports[`NewCardForm that it matches an existing snapshot 1`] = `
+<div
+  className="new-card-form"
+>
+  <h3
+    className="new-card-form__header"
+  >
+    Add Card
+  </h3>
+  <form
+    className="new-card-form__form"
+    onSubmit={[Function]}
+  >
+    <div
+      className="PlayerSubmissionForm__poem-inputs"
+    >
+      <input
+        className="new-card-form__form-label"
+        name="text"
+        onChange={[Function]}
+        placeholder="text"
+        type="text"
+        value=""
+      />
+      <input
+        className="new-card-form__form-label"
+        name="emoji"
+        onChange={[Function]}
+        placeholder="emoji"
+        type="text"
+        value=""
+      />
+    </div>
+    <div
+      className=""
+    >
+      <input
+        className="new-card-form__form-button"
+        type="submit"
+        value="Add"
+      />
+    </div>
+  </form>
+</div>
+`;

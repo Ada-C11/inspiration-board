@@ -31,7 +31,8 @@ class Card extends Component {
 }
 
 Card.propTypes = {
-  content: PropTypes.object.isRequired
+  content: PropTypes.object.isRequired,
+  deleteCardCallBack: PropTypes.func.isRequired
 };
 
 export default Card;
