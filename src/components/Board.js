@@ -7,19 +7,33 @@ import Card from './Card';
 import NewCardForm from './NewCardForm';
 import CARD_DATA from '../data/card-data.json';
 
+const BOARD_API_URL = 'https://inspiration-board.herokuapp.com/';
+
 class Board extends Component {
   constructor() {
     super();
 
     this.state = {
-      cards: [],
+      cards: CARD_DATA,
     };
   }
 
   render() {
+    const cardList = this.state.cards.cards.map((card, index) => {
+      const { text, emoji } = card;
+      return ( <section>
+                <Card
+                key={index}
+                text={text}
+                emoji={emoji}
+                />
+              </section>
+      );
+    })
+    console.log(this.state.cards.cards)
     return (
       <div>
-        Board
+        {cardList}
       </div>
     )
   }
