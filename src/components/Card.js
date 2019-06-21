@@ -13,10 +13,13 @@ class Card extends Component {
   }
 
   render() {
+    console.log(`${typeof this.props.cardEmoji}`);
     return (
       <div className="card">
         <section className="card__content card__content-text">{this.props.cardMessage}</section>
-        <section className="card__content card__content-emoji">{emoji.getUnicode(this.props.cardEmoji)}</section>
+        <section className="card__content card__content-emoji">
+          {emoji.getUnicode(this.props.cardEmoji)}
+        </section>
       </div>
     )
   }

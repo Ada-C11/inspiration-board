@@ -16,7 +16,6 @@ class Board extends Component {
   }
 
   updateCardList = (card) => {
-    console.log(card);
     const allCards = this.state.cards;
     allCards.push(card);
     this.setState(allCards);

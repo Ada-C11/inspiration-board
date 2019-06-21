@@ -3,14 +3,15 @@ import PropTypes from 'prop-types';
 import emoji from 'emoji-dictionary';
 import './NewCardForm.css';
 
-const EMOJI_LIST = ["", "heart_eyes", "beer", "clap", "sparkling_heart", "heart_eyes_cat", "dog"]
+const EMOJI_LIST = emoji.names;
+EMOJI_LIST.unshift("");
 
 class NewCardForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
       text: '',
-      emoji: '',
+      emoji: EMOJI_LIST[0],
     }
   }
 
@@ -27,20 +28,27 @@ class NewCardForm extends Component {
 
   onChangeHandler = (event) => {
     const fields = {};
-    fields[event.target.name] = event.target.value;
+    const eventName = event.target.name;
+    const eventValue = event.target.value;
+
+    if(event.target.name === 'emoji') {
+      fields[eventName] = emoji.getName(eventValue);
+    } else {
+      fields[eventName] = eventValue;
+    }
+    
     this.setState(fields);
   }
 
   onSubmitButtonClick = (event) => {
     event.preventDefault();
-    console.log(this.state);
+
     this.props.updateCardListCallback(this.state);
     this.setState({
       text: '',
       emoji: '',
     })
   }
-
 
   render() {
     return (
@@ -62,7 +70,7 @@ class NewCardForm extends Component {
               className="new-card-form__form-select" 
               name="emoji" 
               onChange={this.onChangeHandler}
-              value={this.state.emoji}>
+              value={this.state.emoji === '' ? '' : emoji.getUnicode(this.state.emoji)}>
               {this.displayEmojiList()}
             </select>
           </div>
@@ -75,5 +83,8 @@ class NewCardForm extends Component {
   }
 }
 
+NewCardForm.propTypes = {
+  updateCardListCallback: PropTypes.func.isRequired,
+};
 
 export default NewCardForm;
