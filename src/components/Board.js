@@ -30,7 +30,6 @@ class Board extends Component {
       this.setState({
         cards: APICards
       })
-      console.log('inside componentdidmount', this.state.cards)
     })
     .catch((error) => {
       this.setState({
@@ -98,6 +97,7 @@ class Board extends Component {
 
 }
 
+// TODO: FIX PROPTYPES 
 Board.propTypes = {
   onDeleteCard: PropTypes.func
 };
