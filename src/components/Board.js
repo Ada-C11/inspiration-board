@@ -90,8 +90,8 @@ class Board extends Component {
     // this.setState({ cards: cardList });
   }
 
-  deleteCard = () => {
-    console.log("Hey, it worked!");
+  deleteCard = (id) => {
+    console.log(id);
   };
 
 
