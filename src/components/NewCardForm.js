@@ -17,13 +17,19 @@ class NewCardForm extends Component {
     this.state = { ...this.cleared }
   }
 
-  addNewCard = () => {
+  addNewCard = (e) => {
+    e.preventDefault();
+    console.log('submitting soon')
 
+    this.props.addNewCardCallback(this.state)
+    this.setState( {...this.cleared})
   }
 
   onInputChange = (e) => {
+    console.log(e.target.name)
     const updatedState = {};
-    const {field, value} = e;
+    const field = e.target.name;
+    const value = e.target.value;
     
     updatedState[field] = value;
     this.setState(updatedState);
@@ -34,7 +40,7 @@ class NewCardForm extends Component {
     return ( <option key={i} value={emo}>{emoji.getUnicode(emo)}</option>)})
 
     return(
-      <form 
+      <form
         className="new-card-form__form"
         onSubmit={this.addNewCard}
       >
@@ -42,7 +48,7 @@ class NewCardForm extends Component {
         <h3 className="new-card-form__header"> Add a new card</h3>
         <label className="new-card-form__form-label">
           <textarea className="new-card-form__form-textarea"
-            name="name"
+            name="text"
             value={this.state.text}
             onChange={this.onInputChange}
           />
@@ -50,12 +56,15 @@ class NewCardForm extends Component {
         <label className="new-card-form__form-label">
           Emoji:
           <select className="new-card-form__form-select"
-            name="Emoji"
+            name="emoji"
             value={this.state.emoji}
             onChange={this.onInputChange}>
             {emojiOptions}
           </select>
         </label>
+        <button  className="new-card-form__form-button">
+          submit
+        </button>
       </section>
       </form>
     )

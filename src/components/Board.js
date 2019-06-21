@@ -12,8 +12,8 @@ class Board extends Component {
     super(props);
     this.state = {
       cards: [],
-      myUrl: props.url + props.boardName + '/cards',
-      message: null
+      myUrl: props.boardUrl + props.boardName + '/cards',
+      message: ''
     };
     
   }
@@ -50,6 +50,18 @@ class Board extends Component {
       });
 
   }
+
+  addCard = (cardData) => {
+    
+    axios.post(`${this.state.myUrl}?text=${cardData.text}&emoji=${cardData.emoji}`)
+      .then(response => {
+        alert("Succesffully created your new card")
+
+      })
+      .catch(error => {
+        alert(`An error has occurred: ${error.message}`)
+      })
+  }
   
   render() {
     
@@ -70,7 +82,8 @@ class Board extends Component {
           {generatedCards} 
         </section>
         <section className="new-card-form">
-        <NewCardForm />
+        <NewCardForm 
+          addNewCardCallback={ this.addCard }/>
         </section>
       </div>
       
@@ -81,7 +94,7 @@ class Board extends Component {
 }
 
 Board.propTypes = {
-  url: PropTypes.string.isRequired,
+  boardUrl: PropTypes.string.isRequired,
   boardName: PropTypes.string.isRequired, 
   deleteURL: PropTypes.string
 };
