@@ -18,7 +18,7 @@ class Card extends Component {
       <div className="card">
         <h3>{this.state.id}</h3>
         <h4>{this.state.card.text}</h4>
-        <h6>{this.state.card.emoji}</h6>
+        <h6>{this.state.card.emoji ? emoji.getUnicode(this.state.card.emoji) : null}</h6>
       </div>
     )
   }
