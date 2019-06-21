@@ -25,8 +25,10 @@ const Card = (props) => {
 };
 
 Card.propTypes = {
-  // update to array of objects
-  cards: PropTypes.array.isRequired,
+  card: PropTypes.shape({
+    text: PropTypes.string,
+    emoji: PropTypes.string,
+  }),
   onRemoveCallback: PropTypes.func.isRequired,
 };
 

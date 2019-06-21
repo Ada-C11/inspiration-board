@@ -17,6 +17,7 @@ class NewCardForm extends Component {
   }
 
   onChangeHandler = (event) => {
+    console.log('onChangeHandler')
     const field = {}
     field[event.target.name] = event.target.value
 
@@ -25,6 +26,7 @@ class NewCardForm extends Component {
 
   onClickSubmit = (event) => {
     event.preventDefault();
+    console.log('on Click Submit');
 
     this.props.onSubmitNewCardCallback(this.state)
     
@@ -74,6 +76,7 @@ class NewCardForm extends Component {
             {emojiSelections}
           </select>
 
+        
           <div>
             <input className='new-card-form__form-button' type="submit" value="Submit Card" />
           </div>
@@ -82,5 +85,10 @@ class NewCardForm extends Component {
     )
   }
 }
+
+NewCardForm.propTypes = {
+  onSubmitNewCardCallback: PropTypes.func.isRequired,
+};
+
 
 export default NewCardForm;

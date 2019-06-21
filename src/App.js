@@ -38,7 +38,7 @@ class App extends Component {
 }
 
   onSubmitNewCardCallback = (newCard) => {
-    // pet that we're getting from the form
+    // new card we're getting from the form
     const cardDataForApi = {
       text: newCard.text,
       emoji: newCard.emoji
@@ -64,7 +64,7 @@ class App extends Component {
         console.log(error.messages);
     
         this.setState({
-          message: error.message
+          message: error.messages
         });
       });
     
