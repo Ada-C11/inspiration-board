@@ -7,6 +7,10 @@ import Card from './Card';
 import NewCardForm from './NewCardForm';
 import CARD_DATA from '../data/card-data.json';
 
+CARD_DATA['cards'].forEach((card, i) => {
+  card['id'] = i;
+})
+
 class Board extends Component {
   constructor(props) {
     super(props);
@@ -15,6 +19,23 @@ class Board extends Component {
     };
   }
 
+  componentDidMount = () => {
+    const cards = [];
+    axios.get(`${this.props.url}/${this.props.boardName}/cards`)
+    .then((response) => {
+      // console.log(response.data);
+      response.data.forEach((element) => {
+        cards.push(element['card']);
+      })
+
+      this.setState({cards,});
+    })
+    .catch((error) => {
+
+    })
+  }
+
+
   updateCardList = (card) => {
     const allCards = this.state.cards;
     allCards.push(card);
@@ -22,16 +43,25 @@ class Board extends Component {
   }
 
   renderCards = () => {
-    const displayedCards = this.state.cards.map((card, i) => {
+    const displayedCards = this.state.cards.map((card) => {
       return (
         <Card 
-          key={i} 
+          key={card.id}
+          cardId={card.id}
+          removeCardCallback={this.removeCard}
           cardMessage={card.text ? card.text : ''} 
           cardEmoji={card.emoji ? card.emoji : ''}
         />
       )
     });
     return displayedCards;
+  }
+
+  removeCard = (cardId) => {
+    const cards = this.state.cards;
+    const cardIndex = cards.findIndex((card) => card.id === cardId);
+    cards.splice(cardIndex, 1);
+    this.setState({cards, });
   }
 
   render() {

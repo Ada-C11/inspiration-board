@@ -8,12 +8,15 @@ class Card extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      removed: false,
+      display: false,
     }
   }
 
+  onRemoveButtonClick = () => {
+    this.props.removeCardCallback(this.props.cardId);
+  }
+
   render() {
-    console.log(`${typeof this.props.cardEmoji}`);
     return (
       <div className="card">
         <div className="card__content">
@@ -22,7 +25,7 @@ class Card extends Component {
             {emoji.getUnicode(this.props.cardEmoji)}
           </section>
         </div>
-        <section className="card__delete">X</section>
+        <section type="button" className="card__delete" onClick={this.onRemoveButtonClick}>X</section>
       </div>
     )
   }
