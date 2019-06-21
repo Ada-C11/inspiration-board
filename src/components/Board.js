@@ -23,24 +23,26 @@ class Board extends Component {
     axios.get(this.state.myUrl)
       .then( response => {
         this.setState({ cards: response.data});
+        console.log(response.status);
       })
       .catch( error => {
-        // TODO 
+        alert(`Error has occurred: ${error.message}`)
       });
   }
 
 
-  removeCard = (cardID) => {
-    const newState = this.state.cards;
-    const deletedCard = newState.splice(cardID, 1);
-    this.setState(newState);
+  removeCard = (cardIndex, cardID) => {
+    console.log(cardIndex, cardID)
 
-    const deletedID = deletedCard[0].card.id
-
-    axios.delete(this.props.deleteURL + deletedID)
+    axios.delete(this.props.deleteURL + cardID )
       .then( response => {
-       alert(`Successfully deleted pet with ${deletedID}`)
-       this.setState({ message: `Successfully deleted pet with ${deletedID}`}) // will use to add info for user
+        alert(`Successfully deleted pet with ${cardID}`);
+        const newState = this.state.cards;
+        newState.splice(cardID, 1);
+        
+        // TODO: get messages to display for user (not with alerts)
+        newState.message = `Successfully deleted pet with id: ${cardID}`;
+        this.setState(newState);
       })
       .catch( error => {
         console.log(error.message)
@@ -48,32 +50,19 @@ class Board extends Component {
       });
 
   }
-
-  reportStatus = (message) => {
-    console.log('inside error handling helper')
-    return (message) => {
-      return ( <ul>
-        <li>
-          message
-        </li>
-      </ul> )
-    }
-  }
-
   
-
-
   render() {
     
     const generatedCards = this.state.cards.map((card, i ) => {
-     return( <li key={card.card.id}>
-              <Card 
-                card={ card.card }
-                cardIndex={i} 
-                deleteCardCallback={this.removeCard}
-              />
-              </li>);
-            });
+     return( 
+      <li key={card.card.id}>
+        <Card 
+          card={ card.card }
+          cardIndex={i} 
+          deleteCardCallback={this.removeCard}
+        />
+      </li>);
+    });
 
     return ( <div> {generatedCards} </div>);
   }

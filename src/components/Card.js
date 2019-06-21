@@ -8,7 +8,7 @@ class Card extends Component {
 
   handleButtonClick = () => {
     // pass along cardIndex to delete card and remove from API...
-    this.props.deleteCardCallback(this.props.cardIndex)
+    this.props.deleteCardCallback(this.props.cardIndex, this.props.card.id) 
   }
 
   render() {
