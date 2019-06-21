@@ -12,6 +12,7 @@ class App extends Component {
         <Board
           url="https://inspiration-board.herokuapp.com/boards/"
           boardName={`tatiana-q`}
+          deleteURL={'https://inspiration-board.herokuapp.com/cards/'}
           />
       </section>
     );

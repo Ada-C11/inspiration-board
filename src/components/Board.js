@@ -21,7 +21,7 @@ class Board extends Component {
   componentDidMount() {
     axios.get(this.state.myUrl)
       .then( response => {
-        this.setState({ cards: response.data})
+        this.setState({ cards: response.data});
       })
       .catch( error => {
         // TODO 
@@ -29,11 +29,25 @@ class Board extends Component {
   }
 
 
+  removeCard = (cardIndex) => {
+    console.log('in remove card')
+    // const newState = this.state;
+    // const allCards = newState.cards;
+    // const deletedCard = allCards.splice(cardIndex, 1);
+    // newState = allCards;
+
+    // this.setState(newState);
+  }
+
+
   render() {
     const generatedCards = this.state.cards.map( card => {
      return( 
      <li>
-       <Card card={ card.card } />
+       <Card 
+         card={ card.card } 
+         deleteCardCallback={this.removeCard}
+       />
      </li>);
     });
     return (
