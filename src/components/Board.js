@@ -23,7 +23,8 @@ class Board extends Component {
   // }
 
   componentDidMount() {
-    axios.get('https://inspiration-board.herokuapp.com/boards/niv/cards')
+    const url = `${this.props.url}${this.props.boardName}/cards`
+    axios.get(url)
       .then((response) => {
         this.setState({ cards: response.data });
       })
