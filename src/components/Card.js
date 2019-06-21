@@ -7,7 +7,7 @@ import './Card.css';
 class Card extends Component {
 
   onDeleteButtonClick = (event) => {
-    console.log(event);
+    console.log(event.target.id);
     // this.props.deleteCardCallback();
   }
   render() {
@@ -17,7 +17,7 @@ class Card extends Component {
         {this.props.quote}
         {/* Try single-line conditional rendering here */}
         {this.props.emoji && emoji.getUnicode(this.props.emoji)}
-        {<button className="card__delete" onClick={this.onDeleteButtonClick}>Delete</button>}
+        {<button id={this.props.id} className="card__delete" onClick={this.onDeleteButtonClick}>Delete</button>}
       </div>
     )
   }
