@@ -59,6 +59,13 @@ class Board extends Component {
       })
   }
 
+  addCard = (card) => {
+
+    // this.setState({
+    //   cards: this.state.cards.push(card)
+    // })
+  }
+
   removeCard = (cardIndex, cardID) => {
     console.log("inside removeCard");
     console.log("index=", cardIndex);
@@ -73,7 +80,6 @@ class Board extends Component {
     // this.setState({
     //   cards: newCards
     // })
-
 
     axios.delete(BOARD_API_URL + '/cards/' + cardID)
       .then((response) => {
@@ -92,9 +98,13 @@ class Board extends Component {
     const cardComponents = this.generateCardComponents()
     console.log(cardComponents)
     return (
-      <div className="board">
-        {cardComponents}
-      </div>
+      <div>
+        <div className="board">
+          {cardComponents}
+
+        </div>
+        <NewCardForm addCardCallback={this.addCard} />
+      </div >
     )
   }
 
