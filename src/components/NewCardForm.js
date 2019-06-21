@@ -16,9 +16,10 @@ class NewCardForm extends Component {
     }
  
     generateSelectList = () => {
+        let count = 0
         return EMOJI_LIST.map((smiley) => {
             return (
-                <option value={smiley}>{emoji.getUnicode(smiley)}</option>
+                <option key={count+=1} value={smiley}>{emoji.getUnicode(smiley)}</option>
             )
         })
         
@@ -43,22 +44,24 @@ class NewCardForm extends Component {
 
     render() {
         return(
-            <div>
-                <h1>Add a New Card</h1>
-                <form  className="new-card-form"
+            <div className="new-card-form">
+                <h1 className="new-card-form__header">Add a New Card</h1>
+                <form  className="new-card-form__form"
                 onSubmit = {this.onFormSubmit}>
-                <label htmlFor="text">Text</label>
-                <input name="text" 
+                <label className="new-card-form__form-label" htmlFor="text">Text</label>
+                <textarea 
+                className="new-card-form__form-textarea"
+                name="text" 
                 type="text" 
                 onChange = {this.onChange} 
-                value={this.state.text}/>
-                <label htmlFor="emoji">Emoji</label>
-                <select value={this.state.emoji}
+                value={this.state.text}></textarea>
+                <label className="new-card-form__form-label" htmlFor="emoji">Emoji</label>
+                <select className="new-card-form__form-select" value={this.state.emoji}
                 name="emoji"
                 onChange = {this.onChange}>
                     {this.generateSelectList()}
                 </select>
-                <input type="submit" value="Add "/>
+                <input className="new-card-form__form-button" type="submit" value="Add "/>
 
                 </form>
             </div>

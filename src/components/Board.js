@@ -5,7 +5,6 @@ import axios from 'axios';
 import './Board.css';
 import Card from './Card';
 import NewCardForm from './NewCardForm';
-// import CARD_DATA from '../data/card-data.json';
 
 
 
@@ -54,6 +53,7 @@ class Board extends Component {
   generateCards = () => {
     return this.state.cards.map((card) => {
       return (<Card
+      key={card.id}
       id={card.id}
       text={card.text}
       emoji={card.emoji}
@@ -84,31 +84,18 @@ class Board extends Component {
     .catch((error) => {
       this.setState({error: error.message});
     })
-
-  
-    // const updatedCards=CARD_DATA.cards.map((card) => {
-    //   if (card.Emoji) {
-    //     card.emoji = card.Emoji
-    //   } else if (card.emoji === undefined) {
-    //     card.emoji = ""
-    //   }
-    //   return card
-
-    // })
-    // this.setState({cards: updatedCards})
-    
   }
 
   render() {
     console.log(this.state)
     return (
+      <div>
+      <div>
+        <NewCardForm addCardCallback={this.addCard}/>
+      </div>
       <div className="board">
-        <div>
-          <NewCardForm addCardCallback={this.addCard}/>
-        </div>
-        <div>
-        {this.generateCards()}/>
-        </div>
+        {this.generateCards()}
+      </div>
       </div>
     )
   }
