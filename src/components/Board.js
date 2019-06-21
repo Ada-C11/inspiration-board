@@ -13,13 +13,31 @@ class Board extends Component {
     super();
     this.state = {
       cards: [],
-      error: ""
+      error: "",
+      deleteCardCallBack: this.deleteCard
     };
   }
 
+  deleteCard = (id) => {
+    const url = `https://inspiration-board.herokuapp.com/cards/${id}`
+    axios.delete(url)
+    .then(res => {
+      console.log(res);
+      console.log(res.data);
+    })
+    
+ }
 
   // componentDidMount() {
   //   this.importCards()
+  // }
+
+   // importCards = () => {
+  //   CARD_DATA["cards"].forEach((card) => {
+  //     this.state.cards.push(card)
+  //     const newCards = this.state.cards
+  //     this.setState({cards: newCards})
+  //   })
   // }
 
   componentDidMount() {
@@ -33,20 +51,14 @@ class Board extends Component {
       });
   }
 
-  // importCards = () => {
-  //   CARD_DATA["cards"].forEach((card) => {
-  //     this.state.cards.push(card)
-  //     const newCards = this.state.cards
-  //     this.setState({cards: newCards})
-  //   })
-  // }
-
 
   render() {
     const allCards = this.state.cards.map((card, i) => {
       return <Card
       key={i}
+      id={i}
       content={card}
+      deleteCardCallBack = {this.state.deleteCardCallBack}
       />
     })
     return (
