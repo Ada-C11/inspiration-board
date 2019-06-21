@@ -30,12 +30,13 @@ class Board extends Component {
         cardText = card.text;
       }
 
-      if (card.emoji === undefined) {
-        cardEmoji = "" }
-      else {
+      if (card.Emoji) {
+        cardEmoji = card.Emoji
+      } else if (card.emoji === undefined) {
+        cardEmoji = ""
+      } else {
         cardEmoji = card.emoji
       }
-
 
       const newCard = {
         text: cardText,
