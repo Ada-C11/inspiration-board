@@ -34,31 +34,36 @@ class Board extends Component {
         });
         this.setState({cards: cardsList});
       })
-
       .catch((error) => {
         console.log(error);
       })
   }
 
   addCard = (card) => {
-    const newCards = this.state.cards;
-    newCards.push(card);
-    this.setState(newCards)
+    console.log('in addCard')
+    const newCard = <Card 
+      {...card}
+      key = {card.id}
+      deleteCardCallback = {this.deleteCard}
+    />
+
+    // console.log(newCard)
+    const newCards = [newCard, ...this.state.cards]
+
+    console.log('this is newcards')
+    console.log(newCards)
+    this.setState({cards: newCards});
   }
 
   deleteCard = (cardID) => {
     const deleteEndpoint = 'https://inspiration-board.herokuapp.com/cards/' + cardID;
-
     axios.delete(deleteEndpoint)
     .then((response) => {
       console.log(`Card ${cardID} successfully deleted`)
-      });
-  
-
-    // .catch((error) => {
-    //   console.log(error);
-    // });
-
+      })
+    .catch((error) => {
+      console.log(error);
+    });
 
     const cards = this.state.cards;
     const cardIndex = cards.findIndex((card) => {
@@ -73,8 +78,7 @@ class Board extends Component {
   render() {
     return (
       <div>
-        <div>
-          Board
+        <div className='cardform-container'>
           <NewCardForm 
             cardsEndpoint = {this.cardsEndpoint}
             addCardCallback = {this.addCard}

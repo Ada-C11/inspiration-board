@@ -9,16 +9,18 @@ const EMOJI_LIST = ["", "heart_eyes", "beer", "clap", "sparkling_heart", "heart_
 class NewCardForm extends Component {
     constructor(props) {
         super(props);
-        this.state = {
+        this.startState = {
             text: '',
             emoji: '',
-        }
+            message: ''
+        };
+        this.state = this.startState
     }
 
     emojiList = () => {
         const list = EMOJI_LIST.map((emoji) => {
             const cardEmoji = emoji ? getUnicode(emoji) : 'Thank u, next. No emoji';
-            return (<option value={emoji}>{cardEmoji}</option>);
+            return (<option key={emoji} value={emoji}>{cardEmoji}</option>);
         });
         return list;
     }
@@ -33,38 +35,36 @@ class NewCardForm extends Component {
 
     postCard = (event) => {
         const url = this.props.cardsEndpoint;
-        let newCard = undefined;
-        axios.post(url, { text: this.state.text, emoji: this.state.emoji }
-        )
-
+        axios.post(url, { text: this.state.text, emoji: this.state.emoji })
             .then((response) => {
-                newCard = response.data.card;
-                console.log(newCard)
-                const id = response.data.card.id;
+                const newCard = response.data.card;
+                this.props.addCardCallback(newCard);
+                const id = newCard.id;
                 console.log(`Card ${id} successfully created`)
+                this.setState({message: `Card ${id} successfully created`})
             })
-            
             .catch((error) => {
                 console.log(error);
+                
+                this.setState({message: error.toString()})
               })
 
-              return newCard;
+ 
     }
 
     onFormSubmit = (event) => {
-        const { addCardCallback } = this.props
         event.preventDefault();
-        const newCard = this.postCard();
-        addCardCallback(newCard);
+        this.postCard();
     }
 
     render() {
         return (
             <div className='new-card-form'>
                 <h3 className='new-card-form__header'> Add Inspiration Here </h3>
+                <p className='statusMessage'> {this.state.message} </p>
                 <form
                     className='new-card-form__form'
-                    onSubmit={this.postCard}>
+                    onSubmit={this.onFormSubmit}>
                     <label className='new-card-form__form-label'>
                         Message:
                     <textarea
