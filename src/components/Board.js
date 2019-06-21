@@ -61,11 +61,11 @@ class Board extends Component {
   componentDidMount() {
     axios.get(this.props.url+this.props.boardName+'/cards')
     .then((response) => {
-      console.log(response.data)
       const updatedCards=response.data.map((card) => {
         const newCard = {
 
           ...card.card,
+          text: card.card.text==null ? "" : card.card.text,
           emoji: card.card.emoji==null ? "" : card.card.emoji
         }
          
