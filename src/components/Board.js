@@ -7,6 +7,8 @@ import Card from './Card';
 import NewCardForm from './NewCardForm';
 import CARD_DATA from '../data/card-data.json';
 
+const URL = "https://inspiration-board.herokuapp.com/boards/Ada-Lovelace/cards";
+
 class Board extends Component {
   constructor() {
     super();
@@ -18,6 +20,14 @@ class Board extends Component {
   }
 
   componentDidMount() {
+
+    axios.get(URL)
+      .then((response) => {
+      console.log(response);
+      })
+      .catch((error) => {
+      console.log(error);
+      });
 
     const cardList = CARD_DATA.cards.map((card) => {
 
@@ -38,6 +48,13 @@ class Board extends Component {
         cardEmoji = card.emoji
       }
 
+      // if (card.emoji === undefined) {
+      //   cardEmoji = "" }
+      // else {
+      //   cardEmoji = card.emoji
+      // }
+
+
       const newCard = {
         text: cardText,
         emoji: cardEmoji,
@@ -51,7 +68,8 @@ class Board extends Component {
 
 
   render() {
-    console.log(this.state.cards);
+    // console.log(this.state.cards);
+    // console.log("Hello");
     const cards = this.state.cards.map((card, i) => {
 
       return (
