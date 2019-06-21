@@ -5,6 +5,10 @@ import emoji from 'emoji-dictionary';
 import './Card.css';
 
 class Card extends Component {
+
+  onDeleteButtonClick = () => {
+    console.log("Boing boing!");
+  }
   render() {
   
     return (
@@ -12,7 +16,7 @@ class Card extends Component {
         {this.props.quote}
         {/* Try single-line conditional rendering here */}
         {this.props.emoji && emoji.getUnicode(this.props.emoji)}
-        {<button className="card__delete">Delete</button>}
+        {<button className="card__delete" onClick={this.onDeleteButtonClick}>Delete</button>}
       </div>
     )
   }

@@ -52,6 +52,10 @@ class Board extends Component {
       console.log(error);
       });
 
+      // const deleteCard = () => {
+      //   console.log("Hey, it worked!");
+      // }
+
     // const cardList = CARD_DATA.cards.map((card) => {
 
     //   let cardText;
