@@ -19,9 +19,10 @@ class Board extends Component {
   }
 
   componentDidMount() {
+    
     axios.get(`${this.props.url}/${this.props.boardName}/cards`)
       .then((response) => {
-
+        console.log(response);
         this.setState({
           currentError: null,
         });
@@ -45,7 +46,7 @@ class Board extends Component {
       })
       .catch((error) => {
         this.setState({
-          currentError: error.message,
+          currentError: `Could not load cards: ${error.message}`,
         });
       })
 
