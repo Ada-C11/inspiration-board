@@ -9,12 +9,12 @@ class Card extends Component {
 
   render() {
     let foundEmoji = ""
-    if(this.props.content["emoji"]){
-      foundEmoji = emoji.getUnicode(this.props.content["emoji"])
+    if(this.props.content["card"]["emoji"]){
+      foundEmoji = emoji.getUnicode(this.props.content["card"]["emoji"])
     }
     return (
       <div className="card">
-        {this.props.content["text"]}
+        {this.props.content["card"]["text"]}
         {foundEmoji}
       </div>
     )

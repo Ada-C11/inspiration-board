@@ -13,21 +13,32 @@ class Board extends Component {
     super();
     this.state = {
       cards: [],
+      error: ""
     };
   }
 
 
+  // componentDidMount() {
+  //   this.importCards()
+  // }
+
   componentDidMount() {
-    this.importCards()
+    axios.get('https://inspiration-board.herokuapp.com/boards/niv/cards')
+      .then((response) => {
+        this.setState({ cards: response.data });
+      })
+      .catch((error) => {
+        this.setState({ error: error.message });
+      });
   }
 
-  importCards = () => {
-    CARD_DATA["cards"].forEach((card) => {
-      this.state.cards.push(card)
-      const newCards = this.state.cards
-      this.setState({cards: newCards})
-    })
-  }
+  // importCards = () => {
+  //   CARD_DATA["cards"].forEach((card) => {
+  //     this.state.cards.push(card)
+  //     const newCards = this.state.cards
+  //     this.setState({cards: newCards})
+  //   })
+  // }
 
 
   render() {
