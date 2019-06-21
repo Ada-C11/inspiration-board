@@ -14,16 +14,16 @@ class Board extends Component {
     super();
 
     this.state = {
-      cards: CARD_DATA.cards,
+      cards: [],
     };
   }
   // componentDidMount() {
   //   const newCardState = CARD_DATA.cards.map
   // }
   generateCardComponents = () => {
-    // console.log(this.state.cards)
+    console.log(this.state.cards)
     return this.state.cards.map((card, i) => {
-      // console.log(card.text)
+      console.log(card)
       return (<Card
         key={i}
         text={card.text}
@@ -37,7 +37,14 @@ class Board extends Component {
   componentDidMount() {
     axios.get(BOARD_API_URL + '/boards/sarah-scotton/cards')
       .then((response) => {
-        this.setState({ apiCards: response.data })
+        // this.setState({ cards: response.data })
+        const newCards = response.data.map((item) => {
+          return {
+            text: item.card.text,
+            emoji: item.card.emoji
+          }
+        })
+        this.setState({ cards: newCards })
         console.log(response.data)
       })
       .catch((error) => {
