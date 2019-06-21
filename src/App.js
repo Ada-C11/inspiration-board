@@ -3,7 +3,7 @@ import './App.css';
 import Board from './components/Board';
 
 class App extends Component {
-  render() {
+render() {
     return (
       <section>
         <header className="header">
@@ -11,7 +11,7 @@ class App extends Component {
         </header>
         <Board
           url="https://inspiration-board.herokuapp.com/boards/"
-          boardName={`Ada-Lovelace`}
+          boardName={`jessica`}
           />
       </section>
     );
