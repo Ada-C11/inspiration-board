@@ -13,12 +13,6 @@ class Board extends Component {
     super(props);
 
     this.state = {
-      // cards: [
-      //   "Good Job!", 
-      //   "You're awesome!",
-      //   "You Matter!",
-      //   "Take a Deep Breath and let the stress melt away"
-      // ],
       cards: [],
       error: null
     };
@@ -26,18 +20,22 @@ class Board extends Component {
 
   componentDidMount() {
     const {url, boardName } = this.props;
-    axios.get(`${url}/boards/${boardName}/cards`)
+    axios.get(`${url}boards/${boardName}/cards`)
       .then((response) => {
         console.log('In .then!!!!');
 
-        const allCards = response.data.map(card => {
-          if (card) {
-            return [{
-              ...card
-            }];
-          } else {
-            return [];
+        const allCards = response.data.map(element => {
+          // if (card) {
+          //   return [{
+          //     ...card
+          //   }];
+          // } else {
+          //   return [];
+          // }
+          const card = {
+            ...element.card,
           }
+          return card;
         });
 
         this.setState({
@@ -52,32 +50,32 @@ class Board extends Component {
   }
 
   render() {
-    // const mappedCards = this.state.cards.map((card, i) => {
-    //   return <Card 
-    //     key={i}
-    //     individualCard={card}
-    //   />
-    // });
-    const { cards, error } = this.state;
+    const allCards = this.state.cards.map((card) => {
+      return <Card 
+        key={card.id}
+        {...card}
+        // individualCard={card}
+      />
+    });
+    // const { cards, error } = this.state;
 
-    const errorSection = (this.state.error) ? 
-    (<section className='error'>
-      Error: {this.state.error}
-    </section> ) : null;
+    // const errorSection = (this.state.error) ? 
+    // (<section className='error'>
+    //   Error: {this.state.error}
+    // </section> ) : null;
 
     return(
-      <div>
-        {/* {mappedCards} */}
-        <Card 
-          individualCard={this.state.cards}
-        />
+      <div className="board">
+        {allCards}
+        <NewCardForm />
       </div>
     );
   }
 }
 
 Board.propTypes = {
-  url: PropTypes.string.isRequired
+  url: PropTypes.string.isRequired,
+  boardName: PropTypes.string.isRequired
 };
 
 export default Board;

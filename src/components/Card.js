@@ -6,9 +6,16 @@ import './Card.css';
 
 class Card extends Component {
   render() {
+    
     return (
       <div className="card">
-        {this.props.individualCard}
+        {this.props.text}
+        <button
+          type="button"
+          className="btn btn-danger card--delete-btn"
+          aria-label="Delete">
+            Delete
+        </button>
       </div>
     )
   }
