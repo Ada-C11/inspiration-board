@@ -55,7 +55,16 @@ class Board extends Component {
   }
 
   deleteCard = (id) => {
+    const deleteUrl = "https://inspiration-board.herokuapp.com/cards/" + id;
     console.log(id);
+
+    axios.delete(deleteUrl)
+      .then((response) => {
+      console.log(response);
+      })
+      .catch((error) => {
+      console.log(error);
+      })
   };
 
 
