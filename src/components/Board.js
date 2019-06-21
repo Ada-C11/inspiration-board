@@ -57,15 +57,9 @@ class Board extends Component {
       display = cardComponents;
     }
 
-    // const errorMessage = this.state.errors.forEach((error) => {
-    //   return <p>{error.message}</p>
-    // })
-
     return (
       <div className="board">
         {display}
-        {/* {errorMessage} */}
-
       </div>
     )
   }

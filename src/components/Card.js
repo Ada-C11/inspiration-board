@@ -6,16 +6,14 @@ import './Card.css';
 
 
 class Card extends Component {
+
   constructor(props) {
     super(props);
-    this.state = {
 
+    this.state = {
     }
   }
 
-  // convertToEmoji = () => {
-
-  // }
   render() {
     return (
       <div className="card">
@@ -31,8 +29,11 @@ class Card extends Component {
               {emoji.getUnicode(`${this.props.emoji}`)}
             </span>
           </div>
-        </div>
-      </div>
+          <div className="button__container">
+            <button className="card__delete">Delete</button>
+          </div>
+        </div >
+      </div >
     )
   }
 }
