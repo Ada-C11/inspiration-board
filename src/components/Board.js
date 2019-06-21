@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-import emoji from 'emoji-dictionary'
 
 import './Board.css';
 import Card from './Card';
@@ -10,7 +9,6 @@ import NewCardForm from './NewCardForm';
 class Board extends Component {
   constructor() {
     super();
-
     this.state = {
       cards: [],
       errorMessage: null
@@ -56,14 +54,10 @@ class Board extends Component {
   }
 
   addCard = (newCard) => {
-    // Axios post call
-    // console.log('newCard: ', newCard)
-
-    // console.log('in addCard. here is card object', newCard)
     axios.post(`https://inspiration-board.herokuapp.com/boards/${this.props.boardName}/cards`, newCard)
     .then((response) => {
       const newCardList = this.state.cards
-      newCardList.push(newCard)
+      newCardList.unshift(newCard)
     
       this.setState({
         cards: newCardList
@@ -72,7 +66,6 @@ class Board extends Component {
     .catch((error) => {
       this.setState({errorMessage: error.message})
     })
-
   }
 
   render() {
@@ -95,7 +88,6 @@ class Board extends Component {
       </div>
     )
   }
-
 }
 
 Board.propTypes = {
