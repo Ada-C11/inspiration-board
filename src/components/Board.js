@@ -49,12 +49,26 @@ class Board extends Component {
       })
   }
 
+  deleteCard = (id) => {
+    // Finds Id of card
+    let cardId = this.state.cards.find(card => card.id === id);
+
+    let updatedCards = this.state.cards;
+
+    // deletes card with cardId from cards array
+    updatedCards.splice(cardId, 1);
+
+    this.setState({
+      cards: updatedCards,
+    });
+  }
+
   render() {
     const allCards = this.state.cards.map((card) => {
       return <Card 
         key={card.id}
         {...card}
-        // individualCard={card}
+        onDeleteCard={this.deleteCard}
       />
     });
     // const { cards, error } = this.state;

@@ -13,7 +13,7 @@ class Card extends Component {
         <button
           type="button"
           className="btn btn-danger card--delete-btn"
-          aria-label="Delete">
+          aria-label="Delete" onClick={this.props.onDeleteCard}>
             Delete
         </button>
       </div>
@@ -22,7 +22,7 @@ class Card extends Component {
 }
 
 Card.propTypes = {
-  individualCard: PropTypes.string.isRequired,
+  text: PropTypes.string.isRequired,
 };
 
 export default Card;
