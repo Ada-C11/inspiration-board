@@ -15,7 +15,7 @@ class Board extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      cards: [],
+      cards: CARD_DATA['cards'],
       errorMessage: [],
     };
   }
@@ -27,7 +27,6 @@ class Board extends Component {
       response.data.forEach((element) => {
         cards.push(element['card']);
       })
-
       this.setState({cards,});
     })
     .catch((error) => {
@@ -45,31 +44,30 @@ class Board extends Component {
     return messages;
   }
 
-  updateCardList = (card) => {
-    const cardData = {
-      id: card.id,
-      text: card.text,
-      emoji: card.emoji,
-    }
-
+  updateCardList = (cardData) => {
     axios.post(`${this.props.url}${this.props.boardName}/cards`, cardData)
     .then((response) => {
-      let cards = this.state.cards;
+      const cards = this.state.cards;
+      const card = response.data['card'];
       cards.push({
+        id: card.id,
         text: card.text,
         emoji: card.emoji,
       });
       this.setState({ cards, });
     })
     .catch((error) => {
-      const errorMessage = error.message;
-      this.setState({errorMessage,});
+      const errorList = this.state.errorMessage;
+      const newError = error.response.data.errors.text;
+      newError.forEach((text) => {
+        errorList.push(text);
+      })
+      this.setState({ errorMessage: errorList });
     })
   }
 
   renderCards = () => {
     const displayedCards = this.state.cards.map((card) => {
-      // console.log(card.id);
       return (
         <Card 
           key={card.id}

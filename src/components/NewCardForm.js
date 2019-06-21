@@ -10,7 +10,6 @@ class NewCardForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      id: props.nextCardId + 1,
       text: '',
       emoji: EMOJI_LIST[0],
     }

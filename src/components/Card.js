@@ -34,6 +34,7 @@ class Card extends Component {
 Card.propTypes = {
   cardMessage: PropTypes.string,
   cardEmoji: PropTypes.string,
+  cardId: PropTypes.number,
 };
 
 export default Card;
