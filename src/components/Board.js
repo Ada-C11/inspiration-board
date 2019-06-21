@@ -57,9 +57,27 @@ class Board extends Component {
     })
   }
 
-  render() {
-    // const {onDeleteCard} = this.props;
+  addCard = (newCard) => {
+    // Axios post call
+    // console.log('newCard: ', newCard)
 
+    // console.log('in addCard. here is card object', newCard)
+    axios.post('https://inspiration-board.herokuapp.com/boards/salamander/cards', newCard)
+    .then((response) => {
+      const newCardList = this.state.cards
+      newCardList.push(newCard)
+    
+      this.setState({
+        cards: newCardList
+      })
+    })
+    .catch((error) => {
+      this.setState({errorMessage: error.message})
+    })
+
+  }
+
+  render() {
     const cardDisplay = this.state.cards.map((card, i) => {
 
         return (
@@ -71,9 +89,9 @@ class Board extends Component {
       })
 
     return (
-      <div>
+      <div className='board'>
         {cardDisplay}
-        {/* {this.state.cards.length !== 0 ? cardDisplay : ''} */}
+        <NewCardForm addCardCallback={this.addCard}/>
       </div>
     )
   }
