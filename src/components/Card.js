@@ -37,7 +37,10 @@ class Card extends Component {
 }
 
 Card.propTypes = {
-  onDeleteCard: PropTypes.func
+  onDeleteCard: PropTypes.func,
+  id: PropTypes.number,
+  text: PropTypes.string,
+  emoji: PropTypes.string
 };
 
 export default Card;

@@ -19,7 +19,7 @@ class Board extends Component {
   }
 
   componentDidMount() {
-    axios.get('https://inspiration-board.herokuapp.com/boards/salamander/cards')
+    axios.get(this.props.url + this.props.boardName + '/cards')
     .then((response) => {
       const APICards = response.data.map((cardWrapper) => {
         return (
@@ -61,7 +61,7 @@ class Board extends Component {
     // console.log('newCard: ', newCard)
 
     // console.log('in addCard. here is card object', newCard)
-    axios.post('https://inspiration-board.herokuapp.com/boards/salamander/cards', newCard)
+    axios.post(`https://inspiration-board.herokuapp.com/boards/${this.props.boardName}/cards`, newCard)
     .then((response) => {
       const newCardList = this.state.cards
       newCardList.push(newCard)
@@ -97,9 +97,9 @@ class Board extends Component {
 
 }
 
-// TODO: FIX PROPTYPES 
 Board.propTypes = {
-  onDeleteCard: PropTypes.func
+  url: PropTypes.string,
+  boardName: PropTypes.string
 };
 
 export default Board;
