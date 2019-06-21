@@ -52,9 +52,9 @@ class Board extends Component {
       console.log(error);
       });
 
-      // const deleteCard = () => {
-      //   console.log("Hey, it worked!");
-      // }
+      const deleteCard = () => {
+        console.log("Hey, it worked!");
+      };
 
     // const cardList = CARD_DATA.cards.map((card) => {
 
@@ -101,7 +101,7 @@ class Board extends Component {
 
       return (
         <li key={i}>
-          <Card quote={card.text} emoji={card.emoji} />
+          <Card quote={card.text} emoji={card.emoji} deleteCardCallback={this.deleteCard} />
         </li>
       );
     });
