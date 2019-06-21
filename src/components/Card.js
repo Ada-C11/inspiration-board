@@ -6,16 +6,23 @@ import './Card.css';
 
 class Card extends Component {
   render() {
+
+    const displayEmoji = (this.props.emoji) ? emoji.getUnicode(this.props.emoji) : ""
+
     return (
       <div className="card">
-        Card
+        <div className="card__content">
+          <p className="card__content-text">{this.props.text}</p>
+          <p className="card__content-emoji">{displayEmoji}</p>
+        </div>
       </div>
     )
   }
 }
 
 Card.propTypes = {
-
+  text: PropTypes.string,
+  emoji: PropTypes.string
 };
 
 export default Card;
