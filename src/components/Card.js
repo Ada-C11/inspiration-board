@@ -13,7 +13,7 @@ class Card extends Component {
         
           <button 
             className="card__delete"
-            
+            onClick = { this.props.deleteCardCallback }
             >
               Delete
           </button>

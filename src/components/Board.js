@@ -37,6 +37,10 @@ class Board extends Component {
           errorMessage: error.message
         })
       })
+  };
+
+  deleteCard = () => {
+
   }
 
   render() {
@@ -48,6 +52,7 @@ class Board extends Component {
             index={i}
             text={card.text}
             emoji={card.emoji}
+            deleteCardCallback={this.deleteCard}
            />
         </section>
       );
