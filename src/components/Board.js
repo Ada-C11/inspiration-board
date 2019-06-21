@@ -7,38 +7,46 @@ import Card from './Card';
 import NewCardForm from './NewCardForm';
 import CARD_DATA from '../data/card-data.json';
 
+
 class Board extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       cards: [],
     };
   }
 
-  generateCards = (cards) => {
-    const cardsArray = cards.map((card) => {
-      return <Card 
-      text={card.text} 
-      emoji={card.emoji}
-      />
-    });
-    return cardsArray;
-    // this.setState({ cards: cardsArray });
+  componentDidMount() {
+    const { url, boardName } = this.props;
+    const cardsEndpoint = url + boardName + '/cards';
+
+    axios.get(cardsEndpoint)
+      .then((response) => {
+        const cardsList = response.data.map((card, i) => {
+          return <Card
+            key={i}
+            text={card.card.text}
+            emoji={card.card.emoji}
+          />
+        });
+        this.setState({cards: cardsList});
+      })
+
+      .catch((error) => {
+        console.log(error);
+      })
+
   }
 
-
-
   render() {
-
-
     return (
       <div>
         <div>
           Board
       </div>
         <div className='card-container'>
-          {this.generateCards(CARD_DATA.cards)}
+          {this.state.cards}
         </div>
       </div>
     )
