@@ -9,7 +9,7 @@ class NewCardForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      message: '',
+      text: '',
       emoji: '',
     }
   }
@@ -33,9 +33,10 @@ class NewCardForm extends Component {
 
   onSubmitButtonClick = (event) => {
     event.preventDefault();
+    console.log(this.state);
     this.props.updateCardListCallback(this.state);
     this.setState({
-      message: '',
+      text: '',
       emoji: '',
     })
   }
@@ -51,8 +52,8 @@ class NewCardForm extends Component {
             <textarea 
               className="new-card-form__form-textarea"
               onChange={this.onChangeHandler}
-              name="message" 
-              value={this.state.message}>
+              name="text" 
+              value={this.state.text}>
             </textarea>
           </div>
           <div>
