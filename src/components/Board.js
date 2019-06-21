@@ -52,42 +52,6 @@ class Board extends Component {
       .catch((error) => {
       console.log(error);
       });
-
-    // const cardList = CARD_DATA.cards.map((card) => {
-
-    //   let cardText;
-    //   let cardEmoji;
-
-    //   if (card.text === undefined) {
-    //     cardText = "" }
-    //   else {
-    //     cardText = card.text;
-    //   }
-
-    //   if (card.Emoji) {
-    //     cardEmoji = card.Emoji
-    //   } else if (card.emoji === undefined) {
-    //     cardEmoji = ""
-    //   } else {
-    //     cardEmoji = card.emoji
-    //   }
-
-    //   // if (card.emoji === undefined) {
-    //   //   cardEmoji = "" }
-    //   // else {
-    //   //   cardEmoji = card.emoji
-    //   // }
-
-
-    //   const newCard = {
-    //     text: cardText,
-    //     emoji: cardEmoji,
-    //   }
-
-    //   return newCard;
-    // })
-
-    // this.setState({ cards: cardList });
   }
 
   deleteCard = (id) => {
