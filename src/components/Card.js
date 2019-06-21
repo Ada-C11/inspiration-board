@@ -7,9 +7,16 @@ import './Card.css';
 class Card extends Component {
   render() {
     return (
-      <div className="card">
-        {this.props.text && <p>{this.props.text}</p>}
-        {this.props.emoji && <p>{emoji.getUnicode(this.props.emoji)}</p>}
+      <div className="card card__content">
+          {this.props.text && <p className="card__content-text">{this.props.text}</p>}
+          {this.props.emoji && <p className="card__content-emoji">{emoji.getUnicode(this.props.emoji)}</p>}
+        
+          <button 
+            className="card__delete"
+            
+            >
+              Delete
+          </button>
       </div>
     )
   }
