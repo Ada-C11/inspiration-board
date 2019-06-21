@@ -3,6 +3,7 @@ import './App.css';
 import Board from './components/Board';
 import axios from 'axios';
 
+const BOARD = 'Svalbard'
 
 class App extends Component {
   constructor(props) {
@@ -10,14 +11,14 @@ class App extends Component {
     this.state = {
       cardList: [],
       message: '',
-      board: 'Svalbard',
+      // board: 'Svalbard',
     }
   }
 
   
   componentDidMount() {
     // get request for all cards on this board
-    axios.get(`https://inspiration-board.herokuapp.com/boards/${this.state.board}/cards`)
+    axios.get(`https://inspiration-board.herokuapp.com/boards/${BOARD}/cards`)
     .then((response) => {
       const cards = response.data.map((cardItem) => {
           return cardItem.card;
