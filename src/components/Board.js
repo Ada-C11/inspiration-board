@@ -67,7 +67,7 @@ class Board extends Component {
 
     })
     .catch((error) => {
-      console.log(error);
+      this.setState({error: error.message});
     })
 
   
@@ -88,7 +88,12 @@ class Board extends Component {
     console.log(this.state)
     return (
       <div>
+        <div>
+          <NewCardForm />
+        </div>
+        <div>
         {this.generateCards()}/>
+        </div>
       </div>
     )
   }
