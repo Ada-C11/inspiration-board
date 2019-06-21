@@ -5,7 +5,6 @@ import axios from 'axios';
 import './Board.css';
 import Card from './Card';
 import NewCardForm from './NewCardForm';
-import CARD_DATA from '../data/card-data.json';
 
 class Board extends Component {
   constructor() {
@@ -13,31 +12,50 @@ class Board extends Component {
 
     this.state = {
       cards: [],
+      errorMessage: null,
     };
   }
 
-
   componentDidMount() {
-    const cards = CARD_DATA["cards"].map((card) => {
-  
-      const newCard = {
-        text: card.text,
-        emoji: card.emoji,
-      }
-      return newCard;
+    axios.get(`${this.props.url}${this.props.boardName}/cards`)
+    .then((response) => {
+      const boardCards = response.data.flatMap(card => {
+        console.log(card);
+        if (card["card"].text || card["card"].emoji) {
+          return [{
+            ...card,
+          }];
+        } else {
+          return [];
+        }
+      });
+      console.log(boardCards);
+      this.setState({ cards: boardCards })
     })
-
-     this.setState({ cards })
+    .catch((error) => {
+      this.setState({
+        errorMessage: error.message
+      })
+    })
   }
-
   render() {
 
-    const displayCards = this.state.cards.map((card) => {
-      return <Card text={card.text} emoji={card.emoji} />
+    const errorSection = (this.state.errorMessage) ? 
+    (<section className="error">
+       Error: {this.state.errorMessage}
+     </section>) : null;
+
+    const displayCards = this.state.cards.map((card, i) => {
+      return <Card 
+                key={i}
+                id={card["card"].id}
+                text={card["card"].text}
+                emoji={card["card"].emoji} />
     })
 
     return (
-      <div>
+      <div className="board">
+        { errorSection }
         { displayCards }
       </div>
     )

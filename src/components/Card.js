@@ -10,6 +10,7 @@ class Card extends Component {
     super(props);
 
     this.state = {
+      id: props.id,
       text: props.text,
       emoji: props.emoji ? props.emoji : '',
     };
@@ -17,6 +18,7 @@ class Card extends Component {
   render() {
     return (
       <div className="card card__content">
+        <p >{this.state.id}</p>
         <p className="card__content-text">{this.state.text}</p>
         <p className="card__content-emoji">{emoji.getUnicode(this.state.emoji)}</p>
       </div>
@@ -25,7 +27,7 @@ class Card extends Component {
 }
 
 Card.propTypes = {
-  text: PropTypes.string.isRequired,
+  text: PropTypes.string,
   emoji: PropTypes.string,
 };
 
