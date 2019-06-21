@@ -102,8 +102,8 @@ class Board extends Component {
     const cards = this.state.cards.map((card, i) => {
 
       return (
-        <li key={i}>
-          <Card quote={card.text} emoji={card.emoji} deleteCardCallback={this.deleteCard} />
+        <li key={card.id}>
+          <Card id={card.id} quote={card.text} emoji={card.emoji} deleteCardCallback={this.deleteCard} />
         </li>
       );
     });
