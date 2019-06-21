@@ -20,9 +20,26 @@ class Board extends Component {
   componentDidMount() {
 
     const cardList = CARD_DATA.cards.map((card) => {
+
+      let cardText;
+      let cardEmoji;
+
+      if (card.text === undefined) {
+        cardText = "" }
+      else {
+        cardText = card.text;
+      }
+
+      if (card.emoji === undefined) {
+        cardEmoji = "" }
+      else {
+        cardEmoji = card.emoji
+      }
+
+
       const newCard = {
-        text: card.text,
-        emoji: card.emoji
+        text: cardText,
+        emoji: cardEmoji,
       }
 
       return newCard;
