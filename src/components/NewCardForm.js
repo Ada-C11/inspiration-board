@@ -27,12 +27,10 @@ class NewCardForm extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
 
-    // const card = {
-    //   text: this.state.text,
-    //   emoji: this.state.emoji,
-    // }
-
-    const card = this.state;
+    const card = {
+      text: this.state.text,
+      emoji: this.state.emoji,
+    }
 
     this.props.addCardCallback(card);
 
@@ -46,7 +44,7 @@ class NewCardForm extends Component {
   render(){
     return(
       <form className="new-card-form" onSubmit={this.handleSubmit}> 
-        <h3> Add a Card</h3>
+        <h3 className="title"> Add a Card</h3>
         <div>
           <label htmlFor="text"> Text: </label>
           <input
