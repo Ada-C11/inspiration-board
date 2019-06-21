@@ -7,6 +7,7 @@ import './Card.css';
 
 class Card extends Component {
 
+
   displayEmoji = (emojiInput) => {
     if (emojiInput) {
       return (
@@ -16,17 +17,27 @@ class Card extends Component {
   }
 
   render() {
+    const {onDeleteCard, id, text, emoji} = this.props;
+
     return (
       <div className="card">
-        <p> {this.props.cardText} </p>
-        <p> {this.displayEmoji(this.props.cardEmoji)} </p>
+        <section className='card__content'>
+            <p className='card__content-text'> {text} </p>
+            <p className='card__content-emoji'> {this.displayEmoji(emoji)} </p>
+        </section>
+        <button 
+        className='card__delete'
+        onClick={() => onDeleteCard(id) } > 
+          Delete Card 
+        </button>
+        
       </div>
     )
   }
 }
 
 Card.propTypes = {
-
+  onDeleteCard: PropTypes.func
 };
 
 export default Card;

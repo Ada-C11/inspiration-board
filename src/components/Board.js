@@ -39,14 +39,26 @@ class Board extends Component {
     })
   }
 
+  onDeleteCard = (id) => {
+    const updatedCards = this.state.cards.filter((card) => card.id !== id)
+
+    this.setState({
+      cards: updatedCards
+    })
+
+
+  }
+
   render() {
+    // const {onDeleteCard} = this.props;
+
     const cardDisplay = this.state.cards.map((card, i) => {
 
         return (
          <Card 
           key={i}
-          cardText={card.text}
-          cardEmoji={card.emoji} />
+          {...card}
+          onDeleteCard={this.onDeleteCard} />
         )
       })
 
@@ -61,7 +73,7 @@ class Board extends Component {
 }
 
 Board.propTypes = {
-
+  onDeleteCard: PropTypes.func
 };
 
 export default Board;
