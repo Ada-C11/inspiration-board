@@ -7,7 +7,7 @@ import Card from './Card';
 import NewCardForm from './NewCardForm';
 import CARD_DATA from '../data/card-data.json';
 
-const URL = "https://inspiration-board.herokuapp.com/boards/Ada-Lovelace/cards";
+// const URL = "https://inspiration-board.herokuapp.com/boards/jansen-martin/cards";
 
 class Board extends Component {
   constructor() {
@@ -20,6 +20,11 @@ class Board extends Component {
   }
 
   componentDidMount() {
+
+    const URL = this.props.url + this.props.boardName + "/cards";
+
+    // console.log("This is the URL");
+    // console.log(this.props.url);
 
     axios.get(URL)
       .then((response) => {
