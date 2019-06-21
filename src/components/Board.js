@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 
@@ -12,22 +12,47 @@ class Board extends Component {
     super();
 
     this.state = {
-      cards: [],
+      // cards: [],
+      // cards: CARD_DATA.cards,
     };
   }
 
+  
+
   render() {
+
+    const { url, boardName, cardList, onRemoveCallback } = this.props
+    // console.log(cardLisst);
+
+    const renderCards = cardList.map( (card, i) => {
+      return (
+        <div key={i}>
+          <Card 
+            card={card} 
+            onRemoveCallback={onRemoveCallback}
+          />
+        </div>
+      );
+    });
+
     return (
-      <div>
-        Board
-      </div>
+      <Fragment>
+        <section className='validations-error-display'>
+
+        </section>
+        <section className='board'>
+          {renderCards}
+        </section>
+      </Fragment>
     )
   }
-
 }
 
 Board.propTypes = {
-
+  url: PropTypes.string.isRequired,
+  boardName: PropTypes.string.isRequired,
+  cardList: PropTypes.array.isRequired,
+  onRemoveCallback: PropTypes.func.isRequired,
 };
 
 export default Board;
