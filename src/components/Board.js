@@ -14,12 +14,32 @@ class Board extends Component {
     super();
 
     this.state = {
-      cards: CARD_DATA,
+      cards: [],
     };
   }
 
+  componentDidMount() {
+    axios.get(BOARD_API_URL + 'boards/' + this.props.boardName + '/cards')
+      .then((response) => { 
+        const cardList = response.data.map((card) => {
+          const newCard = {
+            ...card,
+          }
+          return newCard.card;
+        })
+
+        this.setState({
+          cards: cardList,
+        })
+      })
+      
+      .catch((error) => {
+        console.log(error);
+      })
+  }
+
   render() {
-    const cardList = this.state.cards.cards.map((card, index) => {
+    const cardList = this.state.cards.map((card, index) => {
       const { text, emoji } = card;
       return ( <section>
                 <Card
@@ -30,7 +50,7 @@ class Board extends Component {
               </section>
       );
     })
-    console.log(this.state.cards.cards)
+
     return (
       <div>
         {cardList}
