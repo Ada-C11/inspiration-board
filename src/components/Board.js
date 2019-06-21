@@ -8,31 +8,44 @@ import NewCardForm from './NewCardForm';
 import CARD_DATA from '../data/card-data.json';
 
 class Board extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       cards: [],
+      name: props.boardName,
+      url: props.url,
     };
+  }
+
+  componentDidMount() {
+    const boardPath = this.state.url + `/${this.state.name}/cards`;
+    axios.get(boardPath)
+      .then((response) => {
+        this.setState({ cards: response.data });
+      })
+      .catch((error) => {
+        // TODO
+      });
   }
 
   render() {
 
-    const allCards = CARD_DATA.cards.map((card) => {
-      return <Card text={card.text} emoji={card.emoji} />
+    const allCards = this.state.cards.map((cardObj) => {
+      return <Card text={cardObj.card.text} emoji={cardObj.card.emoji} />
     });
 
     return (
-      <div className="board">
+      <section className="board">
         {allCards}
-      </div>
+      </section>
     )
   }
 
 }
 
 Board.propTypes = {
-
+  name: PropTypes.string,
 };
 
 export default Board;
