@@ -40,18 +40,14 @@ class Board extends Component {
   }
 
   addCard = (card) => {
-    console.log('in addCard')
     const newCard = <Card 
       {...card}
       key = {card.id}
       deleteCardCallback = {this.deleteCard}
     />
 
-    // console.log(newCard)
     const newCards = [newCard, ...this.state.cards]
 
-    console.log('this is newcards')
-    console.log(newCards)
     this.setState({cards: newCards});
   }
 

@@ -55,6 +55,7 @@ class NewCardForm extends Component {
     onFormSubmit = (event) => {
         event.preventDefault();
         this.postCard();
+        this.setState(this.startState)
     }
 
     render() {
