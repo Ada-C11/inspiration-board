@@ -6,7 +6,6 @@ import emoji from 'emoji-dictionary'
 import './Board.css';
 import Card from './Card';
 import NewCardForm from './NewCardForm';
-// import CARD_DATA from '../data/card-data.json';
 
 class Board extends Component {
   constructor() {
@@ -87,9 +86,11 @@ class Board extends Component {
         )
       })
 
+    const showError =  <div className='red__error'>Error Message: {this.state.errorMessage}</div>
+
     return (
       <div className='board'>
-        {cardDisplay}
+        {this.state.errorMessage ? showError : cardDisplay}
         <NewCardForm addCardCallback={this.addCard}/>
       </div>
     )
