@@ -12,13 +12,29 @@ class Board extends Component {
     super();
 
     this.state = {
-      cards: CARD_DATA.cards,
+      cards: [],
     };
+
   }
+
+  componentDidMount() {
+
+    const cardList = CARD_DATA.cards.map((card) => {
+      const newCard = {
+        text: card.text,
+        emoji: card.emoji
+      }
+
+      return newCard;
+    })
+
+    this.setState({ cards: cardList });
+  }
+
 
   render() {
     console.log(this.state.cards);
-    const cardList = this.state.cards.map((card, i) => {
+    const cards = this.state.cards.map((card, i) => {
 
       return (
         <li key={i}>
@@ -31,7 +47,7 @@ class Board extends Component {
     return (
       <div>
         Board
-        {cardList}
+        {cards}
       </div>
     )
   }
