@@ -17,9 +17,14 @@ class Board extends Component {
   }
 
   render() {
+
+    const allCards = CARD_DATA.cards.map((card) => {
+      return <Card text={card.text} emoji={card.emoji} />
+    });
+
     return (
-      <div>
-        Board
+      <div className="board">
+        {allCards}
       </div>
     )
   }
