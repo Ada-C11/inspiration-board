@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import emoji, { getUnicode } from 'emoji-dictionary';
 
 import './Card.css';
+import { stringLiteral } from '@babel/types';
 
 class Card extends Component {
   render() {
@@ -28,7 +29,9 @@ class Card extends Component {
 }
 
 Card.propTypes = {
-
+  text: PropTypes.string,
+  emoji: PropTypes.string,
+  deleteCardCallback: PropTypes.func.isRequired
 };
 
 export default Card;

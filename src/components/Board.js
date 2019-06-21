@@ -71,6 +71,7 @@ class Board extends Component {
       <div>
         <div>
           Board
+          <NewCardForm />
       </div>
         <div className='card-container'>
           {this.state.cards}
@@ -82,7 +83,8 @@ class Board extends Component {
 }
 
 Board.propTypes = {
-
+  url: PropTypes.string.isRequired,
+  board: PropTypes.string.isRequired
 };
 
 export default Board;
