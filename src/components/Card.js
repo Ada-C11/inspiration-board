@@ -13,18 +13,19 @@ class Card extends Component {
 
   render() {
     return (
-      <div className="card">
-        <h3>{this.props.id}</h3>
-        <h4>{this.props.card.text}</h4>
-        <h6>{this.props.card.emoji ? emoji.getUnicode(this.props.card.emoji) : null}</h6>
-        <button onClick={this.handleButtonClick}>Delete</button>
+      <div className="card__content">
+        <p className="card__content-text">{this.props.card.text}</p>
+        <p className="card__content-emoji">{this.props.card.emoji ? emoji.getUnicode(this.props.card.emoji) : null}</p>
+        <button className="card-delete" onClick={this.handleButtonClick}>Delete</button>
       </div>
     )
   }
 }
 
 Card.propTypes = {
-
+  card: PropTypes.object.isRequired,
+  cardIndex: PropTypes.number,
+  deletedCardCallback: PropTypes.func
 };
 
 export default Card;

@@ -39,7 +39,7 @@ class Board extends Component {
         alert(`Successfully deleted pet with ${cardID}`);
         const newState = this.state.cards;
         newState.splice(cardID, 1);
-        
+
         // TODO: get messages to display for user (not with alerts)
         newState.message = `Successfully deleted pet with id: ${cardID}`;
         this.setState(newState);
@@ -55,22 +55,35 @@ class Board extends Component {
     
     const generatedCards = this.state.cards.map((card, i ) => {
      return( 
-      <li key={card.card.id}>
+      <div key={card.card.id} className="card">
         <Card 
           card={ card.card }
           cardIndex={i} 
           deleteCardCallback={this.removeCard}
         />
-      </li>);
+      </div>);
     });
 
-    return ( <div> {generatedCards} </div>);
+    return ( 
+      <div> 
+        <section className="board"> 
+          {generatedCards} 
+        </section>
+        <section className="new-card-form">
+        <NewCardForm />
+        </section>
+      </div>
+      
+      
+    );
   }
 
 }
 
 Board.propTypes = {
-  
+  url: PropTypes.string.isRequired,
+  boardName: PropTypes.string.isRequired, 
+  deleteURL: PropTypes.string
 };
 
 export default Board;
