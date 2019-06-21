@@ -7,6 +7,10 @@ import './Card.css';
 
 class Card extends Component {
   
+  deleteCard = () => {
+      this.props.deleteCardCallback(this.props.id)
+  }
+
   render() {
     console.log(this.props.text)
 
@@ -14,6 +18,7 @@ class Card extends Component {
       <div className="card">
         <p>{this.props.text}</p>
         <p>{emoji.getUnicode(this.props.emoji)}</p>
+        <button onClick={this.deleteCard}>Delete</button>
       </div>
     )
   }

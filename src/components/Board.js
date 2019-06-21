@@ -18,12 +18,18 @@ class Board extends Component {
     };
   }
 
+  deleteCardCallback = (id) => {
+    console.log(id)
+  
+  }
+
   generateCards = () => {
     return this.state.cards.map((card) => {
       return (<Card
       id={card.id}
       text={card.text}
       emoji={card.emoji}
+      deleteCardCallback = {this.deleteCardCallback}
       />)
     })
   }
