@@ -24,7 +24,12 @@ class Card extends Component {
             {this.props.text}
           </div>
           <div className="card__content-emoji">
-            <span className="emoji" role="img" aria-label={emoji.getName(this.props.emoji)} >{emoji.getUnicode(`${this.props.emoji}`)}</span>
+            <span className="emoji"
+              role="img"
+              aria-label={emoji.getName(this.props.emoji)}
+            >
+              {emoji.getUnicode(`${this.props.emoji}`)}
+            </span>
           </div>
         </div>
       </div>
