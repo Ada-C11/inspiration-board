@@ -12,8 +12,6 @@ class Card extends Component {
   }
 
   render() {
-    console.log(this.props.text)
-
     return (
       <div className="card">
       <button className="card__delete" onClick={this.deleteCard}>X</button>

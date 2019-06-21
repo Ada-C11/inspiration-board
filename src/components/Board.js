@@ -18,9 +18,7 @@ class Board extends Component {
   }
 
   addCard = (newCard) => {
-    console.log(newCard)
-    console.log(this.state.cards)
-    console.log(this.props.url+this.props.boardName+'/cards')
+
     axios.post(this.props.url+this.props.boardName+'/cards',newCard)
     .then((response) => {
       let updatedData = this.state.cards;
@@ -28,13 +26,11 @@ class Board extends Component {
       this.setState({cards: updatedData})
     })
     .catch((error)=>{
-      console.log(error.message)
+      this.setState({error: error.message});
     })
   }
 
   deleteCard = (id) => {
-    console.log(this.props.urlCards+id.toString())
-
     axios.delete(this.props.urlCards+id.toString())
     .then((response) => {
       const index = this.state.cards.findIndex((object) => {
@@ -77,7 +73,6 @@ class Board extends Component {
   
       })
 
-      console.log(updatedCards)
       this.setState({cards: updatedCards})
 
     })
@@ -87,7 +82,6 @@ class Board extends Component {
   }
 
   render() {
-    console.log(this.state)
     return (
       <div>
       <div>
