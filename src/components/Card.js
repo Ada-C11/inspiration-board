@@ -7,8 +7,8 @@ import './Card.css';
 
 class Card extends Component {
 
-  onDelete = (id) => {
-    this.props.deleteCardCallBack(id)
+  onDelete = () => {
+    this.props.deleteCardCallBack(this.props.content["card"]["id"])
   }
 
 
@@ -25,7 +25,7 @@ class Card extends Component {
         {foundEmoji}
         </div>
         <button 
-          className="btn btn-primary card__delete" onClick={this.onDelete(this.props.content["card"]["id"])}
+          className="btn btn-primary card__delete" onClick={this.onDelete}
           >
             Delete
         </button>
