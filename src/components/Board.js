@@ -13,37 +13,28 @@ class Board extends Component {
 
     this.state = {
       cards: [],
-      cardText: 'hello!'
+      cardText: 'hello!',
+      errorMessage: null
     };
   }
 
   componentDidMount() {
-    axios.get(this.props.url + this.props.boardName)
+    axios.get(this.props.url + this.props.boardName + '/cards')
       .then((response) => {
         console.log("Here is my response!!!!!!!!!!", response);
 
-        // const pets = response.data.flatMap(pet => {
-        //   if (pet.name && pet.breed && pet.about) {
-        //     return [{
-        //       ...pet,
-        //       species: pet.breed.toLowerCase()
-        //     }];
-        //   } else {
-        //     return [];
-        //   }
-        // });
-
-        // this.setState({ petList: pets });
-
         const cards = response.data.map(card => {
 
-          return [
-            {
-              ...card
-            }];
+          let allCards = this.state.cards;
+
+          return (
+            allCards.push(card)
+          );
         })
+
         this.setState({
-          cards: cards
+          // cards: cards
+          cards
         })
 
       })
@@ -52,9 +43,12 @@ class Board extends Component {
           errorMessage: error.message
         })
       })
-      console.log('here are all your cards!!!!!', this.state.cards)
-    }
-    
+    console.log('here are all your cards!!!!!', this.state.cards)
+  }
+
+  // allIndividualCards = this.state.cards
+  //map through all of these cards and include JSX. Put them below where card components are.
+
 
 
   render() {
