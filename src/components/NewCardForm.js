@@ -9,7 +9,7 @@ class NewCardForm extends Component {
 
     onSubmitCardButtonClick = (event) => {
         event.preventDefault();
-        console.log("YOOOOOO, I GOT YOUR CARD");
+        this.props.addCardCallback();
     }
 
     render() {
@@ -41,3 +41,7 @@ class NewCardForm extends Component {
 }
 
 export default NewCardForm;
+
+NewCardForm.propTypes = {
+    addCardCallback: PropTypes.func,
+  };
