@@ -52,7 +52,7 @@ class NewCardForm extends Component {
         <h3 className="new-card-form__header">New Card Form</h3>
         <label className="new-card-form__form-label" htmlFor="fullName">Text:</label>
         <input className="new-card-form__form-textarea" name="text" type="text" value={this.state.text} onChange={this.onInputChange} />
-        <select className="new-card-form__form-select">
+        <select className="new-card-form__form-select" name="emoji" onChange={this.onInputChange}>
           {emojiOptions}
         </select>
         <input className="btn btn-success new-card-form__form-button" type="submit" name="submit" value="Add a Card" />
