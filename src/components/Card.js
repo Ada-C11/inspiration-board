@@ -11,8 +11,6 @@ class Card extends Component {
     this.props.deleteCardCallBack(this.props.content["card"]["id"])
   }
 
-
-
   render() {
     let foundEmoji = ""
     if(this.props.content["card"]["emoji"]){
@@ -35,7 +33,7 @@ class Card extends Component {
 }
 
 Card.propTypes = {
-
+  content: PropTypes.object.isRequired
 };
 
 export default Card;

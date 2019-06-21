@@ -19,6 +19,22 @@ class Board extends Component {
     };
   }
 
+
+  componentDidMount() {
+    this.updateCards()
+  }
+
+  updateCards = () => {
+    const url = `${this.props.url}${this.props.boardName}/cards`
+    axios.get(url)
+      .then((response) => {
+        this.setState({ cards: response.data });
+      })
+      .catch((error) => {
+        this.setState({ error: error.message });
+      });
+  }
+
   deleteCard = (id) => {
     const url = `https://inspiration-board.herokuapp.com/cards/${id}`
     axios.delete(url)
@@ -56,23 +72,6 @@ class Board extends Component {
   //   })
   // }
 
-  updateCards = () => {
-    const url = `${this.props.url}${this.props.boardName}/cards`
-    axios.get(url)
-      .then((response) => {
-        this.setState({ cards: response.data });
-      })
-      .catch((error) => {
-        this.setState({ error: error.message });
-      });
-  }
-
-
-
-  componentDidMount() {
-    this.updateCards()
-  }
-
 
   render() {
     console.log(this.state.cards)
@@ -86,8 +85,8 @@ class Board extends Component {
     })
     return (
       <div>
-        {allCards}
         <NewCardForm addCardCallBack = {this.state.addCardCallBack} />
+        {allCards}
       </div>
     )
   }
@@ -95,6 +94,8 @@ class Board extends Component {
 }
 
 Board.propTypes = {
+  url: PropTypes.string.isRequired,
+  boardName: PropTypes.string.isRequired
 
 };
 

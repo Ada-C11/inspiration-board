@@ -46,25 +46,24 @@ class NewCardForm extends Component {
   }
 
   render() {
-    const initialClass = "PlayerSubmissionFormt__input--invalid"
 
     return (
-      <div className="PlayerSubmissionForm">
-        <h3>Add Card</h3>
+      <div className="new-card-form">
+        <h3 className="new-card-form__header">Add Card</h3>
 
-        <form className="" onSubmit={this.onFormSubmit}>
+        <form className="new-card-form__form" onSubmit={this.onFormSubmit}>
 
           <div className="PlayerSubmissionForm__poem-inputs">
     
             <input
-              className={initialClass}
+              className="new-card-form__form-label" 
               placeholder="text"
               name="text"
               type="text"
               value={this.state.text} 
               onChange={this.onInputChange}/>
             <input
-              className={initialClass}
+              className="new-card-form__form-label" 
               placeholder="emoji"
               name="emoji"
               type="text"
@@ -73,8 +72,8 @@ class NewCardForm extends Component {
     
           </div>
 
-          <div className="PlayerSubmissionForm__submit">
-            <input type="submit" value="Add to Board" className="PlayerSubmissionForm__submit-btn"/>
+          <div className="">
+            <input type="submit" value="Add" className="new-card-form__form-button"/>
           </div>
         </form>
       </div>
