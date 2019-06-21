@@ -7,14 +7,18 @@ import './Card.css';
 class Card extends Component {
   constructor(props){
     super(props)
+    console.log(props);
     this.state = {
-      card: ''
+      card: props.card
     }
   }
+
   render() {
     return (
       <div className="card">
-        
+        <h3>{this.state.id}</h3>
+        <h4>{this.state.card.text}</h4>
+        <h6>{this.state.card.emoji}</h6>
       </div>
     )
   }
