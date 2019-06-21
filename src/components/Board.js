@@ -15,13 +15,12 @@ class Board extends Component {
     this.state = {
       cards: [],
     };
+    const { url, boardName } = this.props;
+    this.cardsEndpoint = url + boardName + '/cards';
   }
 
   componentDidMount() {
-    const { url, boardName } = this.props;
-    const cardsEndpoint = url + boardName + '/cards';
-
-    axios.get(cardsEndpoint)
+    axios.get(this.cardsEndpoint)
       .then((response) => {
         const cardsList = response.data.map((card, i) => {
           let newCard = card.card;
@@ -41,6 +40,11 @@ class Board extends Component {
       })
   }
 
+  addCard = (card) => {
+    const newCards = this.state.cards;
+    newCards.push(card);
+    this.setState(newCards)
+  }
 
   deleteCard = (cardID) => {
     const deleteEndpoint = 'https://inspiration-board.herokuapp.com/cards/' + cardID;
@@ -71,7 +75,10 @@ class Board extends Component {
       <div>
         <div>
           Board
-          <NewCardForm />
+          <NewCardForm 
+            cardsEndpoint = {this.cardsEndpoint}
+            addCardCallback = {this.addCard}
+          />
       </div>
         <div className='card-container'>
           {this.state.cards}
@@ -84,7 +91,7 @@ class Board extends Component {
 
 Board.propTypes = {
   url: PropTypes.string.isRequired,
-  board: PropTypes.string.isRequired
+  boardName: PropTypes.string.isRequired
 };
 
 export default Board;
