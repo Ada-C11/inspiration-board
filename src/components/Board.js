@@ -14,7 +14,8 @@ class Board extends Component {
     this.state = {
       cards: [],
       error: "",
-      deleteCardCallBack: this.deleteCard
+      deleteCardCallBack: this.deleteCard,
+      addCardCallBack: this.addCard,
     };
   }
 
@@ -24,9 +25,24 @@ class Board extends Component {
     .then(res => {
       console.log(res);
       console.log(res.data);
+      this.updateCards()
     })
-    
  }
+
+ addCard = (cardContent) => {
+   const url = `${this.props.url}${this.props.boardName}/cards`
+
+    axios.post(url, cardContent)
+    .then((response) => {
+      this.updateCards()
+    })
+    .catch((error) => {
+      // Use the same idea we had in our GET request
+      this.setState({ error: error.message });
+    });
+ }
+
+
 
   // componentDidMount() {
   //   this.importCards()
@@ -40,7 +56,7 @@ class Board extends Component {
   //   })
   // }
 
-  componentDidMount() {
+  updateCards = () => {
     const url = `${this.props.url}${this.props.boardName}/cards`
     axios.get(url)
       .then((response) => {
@@ -52,7 +68,14 @@ class Board extends Component {
   }
 
 
+
+  componentDidMount() {
+    this.updateCards()
+  }
+
+
   render() {
+    console.log(this.state.cards)
     const allCards = this.state.cards.map((card, i) => {
       return <Card
       key={i}
@@ -64,6 +87,7 @@ class Board extends Component {
     return (
       <div>
         {allCards}
+        <NewCardForm addCardCallBack = {this.state.addCardCallBack} />
       </div>
     )
   }
