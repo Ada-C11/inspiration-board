@@ -6,23 +6,34 @@ import './Card.css';
 
 // class Card extends Component {
 const Card = (props) => {
-  // const emoji = require('emoji-dictionary');
-  console.log(emoji.getUnicode("heart_eyes"));
-  const {text, cardEmoji} = props;
+
+  const { text, cardEmoji, deleteCardCallback, id} = props;
 
   let displayEmoji = cardEmoji
-  if (cardEmoji){
+  if (cardEmoji) {
     displayEmoji = emoji.getUnicode(cardEmoji)
   }
-  // render() {
-    return (
-      <div className="card">
-        <div className="card__content">
-          <span className="card__content-text">{text}</span>
-          <span className="card__content-emoji">{displayEmoji}</span>
-        </div>
+  const onClickDelete = () => {
+    console.log(id)
+    return deleteCardCallback(id)
+  }
+  return (
+    <div className="card">
+      <div className="card__content">
+      <button 
+          type="button" 
+          className="card__delete" 
+          
+          onClick={onClickDelete}
+        >
+          Delete Card
+        </button>
+        <span className="card__content-text">{id}</span>
+        <span className="card__content-text">{text}</span>
+        <span className="card__content-emoji">{displayEmoji}</span>
       </div>
-    )
+    </div>
+  )
   // }
 }
 

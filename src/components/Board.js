@@ -22,7 +22,7 @@ class Board extends Component {
     axios.get(`${this.props.url}/${this.props.boardName}/cards`)
       .then((response) => {
         this.setState({ cards: response.data });
-        console.log('response.data is', response.data)
+        // console.log('response.data is', response.data)
       })
       .catch((error) => {
         this.setState({
@@ -30,6 +30,46 @@ class Board extends Component {
         })
         console.log(error.message)
       })
+  }
+
+  addCardCallback = (card) => {
+    const cardData = {
+      text: card.text,
+      emoji: card.cardEmoji,
+    };
+    axios.post(`${this.props.url}/${this.props.boardName}/cards`, cardData)
+      .then((response) => {
+        console.log(card)
+        let updatedCards = this.state.cards;
+        updatedCards.unshift({ card });
+        this.setState({
+          cards: updatedCards
+        });
+        console.log(updatedCards);
+      })
+      .catch((error) => {
+        this.setState({
+          errorMessage: error.message,
+        });
+      });
+  }
+
+  deleteCardCallback = (cardId) => {
+    console.log(cardId)
+    //  console.log(card.id)
+    axios.delete(`https://inspiration-board.herokuapp.com/cards/${cardId}`)
+      .then((response) => {
+        const newCardList = this.state.cards.filter(card => card.card.id !== cardId);
+
+        this.setState({
+          cards: newCardList
+        });
+      })
+      .catch((error) => {
+        this.setState({
+          errorMessage: error.message,
+        });
+      });
   }
 
   render() {
@@ -42,12 +82,15 @@ class Board extends Component {
 
     const cardComponents = this.state.cards.map((card, i) => {
       return (
-        <div key={i}>
+        // <div key={i} className="board">
           <Card
+          key={i} 
+            id={card.card.id}
             text={card.card.text}
-            cardEmoji={card.card.emoji} />
-        </div>
-
+            cardEmoji={card.card.emoji}
+            deleteCardCallback={this.deleteCardCallback}
+          />
+        // </div>
       )
     });
 
@@ -56,7 +99,10 @@ class Board extends Component {
         <div>
           {errorSection}
         </div>
-        <div>
+        <div >
+          <NewCardForm addCardCallback={this.addCardCallback} />
+        </div>
+        <div className="board">
           {cardComponents}
         </div>
       </section>
