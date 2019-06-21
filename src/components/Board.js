@@ -5,7 +5,7 @@ import axios from 'axios';
 import './Board.css';
 import Card from './Card';
 import NewCardForm from './NewCardForm';
-import CARD_DATA from '../data/card-data.json';
+// import CARD_DATA from '../data/card-data.json';
 
 class Board extends Component {
   constructor() {
@@ -25,6 +25,7 @@ class Board extends Component {
         const cardsFromApi = response.data.map(cardWrapper => {
     
             return {
+              id: cardWrapper.card.id,
               text: cardWrapper.card.text,
               emoji: cardWrapper.card.emoji
             };
@@ -39,19 +40,23 @@ class Board extends Component {
       })
   };
 
-  deleteCard = () => {
-
-  }
+  deleteCard = (cardId) => {
+    // axios.delete(`https://inspiration-board.herokuapp.com/cards/${}`)
+    // .then((response) => {
+    //   // What should we do when we know the delete request worked?
+    // })
+    // .catch((error) => {
+    //   // What should we do when we know the delete request failed?
+    // });
+    console.log("i am in Board.js and this is the card id", cardId)
+  };
 
   render() {
-
     const allCards = this.state.cards.map((card, i) => {
       return (
         <section key={i}>
           <Card
-            index={i}
-            text={card.text}
-            emoji={card.emoji}
+            {...card}
             deleteCardCallback={this.deleteCard}
            />
         </section>
