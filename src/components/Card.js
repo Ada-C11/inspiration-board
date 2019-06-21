@@ -5,17 +5,34 @@ import emoji from 'emoji-dictionary';
 import './Card.css';
 
 class Card extends Component {
+  constructor (props) {
+    super(props);
+
+    this.state = {
+      text: props.text,
+      emoji: props.emoji,
+    }
+  }
+
   render() {
     return (
-      <div className="card">
-        Card
-      </div>
+      <section className="card">
+        <section className="card__content">
+          <p className="card__content-text">
+            {this.state.text}
+          </p> 
+          <span className="card__content-emoji">
+            {emoji.getUnicode(`${this.state.emoji}`)}
+          </span>
+        </section>
+      </section>
     )
   }
 }
 
 Card.propTypes = {
-
+  name: PropTypes.string.isRequired,
+  emoji: PropTypes.string,
 };
 
 export default Card;
