@@ -22,9 +22,10 @@ class Board extends Component {
   // }
   generateCardComponents = () => {
     console.log("inside generate card components")
+    console.log(this.state.cards)
     return this.state.cards.map((card, i) => {
       console.log("this is the card")
-      console.log(card)
+      // console.log(card)
       console.log(card.id)
       return (<Card
         key={i}
@@ -61,9 +62,23 @@ class Board extends Component {
 
   addCard = (card) => {
 
-    // this.setState({
-    //   cards: this.state.cards.push(card)
-    // })
+    axios.post(BOARD_API_URL + '/boards/sarah-scotton/cards/', card)
+      .then((response) => {
+        console.log(response.data.card.id)
+        card.id = response.data.card.id
+        console.log(card)
+        const newCards = this.state.cards
+        console.log("New state", newCards)
+        newCards.push(card)
+        console.log("New state 2", newCards)
+        this.setState({
+          cards: newCards
+        })
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+
   }
 
   removeCard = (cardIndex, cardID) => {
