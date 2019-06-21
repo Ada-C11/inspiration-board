@@ -16,7 +16,7 @@ class Card extends Component {
     }
   }
   removeCard = () => {
-    this.props.removeCardCallback(this.props.index)
+    this.props.removeCardCallback(this.props.index, this.props.id)
   }
   render() {
 

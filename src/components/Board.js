@@ -25,9 +25,11 @@ class Board extends Component {
     return this.state.cards.map((card, i) => {
       console.log("this is the card")
       console.log(card)
+      console.log(card.id)
       return (<Card
         key={i}
         index={i}
+        id={card.id}
         text={card.text}
         emoji={card.emoji}
         removeCardCallback={this.removeCard}
@@ -45,7 +47,8 @@ class Board extends Component {
         const newCards = response.data.map((item) => {
           return {
             text: item.card.text,
-            emoji: item.card.emoji
+            emoji: item.card.emoji,
+            id: item.card.id
           }
         })
         this.setState({ cards: newCards })
@@ -56,19 +59,33 @@ class Board extends Component {
       })
   }
 
-  removeCard = (cardIndex) => {
+  removeCard = (cardIndex, cardID) => {
     console.log("inside removeCard");
-    console.log(cardIndex);
-    const newCards = this.state.cards;
-    console.log(newCards.length);
-    // console.log(this.state.cards)
-    const card = newCards.splice(cardIndex, 1);
-    console.log(card)
-    console.log(newCards.length);
+    console.log("index=", cardIndex);
+    console.log("id =", cardID);
+    // const newCards = this.state.cards;
+    // console.log(newCards.length);
+    // // console.log(this.state.cards)
+    // const card = newCards.splice(cardIndex, 1);
+    // console.log(card)
+    // console.log(newCards.length);
 
-    this.setState({
-      cards: newCards
-    })
+    // this.setState({
+    //   cards: newCards
+    // })
+
+
+    axios.delete(BOARD_API_URL + '/cards/' + cardID)
+      .then((response) => {
+        const newCards = this.state.cards;
+        const card = newCards.splice(cardIndex, 1);
+        console.log(card)
+        this.setState({ cards: newCards })
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+    console.log(this.state.cards)
   }
 
   render() {
