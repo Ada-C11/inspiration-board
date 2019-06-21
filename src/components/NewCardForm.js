@@ -69,4 +69,9 @@ class NewCardForm extends Component {
     }
 }
 
+NewCardForm.propTypes = {
+    addCardCallback: PropTypes.func.isRequired,
+  };
+
 export default NewCardForm;
+
