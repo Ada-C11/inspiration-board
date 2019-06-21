@@ -12,7 +12,6 @@ class Board extends Component {
     super(props);
     this.state = {
       cards: [],
-      currentCard: undefined,
       error: null
     };
   }
@@ -27,12 +26,27 @@ class Board extends Component {
         this.setState({ error: error.message });
       });
   }
-  
+ 
+    onDeleteCard = (cardId) => {
+      const cardsUrl = this.props.cardsUrl+cardId
+      axios.delete(cardsUrl)
+        .then((response) => {
+          const newCardList = this.state.cards.filter(cardData => cardData.card.id !== cardId);
+          this.setState({
+            cards: newCardList
+          });
+          console.log(this.state.cards)
+        })
+        .catch((error) => {
+          this.setState({ error: error.message });
+        });
+    }
+
   render() {
-    const { currentCard, cards } = this.state;
+    const { cards } = this.state;
     const cardList = cards.map((cardData) => {
       const {id, text, emoji} = cardData.card;
-      return (<Card key={id} text={text} emoji={emoji} /> );
+      return (<Card key={id} id={id} text={text} emoji={emoji} onDeleteCard={this.onDeleteCard}/> );
     });
 
     const errorSection = (this.state.error) ? 
