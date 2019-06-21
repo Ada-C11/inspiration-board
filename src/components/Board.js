@@ -15,7 +15,8 @@ class Board extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      cards: CARD_DATA['cards'],
+      cards: [],
+      errorMessage: [],
     };
   }
 
@@ -23,7 +24,6 @@ class Board extends Component {
     const cards = [];
     axios.get(`${this.props.url}/${this.props.boardName}/cards`)
     .then((response) => {
-      // console.log(response.data);
       response.data.forEach((element) => {
         cards.push(element['card']);
       })
@@ -31,19 +31,45 @@ class Board extends Component {
       this.setState({cards,});
     })
     .catch((error) => {
-
+      const errorMessage = error.message;
+      this.setState({errorMessage,})
     })
   }
 
+  displayErrorMessage = () => {
+    const messages = this.state.errorMessage.map((e, i) => {
+      return(
+        <li key={i}>{e}</li>
+      )
+    })
+    return messages;
+  }
 
   updateCardList = (card) => {
-    const allCards = this.state.cards;
-    allCards.push(card);
-    this.setState(allCards);
+    const cardData = {
+      id: card.id,
+      text: card.text,
+      emoji: card.emoji,
+    }
+
+    axios.post(`${this.props.url}${this.props.boardName}/cards`, cardData)
+    .then((response) => {
+      let cards = this.state.cards;
+      cards.push({
+        text: card.text,
+        emoji: card.emoji,
+      });
+      this.setState({ cards, });
+    })
+    .catch((error) => {
+      const errorMessage = error.message;
+      this.setState({errorMessage,});
+    })
   }
 
   renderCards = () => {
     const displayedCards = this.state.cards.map((card) => {
+      // console.log(card.id);
       return (
         <Card 
           key={card.id}
@@ -67,6 +93,11 @@ class Board extends Component {
   render() {
     return (
       <div>
+        <div className="validation-errors-display">
+          <ul className="validation-errors-display__list">
+            {this.displayErrorMessage()}
+          </ul>
+        </div>
         <NewCardForm updateCardListCallback={this.updateCardList}/>
         <div className="board">
           {this.renderCards()}

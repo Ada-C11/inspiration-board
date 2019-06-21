@@ -43,7 +43,6 @@ class NewCardForm extends Component {
 
   onSubmitButtonClick = (event) => {
     event.preventDefault();
-    console.log(this.state);
     this.props.updateCardListCallback(this.state);
     this.setState({
       text: '',
