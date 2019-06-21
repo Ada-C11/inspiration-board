@@ -21,6 +21,8 @@ class Board extends Component {
 
   componentDidMount() {
 
+    console.log("Inside componentDidMount");
+
     const URL = this.props.url + this.props.boardName + "/cards";
 
     // console.log("This is the URL");
@@ -42,7 +44,6 @@ class Board extends Component {
           return newCard;
         })
 
-        console.log("Hello, out there!");
         console.log(cardList);
 
         this.setState({ cards: cardList });
@@ -54,13 +55,26 @@ class Board extends Component {
       });
   }
 
+
   deleteCard = (id) => {
     const deleteUrl = "https://inspiration-board.herokuapp.com/cards/" + id;
-    console.log(id);
+    // console.log(id);
 
     axios.delete(deleteUrl)
       .then((response) => {
       console.log(response);
+
+      let updatedCards = [...this.state.cards];
+
+     const index = updatedCards.findIndex((card) => card.id == id);
+
+     updatedCards.splice(index, 1);
+
+      this.setState({
+          cards: updatedCards,
+      });
+
+
       })
       .catch((error) => {
       console.log(error);
@@ -70,8 +84,7 @@ class Board extends Component {
 
   render() {
     // console.log(this.state.cards);
-    // console.log("Hello");
-    console.log(this.deleteCard);
+    // console.log("Hello")
     const cards = this.state.cards.map((card, i) => {
 
       return (
