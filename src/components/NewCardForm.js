@@ -46,7 +46,7 @@ class NewCardForm extends Component {
             <div>
                 <h1>Add a New Card</h1>
                 <form  className="new-card-form"
-      onSubmit = {this.onFormSubmit}>
+                onSubmit = {this.onFormSubmit}>
                 <label htmlFor="text">Text</label>
                 <input name="text" 
                 type="text" 
@@ -58,7 +58,7 @@ class NewCardForm extends Component {
                 onChange = {this.onChange}>
                     {this.generateSelectList()}
                 </select>
-                <input type="submit" value="Add Card"/>
+                <input type="submit" value="Add "/>
 
                 </form>
             </div>

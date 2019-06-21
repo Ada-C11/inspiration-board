@@ -20,6 +20,17 @@ class Board extends Component {
 
   addCard = (newCard) => {
     console.log(newCard)
+    console.log(this.state.cards)
+    console.log(this.props.url+this.props.boardName+'/cards')
+    axios.post(this.props.url+this.props.boardName+'/cards',newCard)
+    .then((response) => {
+      let updatedData = this.state.cards;
+      updatedData.push(newCard);
+      this.setState({cards: updatedData})
+    })
+    .catch((error)=>{
+      console.log(error.message)
+    })
   }
 
   deleteCard = (id) => {
