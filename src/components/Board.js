@@ -19,7 +19,6 @@ class Board extends Component {
   
   componentDidMount() {
     const URL = this.props.url +'/'+this.props.boardName+'/cards'
-    console.log(URL)
     axios.get(URL)
       .then((response) => {
         this.setState({ cards: response.data });
@@ -31,16 +30,23 @@ class Board extends Component {
   
   render() {
     const { currentCard, cards } = this.state;
-    const {url, boardName} = this.props;
     const cardList = cards.map((cardData) => {
       const {id, text, emoji} = cardData.card;
       return (<Card key={id} text={text} emoji={emoji} /> );
     });
 
+    const errorSection = (this.state.error) ? 
+    (<section className="error">
+       Error: {this.state.error}
+     </section>) : null;
+
     return (
-      <div className ="board">
-        {cardList}
-      </div>
+      <section>
+        {errorSection}
+        <div className ="board">
+          {cardList}
+        </div>
+      </section>
     )
   }
 
