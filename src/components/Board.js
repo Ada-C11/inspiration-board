@@ -27,7 +27,7 @@ class Board extends Component {
 }
 
 Board.propTypes = {
-
+  name: PropTypes.string,
 };
 
 export default Board;
