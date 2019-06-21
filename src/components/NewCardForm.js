@@ -25,7 +25,6 @@ class NewCardForm extends Component {
 
   onClickSubmit = (event) => {
     event.preventDefault();
-    console.log('yes')
 
     this.props.onSubmitNewCardCallback(this.state)
     

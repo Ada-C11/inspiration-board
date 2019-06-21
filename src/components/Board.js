@@ -9,8 +9,7 @@ import CARD_DATA from '../data/card-data.json';
 
 const Board = (props) => {
 
-  const { url, boardName, cardList, onRemoveCallback } = props
-  // console.log(cardLisst);
+  const { cardList, onRemoveCallback } = props
 
   const renderCards = cardList.map( (card, i) => {
     return (

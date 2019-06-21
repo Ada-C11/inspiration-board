@@ -44,7 +44,6 @@ class App extends Component {
       emoji: newCard.emoji
     };
 
-    console.log('we\'re in the app! in the blah blah blah');
     // posting this new card to the API - updating the backend
     axios.post(URL, cardDataForApi) 
   
@@ -102,8 +101,6 @@ class App extends Component {
         </section>
         <section className='board'>
         <Board
-          url="https://inspiration-board.herokuapp.com/boards/"
-          boardName={`Svalbard`}
           cardList={this.state.cardList}
           onRemoveCallback={onRemoveCallback}
           />
