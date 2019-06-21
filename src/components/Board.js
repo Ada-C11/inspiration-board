@@ -12,8 +12,31 @@ class Board extends Component {
     super();
 
     this.state = {
-      cards: CARD_DATA["cards"],
+      cards: [],
+      errorMessage: null,
     };
+  };
+
+  componentDidMount() {
+    axios.get(`${this.props.url}${this.props.boardName}/cards`)
+      .then((response) => {
+
+        console.log(response.data);
+        const cardsFromApi = response.data.map(cardWrapper => {
+    
+            return {
+              text: cardWrapper.card.text,
+              emoji: cardWrapper.card.emoji
+            };
+        });
+
+        this.setState({ cards: cardsFromApi });
+      })
+      .catch((error) => {
+        this.setState({
+          errorMessage: error.message
+        })
+      })
   }
 
   render() {
@@ -30,10 +53,31 @@ class Board extends Component {
       );
     });
 
+    let errorMessages = '';
+    if (this.state.errorMessages) {
+      errorMessages = this.state.errorMessage.map((message) => {
+        return (
+          <li >
+            {message}
+          </li>
+        )
+      }) 
+    };
+
     return (
-      <div>
-        {allCards}
-      </div>
+      <main className="board">
+        
+        <section className="validation-errors-display">
+          <ul className="validation-errors-display__list">
+            {errorMessages}
+          </ul>
+        </section>
+
+        <div>
+          {allCards}
+        </div>
+
+      </main>
     );
 
   }
