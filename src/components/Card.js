@@ -8,7 +8,14 @@ class Card extends Component {
   render() {
     return (
       <div className="card">
-        Card
+        <div className="card__content">
+          <div className="card__content-text">
+
+          </div>
+          <div className="card__content-emoji">
+
+          </div>
+        </div>
       </div>
     )
   }

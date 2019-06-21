@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import Board from './components/Board';
+const API_URL = "https://inspiration-board.herokuapp.com/";
 
 class App extends Component {
   render() {
@@ -11,8 +12,8 @@ class App extends Component {
         </header>
         <Board
           url="https://inspiration-board.herokuapp.com/boards/"
-          boardName={`Ada-Lovelace`}
-          />
+          boardName={`PhDPlayerHatersDegree`}
+        />
       </section>
     );
   }
