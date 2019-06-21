@@ -19,12 +19,10 @@ class Card extends Component {
     return (
       <div className="card">
         <div className="card__content">
-        {this.props.content["card"]["text"]}
-        {foundEmoji}
+        <div className="card__content-text"> {this.props.content["card"]["text"]}</div>
+        <div className="card__content-emoji"> {foundEmoji}</div>
         </div>
-        <button 
-          className="btn btn-primary card__delete" onClick={this.onDelete}
-          >
+        <button className="btn btn-primary card__delete" onClick={this.onDelete} >
             Delete
         </button>
       </div>
