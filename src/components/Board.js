@@ -52,10 +52,6 @@ class Board extends Component {
       console.log(error);
       });
 
-      const deleteCard = () => {
-        console.log("Hey, it worked!");
-      };
-
     // const cardList = CARD_DATA.cards.map((card) => {
 
     //   let cardText;
@@ -93,10 +89,15 @@ class Board extends Component {
     // this.setState({ cards: cardList });
   }
 
+  deleteCard = () => {
+    console.log("Hey, it worked!");
+  };
+
 
   render() {
     // console.log(this.state.cards);
     // console.log("Hello");
+    console.log(this.deleteCard);
     const cards = this.state.cards.map((card, i) => {
 
       return (
