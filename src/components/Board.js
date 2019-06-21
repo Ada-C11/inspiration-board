@@ -19,8 +19,21 @@ class Board extends Component {
   }
 
   deleteCardCallback = (id) => {
-    console.log(id)
-  
+    console.log(this.props.urlCards+id.toString())
+
+    axios.delete(this.props.urlCards+id.toString())
+    .then((response) => {
+      const index = this.state.cards.findIndex((object) => {
+        return object.id===id;
+      });
+      let updatedData=this.state.cards;
+      updatedData.splice(index,1);
+      this.setState({cards: updatedData});
+
+    })
+    .catch((error) => {
+      this.setState({error: error.message});
+    })
   }
 
   generateCards = () => {
@@ -35,7 +48,7 @@ class Board extends Component {
   }
 
   componentDidMount() {
-    axios.get(this.props.url+'Ada-Lovelace/cards')
+    axios.get(this.props.url+this.props.boardName+'/cards')
     .then((response) => {
       console.log(response.data)
       const updatedCards=response.data.map((card) => {
@@ -75,9 +88,7 @@ class Board extends Component {
     console.log(this.state)
     return (
       <div>
-        Board
         {this.generateCards()}/>
-        
       </div>
     )
   }
