@@ -23,47 +23,65 @@ class Board extends Component {
 
     axios.get(URL)
       .then((response) => {
-      console.log(response);
+      console.log(response.data);
+
+        const cardList = response.data.map((card) => {
+    
+    
+          const newCard = {
+            text: card.card.text,
+            emoji: card.card.emoji,
+          }
+    
+          return newCard;
+        })
+
+        console.log("Hello, out there!");
+        console.log(cardList);
+
+        this.setState({ cards: cardList });
+
       })
+      // })
       .catch((error) => {
       console.log(error);
       });
 
-    const cardList = CARD_DATA.cards.map((card) => {
+    // const cardList = CARD_DATA.cards.map((card) => {
 
-      let cardText;
-      let cardEmoji;
+    //   let cardText;
+    //   let cardEmoji;
 
-      if (card.text === undefined) {
-        cardText = "" }
-      else {
-        cardText = card.text;
-      }
+    //   if (card.text === undefined) {
+    //     cardText = "" }
+    //   else {
+    //     cardText = card.text;
+    //   }
 
-      if (card.Emoji) {
-        cardEmoji = card.Emoji
-      } else if (card.emoji === undefined) {
-        cardEmoji = ""
-      } else {
-        cardEmoji = card.emoji
-      }
+    //   if (card.Emoji) {
+    //     cardEmoji = card.Emoji
+    //   } else if (card.emoji === undefined) {
+    //     cardEmoji = ""
+    //   } else {
+    //     cardEmoji = card.emoji
+    //   }
 
-      // if (card.emoji === undefined) {
-      //   cardEmoji = "" }
-      // else {
-      //   cardEmoji = card.emoji
-      // }
+    //   // if (card.emoji === undefined) {
+    //   //   cardEmoji = "" }
+    //   // else {
+    //   //   cardEmoji = card.emoji
+    //   // }
 
 
-      const newCard = {
-        text: cardText,
-        emoji: cardEmoji,
-      }
+    //   const newCard = {
+    //     text: cardText,
+    //     emoji: cardEmoji,
+    //   }
 
-      return newCard;
-    })
+    //   return newCard;
+    // })
 
-    this.setState({ cards: cardList });
+    // this.setState({ cards: cardList });
   }
 
 

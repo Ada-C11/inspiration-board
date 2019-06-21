@@ -10,7 +10,8 @@ class Card extends Component {
     return (
       <div className="card">
         {this.props.quote}
-        {emoji.getUnicode(this.props.emoji)}
+        {/* Try single-line conditional rendering here */}
+        {this.props.emoji && emoji.getUnicode(this.props.emoji)}
       </div>
     )
   }
