@@ -22,7 +22,6 @@ class Card extends Component {
             {emoji.getUnicode(this.props.cardEmoji)}
           </section>
         </div>
-        
         <section className="card__delete">X</section>
       </div>
     )

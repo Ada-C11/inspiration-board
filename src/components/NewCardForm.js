@@ -55,28 +55,22 @@ class NewCardForm extends Component {
       <div className="new-card-form">
         <h3 className="new-card-form__header">Post a message</h3>
         <form className="new-card-form__form" onSubmit={this.onSubmitButtonClick}>
-          <div className="">
-            <label className="new-card-form__form-label">Message</label>
-            <textarea 
-              className="new-card-form__form-textarea"
-              onChange={this.onChangeHandler}
-              name="text" 
-              value={this.state.text}>
-            </textarea>
-          </div>
-          <div>
-            <label className="new-card-form__form-label">Emojis</label>
-            <select 
-              className="new-card-form__form-select" 
-              name="emoji" 
-              onChange={this.onChangeHandler}
-              value={this.state.emoji === '' ? '' : emoji.getUnicode(this.state.emoji)}>
-              {this.displayEmojiList()}
-            </select>
-          </div>
-          <div>
-            <input type="submit" value="Post" className="new-card-form__form-button" />
-          </div>
+          <label className="new-card-form__form-label">Message</label>
+          <textarea 
+            className="new-card-form__form-textarea"
+            onChange={this.onChangeHandler}
+            name="text" 
+            value={this.state.text}>
+          </textarea>
+          <label className="new-card-form__form-label">Emojis</label>
+          <select 
+            className="new-card-form__form-select" 
+            name="emoji" 
+            onChange={this.onChangeHandler}
+            value={this.state.emoji === '' ? '' : emoji.getUnicode(this.state.emoji)}>
+            {this.displayEmojiList()}
+          </select>
+          <input type="submit" value="Post" className="new-card-form__form-button" />
         </form>
       </div>    
     );
