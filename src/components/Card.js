@@ -5,10 +5,19 @@ import emoji from 'emoji-dictionary';
 import './Card.css';
 
 class Card extends Component {
+  // constructor(props) {
+  //   super(props);
+  // }
+
   render() {
     return (
+      //.card__delete somewhere
       <div className="card">
-        Card
+        <p className='card__delete'>x</p>
+        <div className='card__content'>
+          <p className='card__content-text'>{this.props.text}</p>
+          <p className='card__content-emoji'>{emoji.getUnicode(this.props.emoji)}</p>
+        </div>
       </div>
     )
   }
