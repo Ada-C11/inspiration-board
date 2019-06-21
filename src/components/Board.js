@@ -36,9 +36,11 @@ class Board extends Component {
 
   render() {
     return (
-      <div className="board">
-        <NewCardForm updateCardListCallback={this.updateCardList}/> 
-        {this.renderCards()}
+      <div>
+        <NewCardForm updateCardListCallback={this.updateCardList}/>
+        <div className="board">
+          {this.renderCards()}
+        </div>
       </div>
     )
   }

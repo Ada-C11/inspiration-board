@@ -16,10 +16,14 @@ class Card extends Component {
     console.log(`${typeof this.props.cardEmoji}`);
     return (
       <div className="card">
-        <section className="card__content card__content-text">{this.props.cardMessage}</section>
-        <section className="card__content card__content-emoji">
-          {emoji.getUnicode(this.props.cardEmoji)}
-        </section>
+        <div className="card__content">
+          <section className="card__content-text">{this.props.cardMessage}</section>
+          <section className="card__content-emoji">
+            {emoji.getUnicode(this.props.cardEmoji)}
+          </section>
+        </div>
+        
+        <section className="card__delete">X</section>
       </div>
     )
   }
