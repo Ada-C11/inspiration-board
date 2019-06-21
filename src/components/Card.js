@@ -12,6 +12,7 @@ class Card extends Component {
         {this.props.quote}
         {/* Try single-line conditional rendering here */}
         {this.props.emoji && emoji.getUnicode(this.props.emoji)}
+        {<button className="card__delete">Delete</button>}
       </div>
     )
   }
