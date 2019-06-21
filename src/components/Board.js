@@ -15,6 +15,7 @@ class Board extends Component {
       cards: [],
       name: props.boardName,
       url: props.url,
+      error: false,
     };
   }
 
@@ -25,7 +26,7 @@ class Board extends Component {
         this.setState({ cards: response.data });
       })
       .catch((error) => {
-        // TODO
+        this.setState({ error: error.message });
       });
   }
 
@@ -36,8 +37,15 @@ class Board extends Component {
     });
 
     return (
-      <section className="board">
-        {allCards}
+      <section>
+        <section className="validation-errors-display">
+          <ul className="validation-errors-display__list">
+            <li>{this.state.error}</li>
+          </ul>
+        </section>
+        <section className="board">
+          {this.state.error ? ("") : (allCards) }
+        </section>
       </section>
     )
   }
