@@ -42,20 +42,37 @@ class Board extends Component {
   }
 
   deleteCard = (cardID) => {
+    const deleteEndpoint = this.props.url+ '/cards/' + cardID;
+
+    axios.delete(deleteEndpoint, )
+    .then((response) => {
+      const cardsList = response.data.map((card, i) => {
+        let newCard = card.card;
+        return <Card
+          key={i}
+          text={newCard.text}
+          emoji={newCard.emoji}
+          id = {newCard.id}
+          deleteCardCallback = {this.deleteCard}
+        />
+      });
+      this.setState({cards: cardsList});
+    })
+
+    .catch((error) => {
+      console.log(error);
+    })
+
     const cards = this.state.cards;
-    // console.log(cards)
     const cardIndex = cards.findIndex((card) => {
       console.log(card.props.id)
       return card.props.id === cardID;
     });
 
     console.log(cardIndex)
-    // console.log(cards[cardIndex]);
 
     cards.splice(cardIndex, 1);
 
-    // console.log(`cards state:`)
-    // console.log(cards)
     this.setState(cards);
   }
 
