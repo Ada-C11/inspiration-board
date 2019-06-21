@@ -70,68 +70,71 @@ class Board extends Component {
 
       .catch((error) => {
         this.setState({
-          currentError: error.message
+          currentError: `Could not add card: ${error.response.data.errors.text}`
         })
-    });
-    }
-
-  deleteCard = (id) => {
-          const allCards = this.state.cardList;
-          const index = allCards.findIndex(card => card.id === id);
-          allCards.splice(index, 1);
-
-          this.setState({
-            cardList: allCards,
-          });
-
-          axios.delete(`${this.props.deleteUrl}/${id}`)
-            .then((response) => {
-              console.log(response);
-            })
-
-            .catch((error) => {
-              console.log(error);
-            })
-        };
-
-    displayErrors = () => {
-      return <p>
-        {this.state.currentError}
-      </p>
-    }
-
-    renderCards = () => {
-      return this.state.cardList.map((card) => {
-        return <Card key={card.id}
-          id={card.id}
-          text={card.text}
-          emoji={card.emoji}
-          deleteCardCallback={this.deleteCard}
-        />
+        console.log(error.response);
       });
-    };
-
-    render() {
-      return (
-        <div>
-          <NewCardForm addCardCallback={this.addCard} />
-          <div className="board">
-            <section className="validation-errors-display">
-              {this.state.currentError ? this.displayErrors() : ""}
-            </section>
-
-            {this.renderCards()}
-          </div>
-        </div>
-      )
-    }
-
   }
 
-  Board.propTypes = {
-    url: PropTypes.string.isRequired,
-    deleteUrl: PropTypes.string.isRequired,
-    boardName: PropTypes.string.isRequired,
+  deleteCard = (id) => {
+
+    axios.delete(`${this.props.deleteUrl}/${id}`)
+      .then((response) => {
+        const allCards = this.state.cardList;
+        const index = allCards.findIndex(card => card.id === id);
+        allCards.splice(index, 1);
+
+        this.setState({
+          cardList: allCards,
+        });
+        
+      })
+
+      .catch((error) => {
+        this.setState({ 
+          currentError: `Could not delete card: ${error.message}`
+        })
+      })
   };
 
-  export default Board;
+  displayErrors = () => {
+    return <p>
+      {this.state.currentError}
+    </p>
+  }
+
+  renderCards = () => {
+    return this.state.cardList.map((card) => {
+      return <Card key={card.id}
+        id={card.id}
+        text={card.text}
+        emoji={card.emoji}
+        deleteCardCallback={this.deleteCard}
+      />
+    });
+  };
+
+  render() {
+    return (
+      <div>
+        <NewCardForm addCardCallback={this.addCard} />
+        <section className="validation-errors-display">
+            {this.state.currentError ? this.displayErrors() : ""}
+          </section>
+        
+        <div className="board">
+          {this.renderCards()}
+        </div>
+      </div>
+    )
+  }
+
+}
+
+Board.propTypes = {
+  url: PropTypes.string.isRequired,
+  deleteUrl: PropTypes.string.isRequired,
+  boardName: PropTypes.string.isRequired,
+};
+
+export default Board;
