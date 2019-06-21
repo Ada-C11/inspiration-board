@@ -16,10 +16,21 @@ class Board extends Component {
     };
   }
 
+  cardComponents = CARD_DATA.cards.map((card, i) => {
+    card.text = card.text ? card.text : "";
+    card.emoji = card.emoji ? card.emoji : "octopus";
+    return (
+      <Card 
+        key={i}
+        text={card.text}
+        emoji={card.emoji} />
+    )
+  })
+
   render() {
     return (
       <div>
-        Board
+        {this.cardComponents}
       </div>
     )
   }
