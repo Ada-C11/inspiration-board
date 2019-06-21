@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App that it renders App with shallow rendering 1`] = `ShallowWrapper {}`;
+
+exports[`App will match the last snapshot with deep rendering 1`] = `ReactWrapper {}`;
