@@ -13,8 +13,8 @@ class Card extends Component {
     }
   }
   render() {
-    console.log(this.state.text)
-    console.log(this.state.emoji)
+    // console.log(this.state.text)
+    // console.log(this.state.emoji)
     let emojiUni = (this.state.emoji) ? emoji.getUnicode(this.state.emoji) : emoji.getUnicode("dog");
 
 
