@@ -18,7 +18,11 @@ class Board extends Component {
     };
   }
 
-  deleteCardCallback = (id) => {
+  addCard = (newCard) => {
+    console.log(newCard)
+  }
+
+  deleteCard = (id) => {
     console.log(this.props.urlCards+id.toString())
 
     axios.delete(this.props.urlCards+id.toString())
@@ -42,7 +46,7 @@ class Board extends Component {
       id={card.id}
       text={card.text}
       emoji={card.emoji}
-      deleteCardCallback = {this.deleteCardCallback}
+      deleteCardCallback = {this.deleteCard}
       />)
     })
   }
@@ -87,9 +91,9 @@ class Board extends Component {
   render() {
     console.log(this.state)
     return (
-      <div>
+      <div className="board">
         <div>
-          <NewCardForm />
+          <NewCardForm addCardCallback={this.addCard}/>
         </div>
         <div>
         {this.generateCards()}/>
