@@ -24,10 +24,13 @@ class Board extends Component {
     axios.get(cardsEndpoint)
       .then((response) => {
         const cardsList = response.data.map((card, i) => {
+          let newCard = card.card;
           return <Card
             key={i}
-            text={card.card.text}
-            emoji={card.card.emoji}
+            text={newCard.text}
+            emoji={newCard.emoji}
+            id = {newCard.id}
+            deleteCardCallback = {this.deleteCard}
           />
         });
         this.setState({cards: cardsList});
@@ -36,7 +39,24 @@ class Board extends Component {
       .catch((error) => {
         console.log(error);
       })
+  }
 
+  deleteCard = (cardID) => {
+    const cards = this.state.cards;
+    // console.log(cards)
+    const cardIndex = cards.findIndex((card) => {
+      console.log(card.props.id)
+      return card.props.id === cardID;
+    });
+
+    console.log(cardIndex)
+    // console.log(cards[cardIndex]);
+
+    cards.splice(cardIndex, 1);
+
+    // console.log(`cards state:`)
+    // console.log(cards)
+    this.setState(cards);
   }
 
   render() {
