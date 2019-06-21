@@ -7,45 +7,32 @@ import Card from './Card';
 import NewCardForm from './NewCardForm';
 import CARD_DATA from '../data/card-data.json';
 
-class Board extends Component {
-  constructor() {
-    super();
+const Board = (props) => {
 
-    this.state = {
-      // cards: [],
-      // cards: CARD_DATA.cards,
-    };
-  }
+  const { url, boardName, cardList, onRemoveCallback } = props
+  // console.log(cardLisst);
 
-  
-
-  render() {
-
-    const { url, boardName, cardList, onRemoveCallback } = this.props
-    // console.log(cardLisst);
-
-    const renderCards = cardList.map( (card, i) => {
-      return (
-        <div key={i}>
-          <Card 
-            card={card} 
-            onRemoveCallback={onRemoveCallback}
-          />
-        </div>
-      );
-    });
-
+  const renderCards = cardList.map( (card, i) => {
     return (
-      <Fragment>
-        <section className='validations-error-display'>
+      <div key={i}>
+        <Card 
+          card={card} 
+          onRemoveCallback={onRemoveCallback}
+        />
+      </div>
+    );
+  });
 
-        </section>
-        <section className='board'>
-          {renderCards}
-        </section>
-      </Fragment>
-    )
-  }
+  return (
+    <Fragment>
+      <section className='validations-error-display'>
+
+      </section>
+      <section className='board'>
+        {renderCards}
+      </section>
+    </Fragment>
+  )
 }
 
 Board.propTypes = {
