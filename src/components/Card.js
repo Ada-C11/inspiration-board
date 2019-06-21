@@ -6,9 +6,9 @@ import './Card.css';
 
 class Card extends Component {
 
-  onDeleteButtonClick = () => {
-    // console.log(this.props.deleteCardCallback);
-    this.props.deleteCardCallback();
+  onDeleteButtonClick = (event) => {
+    console.log(event);
+    // this.props.deleteCardCallback();
   }
   render() {
   

@@ -34,6 +34,7 @@ class Board extends Component {
     
     
           const newCard = {
+            id: card.card.id,
             text: card.card.text,
             emoji: card.card.emoji,
           }
