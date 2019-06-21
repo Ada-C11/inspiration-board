@@ -14,7 +14,6 @@ class App extends Component {
           url="https://inspiration-board.herokuapp.com/boards/"
           boardName={`jansen-martin`}
           />
-        <NewCardForm/>
       </section>
     );
   }

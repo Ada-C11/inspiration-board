@@ -55,6 +55,10 @@ class Board extends Component {
       });
   }
 
+  addCard = () => {
+    console.log("Inside addCard");
+  }
+
 
   deleteCard = (id) => {
     const deleteUrl = "https://inspiration-board.herokuapp.com/cards/" + id;
@@ -99,6 +103,8 @@ class Board extends Component {
       <div>
         Board
         {cards}
+
+        <NewCardForm/>
       </div>
     )
   }
