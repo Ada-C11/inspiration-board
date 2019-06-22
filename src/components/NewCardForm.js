@@ -17,6 +17,12 @@ class NewCardForm extends Component {
     };
   }
 
+  handleInputChange = (event) => {
+    const updatedState = {};
+    updatedState[event.target.name] = event.target.value;
+    this.setState(updatedState);
+  }
+
   render() {
     const emojiSelectOptions = EMOJI_LIST.map((emojiName, i) => {
       return <option key={i} value={emojiName}>{emoji.getUnicode(emojiName)}</option>
