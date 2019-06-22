@@ -62,6 +62,7 @@ class Board extends Component {
       .catch(error => {
         alert(`An error has occurred: ${error.message}`)
       })
+      this.componentDidMount()
   }
   
   render() {
