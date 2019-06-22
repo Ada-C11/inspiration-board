@@ -9,24 +9,33 @@ class App extends Component {
     super();
 
     this.state = {
-      error: null
+      errorMessage: null
     };
   }
 
   showErrorMessage = (error) => {
-    this.setState({ error: error.message });
+    console.log('API response error: ', error);
+    this.setState({ errorMessage: error.message });
   }
+  
 
   render() {
+    const errorSection = (this.state.errorMessage) ?
+    (<section className="error">
+       Error: {this.state.errorMessage}
+     </section>) : null;
     return (
       <section>
         <header className="header">
-        const errorSection = {(this.state.error) ? (<section className='error'>Error: { this.state.error.message }</section>) : null};
+
+        {errorSection}
+
           <h1 className="header__h1"><span className="header__text"> Elle's Inspirations</span></h1>
         </header>
         <Board
           url="https://inspiration-board.herokuapp.com/boards/"
           boardName={`elle`}
+          showErrorMessageCallback={this.showErrorMessage}
           />
       </section>
     );
