@@ -46,20 +46,44 @@ class Board extends Component {
   onDeleteCard = (id) => {
     console.log('Inside of deleteCard!!')
     console.log(id)
-    // const deleteCardPath = `https://inspiration-board.herokuapp.com/cards/${cardId}`;
-    // axios.delete(deleteCardPath)
-    // .then(() => {
-    //   console.log('inside of then in on delete carddddddd')
-    //   // const newCardList = this.state.cards
-    //   // const card = newCardList.splice()
+    const deleteCardPath = `https://inspiration-board.herokuapp.com/cards/${id}`;
+    axios.delete(deleteCardPath)
+    .then(() => {
+      console.log('inside of then in on delete carddddddd')
+
+      const newCardList = [...this.state.cards];
+      const index = newCardList.findIndex(card => card.id === id);
+
+      newCardList.splice(index, 1);
+
+      this.setState({cards: newCardList});
+
     //   // const newCardList = this.state.cards.filter(card => card.id === cardId);
     //   // this.setState({ cards: newCardList });
-    // })
-    // .catch((error) => {
-    //   this.setState({ 
-    //     error: error.message
-    //   });
-    // });
+    })
+
+    .catch((error) => {
+      this.setState({ 
+        error: error.message
+      });
+    });
+  }
+
+  addCard = (cardInfo) => {
+    const addCardPath = `https://inspiration-board.herokuapp.com/boards/${this.props.boardName}/cards`;
+
+    axios.post(addCardPath, cardInfo)
+    .then((response) => {
+      this.setState({
+        cards: [...this.state.cards, response.data]
+      });
+    })
+    .catch((error) => {
+      this.setState({
+        error: error.message,
+      });
+    });
+  
   }
    
   
@@ -77,7 +101,9 @@ class Board extends Component {
       console.log(styledCard.id)
       return (
         <div>
-          <Card key={index} index={index} id={id} text={text} card={card} onDeleteCard={() => this.onDeleteCard(id)}/>
+          <div>
+          <Card key={index} index={index} id={id} text={text} card={styledCard} onDeleteCard={() => this.onDeleteCard(id)}/>
+          </div>
         </div>
       )
     });
@@ -96,6 +122,7 @@ class Board extends Component {
         <div>
           { allCards }
         </div>
+        <NewCardForm addCardCallback={this.addCard} />
       </section>
     )
   }

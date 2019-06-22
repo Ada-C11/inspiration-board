@@ -15,6 +15,9 @@ const Card = (props) => {
             { text }
           </div>
           <div className="card__content-text">
+            { emoji }
+          </div>
+          <div className="card__content-text">
             { id }
           </div>
           <button type="button" className="card__delete" onClick={onDeleteCard}>
