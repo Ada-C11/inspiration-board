@@ -28,8 +28,5 @@ const Card = (props) => {
     )
 }
 
-Card.propTypes = {
-  card: PropTypes.string.isRequired,
-};
 
 export default Card;

@@ -51,10 +51,9 @@ class Board extends Component {
     .then(() => {
       console.log('inside of then in on delete carddddddd')
 
-      const newCardList = [...this.state.cards];
-      const index = newCardList.findIndex(card => card.id === id);
+      // const newCardList = [...this.state.cards];
+      const newCardList = this.state.filter(card => card.id !== id);
 
-      newCardList.splice(index, 1);
 
       this.setState({cards: newCardList});
 
@@ -102,7 +101,7 @@ class Board extends Component {
       return (
         <div>
           <div>
-          <Card key={index} index={index} id={id} text={text} card={styledCard} onDeleteCard={() => this.onDeleteCard(id)}/>
+          <Card key={index} emoji={emoji} index={index} id={id} text={text} card={styledCard} onDeleteCard={() => this.onDeleteCard(id)}/>
           </div>
         </div>
       )
