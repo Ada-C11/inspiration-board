@@ -16,10 +16,20 @@ class Board extends Component {
     };
   }
 
+
   render() {
+    const cardComponents = 
+    CARD_DATA["cards"].map( (card, i) => {
+     return (
+       <div key={i}>
+         {/* need to have it accept card["emoji"] as well */}
+         <Card cardText={card["text"]} cardEmoji={card["Emoji"]}/>
+       </div>
+     )
+   });
     return (
       <div>
-        Board
+        { cardComponents }
       </div>
     )
   }
