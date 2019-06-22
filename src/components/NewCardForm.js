@@ -18,22 +18,24 @@ class NewCardForm extends Component {
     super();
     this.state = {
       text: '',
-      emoji: null,
+      emoji: '',
     };
   }
 
   createForm = () => {
     return (
-      <form className="new-card-form__form">
+      <form className="new-card-form__form" onSubmit={this.handleSubmit}>
         <textarea
           className="new-card-form__form-textarea"
           name="text"
           onChange={this.handleInput}
+          value={this.state.text}
         />
         <select
           className="new-card-form__form-select"
           name="emoji"
           onChange={this.handleInput}
+          value={this.state.emoji}
         >
           {this.selectDropDown()}
         </select>
@@ -46,6 +48,16 @@ class NewCardForm extends Component {
     const newState = {};
     newState[event.target.name] = event.target.value;
     this.setState(newState);
+  };
+
+  handleSubmit = event => {
+    event.preventDefault();
+    console.log(this.state);
+    this.props.postCardCallback(this.state);
+    this.setState({
+      text: '',
+      emoji: '',
+    });
   };
 
   selectDropDown = () => {

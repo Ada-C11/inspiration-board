@@ -1,14 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import emoji from 'emoji-dictionary';
+import Emoji from 'emoji-dictionary';
 
 import './Card.css';
 
-const Card = ({ text, emojiName }) => {
+const Card = ({ text, emoji }) => {
   return (
     <div className="card">
       <p> {text} </p>
-      {emojiName && <p> {emoji.getUnicode(emojiName)} </p>}
+      {emoji && <p> {Emoji.getUnicode(emoji)} </p>}
     </div>
   );
 };
