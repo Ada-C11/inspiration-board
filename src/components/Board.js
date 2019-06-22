@@ -65,7 +65,6 @@ class Board extends Component {
 
 
   render() {
-    let display;
 
     const displayCards = this.state.cards.map((data) => {
       const { id, text, emoji } = data.card;
@@ -78,21 +77,19 @@ class Board extends Component {
       />
     });
 
-    if (this.state.error) {
-      display = this.state.error.map((error) => {
-        return <p>{error.message}</p>
-      })
-    } else {
-      display = displayCards;
-    }
+    const displayErrors = (this.state.error) ? (<div className="validation-errors-display">Whoops! <ul className="validation-errors-display__list"><li>{this.state.error}</li></ul></div>) : null;
 
     return (
-      <div className="board" >
-        {display}
+      <section>
 
-        < NewCardForm addCardCallback={this.addCardCallback} />
-      </div>
-
+        <div className="board" >
+          {displayCards}
+        </div>
+        <div className="form-container">
+          {displayErrors}
+          < NewCardForm addCardCallback={this.addCardCallback} />
+        </div>
+      </section>
     )
   }
 }
