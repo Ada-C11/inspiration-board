@@ -12,29 +12,31 @@ class Card extends Component {
 
   //   }
   // }
-  isEmoji = (emoji) => {
-    console.log(this.props.emoji)
-    if (this.props.emoji !== undefined) {
-      return this.props.emoji
-    } else {
-      return ""
-    }
-  }
+  // isEmoji = (emoji) => {
+  //   if (this.props.emoji !== undefined) {
+  //     return this.props.emoji
+  //   } else {
+  //     return ""
+  //   }
+  
 
   
 
   render() {
-    console.log(this.props.quote)
-    const isQuote = (this.props.quote) ? this.props.quote : ""
+    const isText = (this.props.text) ? this.props.text : ""
     const isEmoji = (this.props.emoji) ? this.props.emoji : ""
+    const id = this.props.id
     return (
       <div className="card">
         <div className="card__content">
           <div className="card__content-text">
-            {this.props.quote}
+            {this.props.text}
           </div>
           <div className="card__content-emoji">
             {emoji.getUnicode(isEmoji)}
+          </div>
+          <div>
+            <button type="button" value="Delete" onClick={this.props.deleteCardCallback(id)} className="card__delete"/>
           </div>
         </div>
       </div>
@@ -43,8 +45,10 @@ class Card extends Component {
 }
 
 Card.propTypes = {
-  quote: PropTypes.string,
+  text: PropTypes.string,
   emoji: PropTypes.string,
+  id: PropTypes.number,
+  deleteCardCallback: PropTypes.func
 };
 
 export default Card;

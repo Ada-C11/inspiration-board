@@ -21,16 +21,14 @@ class Board extends Component {
     const fullUrl = this.props.url + this.props.boardName + "/cards"
     axios.get(fullUrl)
       .then((response) => {
-        console.log(response.data)
         const cards = response.data.map((card) => {
           const newCard = {
-            quote: card.card.text,
+            text: card.card.text,
             emoji: card.card.emoji,
           }
           return newCard;
         })
 
-        console.log(cards)
         this.setState({ cards });
       })
       .catch((error) => {
@@ -38,22 +36,48 @@ class Board extends Component {
       });
   }
 
+  addCardCallback = (cardInfo) => {
+    const fullUrl = this.props.url + this.props.boardName + "/cards"
+    axios.post(fullUrl, cardInfo)
+    .then((response) => {
+      let updatedData = this.state.cards;
+      updatedData.push(cardInfo);
+      this.setState({cards: updatedData})
+    })
+    .catch((error) => {
+      this.setState({ error: error.message });
+    });
+  }
+
+  deleteCardCallback = (cardID) => {
+    const fullUrl = "https://inspiration-board.herokuapp.com/cards/:" + {cardID}
+    axios.delete(fullUrl)
+    .then((response) => {
+
+    })
+    .catch((error) => {
+      this.setState({ error: error.message });
+    });
+  }
+
 
 
 
   render() {
-    console.log(this.state.cards)
     const showCards = this.state.cards.map((card, index) => {
       return (<Card
         key={index}
-        quote={card.quote}
+        text={card.text}
         emoji={card.emoji}
+        id={card.id}
+        deleteCardCallback={this.deleteCardCallback}
       />)
     })
 
 
     return (
       <div className="board">
+        <NewCardForm addCardCallback={this.addCardCallback}/>
         {showCards}
       </div>
     )
