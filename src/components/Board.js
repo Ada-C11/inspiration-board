@@ -20,6 +20,7 @@ class Board extends Component {
     axios.get(`${this.props.url}boards/${this.props.boardName}/cards`)
     .then((response) => {
       this.setState({ cards: response.data })
+      console.log(this.state.cards);
     })
     .catch((error) => {
       this.setState({
@@ -41,6 +42,32 @@ class Board extends Component {
       });
   }
 
+  addCardCallback = (card) => {
+    const cardDataToSendToApi = {
+      text: card.text,
+      emoji: card.emoji,
+    };
+
+    axios.post(`${this.props.url}boards/${this.props.boardName}/cards`, cardDataToSendToApi)
+      .then((response) => {
+        console.log("This is what response.data looks like from the API on a successful response", response.data)
+        let updatedCardList = this.state.cards;
+        updatedCardList.push({
+          card: {
+          id: card.id,
+          text: card.text,
+          emoji: card.emoji,
+        }});
+        this.setState({
+          cards: updatedCardList,
+        });
+      })
+      .catch((error) => {
+        this.setState({
+          errorMessage: error.message
+        });
+      });
+  }
   render() {
 
     const errorSection = (this.state.errorMessage) ? 
@@ -58,10 +85,16 @@ class Board extends Component {
     })
 
     return (
-      <div className="board">
-        { errorSection }
-        { displayCards }
-      </div>
+      <section>
+        <div className="board">
+          { errorSection }
+          { displayCards }
+        </div>
+        <div>
+          < NewCardForm 
+            addCardCallback={this.addCardCallback}/>
+        </div>
+      </section>
     )
   }
 };
