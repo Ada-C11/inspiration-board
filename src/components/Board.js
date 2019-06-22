@@ -35,49 +35,26 @@ class Board extends Component {
     console.log('here are all your cards!!!!!', this.state.cards)
   }
 
-  onDeleteCard = (id) => {
-    // let savedCard;
+  onDeleteCard = (cardId) => {
 
-  let updatedListCards = this.state.cards;
-  let i = 0;
+    axios.delete(`https://inspiration-board.herokuapp.com/cards/${cardId}`)
 
-    for (let card of updatedListCards) {
-      if (card.card.id === id) {
-        // savedCard = card;
-        break;
-      }
-      i += 1;
-    }
+    axios.get(this.props.url + this.props.boardName + '/cards')
+    .then((response) => {
+   
+      const newCardList = this.state.cards.filter(card => card.card.id !== cardId);
 
-    axios.delete(`https://inspiration-board.herokuapp.com/cards/${id}`)
+      this.setState({
+        cards: newCardList
+      })
 
-    this.setState({
-    cards: this.state.cards,
+    })
+    .catch((error) => {
+      this.setState({
+        errorMessage: error.message
+      })
     })
     
-    // axios.get(this.props.url + this.props.boardName + '/cards')
-    //   .then((response) => {
-     
-    //     this.setState({
-    //       cards: response.data
-    //     })
-
-    //   })
-    //   .catch((error) => {
-    //     this.setState({
-    //       errorMessage: error.message
-    //     })
-    //   })
-
-    console.log('Im in onDeleteCard!!!!!!', id);
-    
-    // updatedListCards.splice(i, 1);
-
-    // this.setState({
-    //   cards: updatedListCards
-    // })
-
-
   }
 
 
