@@ -17,20 +17,9 @@ class Board extends Component {
   }
 
   componentDidMount() {
-    axios.get(`${this.props.url}${this.props.boardName}/cards`)
+    axios.get(`${this.props.url}boards/${this.props.boardName}/cards`)
     .then((response) => {
-      const boardCards = response.data.flatMap(card => {
-        console.log(card);
-        if (card["card"].text || card["card"].emoji) {
-          return [{
-            ...card,
-          }];
-        } else {
-          return [];
-        }
-      });
-      console.log(boardCards);
-      this.setState({ cards: boardCards })
+      this.setState({ cards: response.data })
     })
     .catch((error) => {
       this.setState({
@@ -38,6 +27,20 @@ class Board extends Component {
       })
     })
   }
+
+  onDeleteCard = (cardId) => {
+    axios.delete(`${this.props.url}cards/${cardId}`)
+      .then((response) => {
+        let newCardList = this.state.cards.filter(card => card["card"].id !== cardId);
+        this.setState({ cards: newCardList });
+      })
+      .catch((error) => {
+        this.setState({
+          errorMessage: error.message
+        });
+      });
+  }
+
   render() {
 
     const errorSection = (this.state.errorMessage) ? 
@@ -50,7 +53,8 @@ class Board extends Component {
                 key={i}
                 id={card["card"].id}
                 text={card["card"].text}
-                emoji={card["card"].emoji} />
+                emoji={card["card"].emoji}
+                onDeleteCardCallback={this.onDeleteCard} />
     })
 
     return (

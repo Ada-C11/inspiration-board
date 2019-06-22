@@ -13,6 +13,7 @@ class Card extends Component {
       id: props.id,
       text: props.text,
       emoji: props.emoji ? props.emoji : '',
+      onDeleteCardCallback: props.onDeleteCardCallback
     };
   }
   render() {
@@ -21,6 +22,14 @@ class Card extends Component {
         <p >{this.state.id}</p>
         <p className="card__content-text">{this.state.text}</p>
         <p className="card__content-emoji">{emoji.getUnicode(this.state.emoji)}</p>
+
+        <button 
+          type="button" 
+          className="card__delete" 
+          onClick = {() => this.state.onDeleteCardCallback(this.state.id)}
+        >
+          Delete
+        </button>
       </div>
     )
   }
@@ -29,6 +38,8 @@ class Card extends Component {
 Card.propTypes = {
   text: PropTypes.string,
   emoji: PropTypes.string,
+  id: PropTypes.number.isRequired,
+  onDeleteCardCallback: PropTypes.func.isRequired
 };
 
 export default Card;
