@@ -7,8 +7,8 @@ const EMOJI_LIST = ["", "heart_eyes", "beer", "clap", "sparkling_heart", "heart_
 
 class NewCardForm extends Component {
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       id: "",
@@ -23,9 +23,27 @@ class NewCardForm extends Component {
     this.setState(updatedState);
   }
 
+  handleFormSubmit = (event) => {
+    event.preventDefault();
+
+    const newCard = this.state;
+
+    this.props.addCardCallback(newCard);
+
+    this.setState({
+      id: "",
+      emoji: "",
+      text: ""
+    })
+  }
+
   render() {
     const emojiSelectOptions = EMOJI_LIST.map((emojiName, i) => {
-      return <option key={i} value={emojiName}>{emoji.getUnicode(emojiName)}</option>
+      return (
+        <option key={i} value={emojiName}>
+          {emoji.getUnicode(emojiName)}
+        </option>
+      )
     })
 
     return (
@@ -34,7 +52,7 @@ class NewCardForm extends Component {
           Add a New Inspirational Message
         </h3>
 
-        <form className="new-card-form__form">
+        <form className="new-card-form__form" onSubmit={this.handleFormSubmit}>
           <label htmlFor="text"
             className="new-card-form__form-label">
             Your message:
@@ -54,11 +72,17 @@ class NewCardForm extends Component {
           >
             {emojiSelectOptions}
           </select>
-          <input name="submit" type="submit" className="new-card-form__form-button" />
+          <input name="submit"
+            type="submit"
+            className="new-card-form__form-button"
+            value="Post it!" />
         </form>
       </div>
     )
   }
 }
 
+NewCardForm.propTypes = {
+  addCardCallback: PropTypes.func
+}
 export default NewCardForm;

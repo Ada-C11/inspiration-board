@@ -5,28 +5,44 @@ import axios from 'axios';
 import './Board.css';
 import Card from './Card';
 import NewCardForm from './NewCardForm';
-import CARD_DATA from '../data/card-data.json';
 
-const GET_CARDS_URL = "https://inspiration-board.herokuapp.com/boards/PhDPlayerHatersDegree/cards";
+const BASE_URL = "https://inspiration-board.herokuapp.com/boards/PhDPlayerHatersDegree/cards";
 
 
 class Board extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       cards: [],
+      error: null,
     };
   }
 
   componentDidMount() {
-    axios.get(GET_CARDS_URL)
+    axios.get(BASE_URL)
       .then((response) => {
         this.setState({ cards: response.data });
       })
       .catch((error) => {
         this.setState({ error: error.message });
       });
+  }
+
+
+  addCardCallback = (card) => {
+    console.log(card)
+    axios.post(BASE_URL, card)
+      .then((response) => {
+        const updatedCards = this.state.cards;
+        updatedCards.push(response.data);
+        this.setState({ cards: updatedCards });
+
+        // window.location.reload();
+      })
+      .catch((error) => {
+        this.setState({ error: error.message });
+      })
   }
 
 
@@ -39,6 +55,7 @@ class Board extends Component {
         const updatedCards = this.state.cards.filter(card => card.id !== cardID)
 
         this.setState({ cards: updatedCards });
+
         window.location.reload();
       })
       .catch((error) => {
@@ -48,12 +65,12 @@ class Board extends Component {
 
 
   render() {
-    // let display;
+    let display;
 
-    const displayCards = this.state.cards.map((data, index) => {
-      const { text, emoji, id } = data.card;
+    const displayCards = this.state.cards.map((data) => {
+      const { id, text, emoji } = data.card;
       return <Card
-        key={index}
+        key={id}
         id={id}
         text={text}
         emoji={emoji}
@@ -61,18 +78,21 @@ class Board extends Component {
       />
     });
 
-    // if (this.state.error) {
-    //   display = this.state.error.map((error) => {
-    //     return <p>{error.message}</p>
-    //   })
-    // } else {
-    //   display = cardComponents;
-    // }
+    if (this.state.error) {
+      display = this.state.error.map((error) => {
+        return <p>{error.message}</p>
+      })
+    } else {
+      display = displayCards;
+    }
 
     return (
-      <div className="board">
-        {displayCards}
+      <div className="board" >
+        {display}
+
+        < NewCardForm addCardCallback={this.addCardCallback} />
       </div>
+
     )
   }
 }
