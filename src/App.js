@@ -4,7 +4,7 @@ import Board from './components/Board';
 
 class App extends Component {
 
-
+//need props in constructor here?
   constructor(props){
     super();
 
@@ -17,7 +17,7 @@ class App extends Component {
     console.log('API response error: ', error);
     this.setState({ errorMessage: error.message });
   }
-  
+
 
   render() {
     const errorSection = (this.state.errorMessage) ?

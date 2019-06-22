@@ -12,7 +12,17 @@ class Card extends Component {
     // const tempEmoji = emoji.getUnicode("heart_eyes_cat")
     return (
       <div className="card">
+        <button
+        type="button"
+        className=""
+        aria-label="Close"
+        // onClick={removeCardCallback(id)}
+        >
+        x
+        </button>
+
         <p> {this.props.text} </p>
+
         {emojiUnicode ? (<p> {emoji.getUnicode(emojiUnicode)} </p>) : ""}
       </div>
     )
@@ -21,7 +31,8 @@ class Card extends Component {
 
 Card.propTypes = {
   text: PropTypes.string,
-  emoji: PropTypes.string
+  emoji: PropTypes.string,
+  reomveCardCallback: PropTypes.func
 };
 
 export default Card;

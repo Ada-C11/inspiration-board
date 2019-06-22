@@ -37,9 +37,9 @@ class Board extends Component {
     })
 
     .catch((error) => {
-      this.showErrorMessageCallback = () => {
-        this.props.showErrorMessage(error)
-      }
+      // this.showErrorMessageCallback = () => {
+        this.props.showErrorMessageCallback(error)
+      // }
     });
   }
 
