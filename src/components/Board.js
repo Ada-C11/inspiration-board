@@ -34,15 +34,16 @@ class Board extends Component {
   removeCard = (cardIndex, cardID) => {
     console.log(cardIndex, cardID)
 
-    axios.delete(this.props.deleteURL + cardID )
+    axios.delete(this.props.baseURL + cardID )
       .then( response => {
-        alert(`Successfully deleted pet with ${cardID}`);
+        // alert(`Successfully deleted pet with ${cardID}`);
         const newState = this.state.cards;
         newState.splice(cardID, 1);
 
         // TODO: get messages to display for user (not with alerts)
-        newState.message = `Successfully deleted pet with id: ${cardID}`;
+        newState.message = `Successfully deleted card with id: ${cardID}`;
         this.setState(newState);
+        this.componentDidMount()
       })
       .catch( error => {
         console.log(error.message)
