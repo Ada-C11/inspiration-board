@@ -8,6 +8,7 @@ import NewCardForm from './NewCardForm';
 import CARD_DATA from '../data/card-data.json';
 
 const API_URL = 'https://inspiration-board.herokuapp.com/boards/carla-bosco/cards';
+const DELETE_URL = 'https://inspiration-board.herokuapp.com/cards/'
 
 class Board extends Component {
   
@@ -19,8 +20,6 @@ class Board extends Component {
     };
    }
 
-  
-
   componentDidMount() {
     axios.get(API_URL)
     .then ((response) => {
@@ -31,10 +30,22 @@ class Board extends Component {
     })
   }
 
+  deleteCard = (cardID) => {
+    axios.delete(DELETE_URL + cardID)
+    .then((response) => {
+      const updatedCards = [...this.state.cards]
+      this.setState({cards: updatedCards})
+    })
+    .catch((error) => {
+      console.log(error)
+    })
+  }
+
   render() {
     const cardCollection = this.state.cards.map((cardsArray, index) => {
       return <Card key={index}
         card={cardsArray.card}
+        deleteCallback={this.deleteCard}
         />
     });
 
@@ -48,7 +59,7 @@ class Board extends Component {
 }
 
 Board.propTypes = {
-  
+
 };
 
 export default Board;

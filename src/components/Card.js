@@ -18,13 +18,15 @@ class Card extends Component {
         { emoji &&
           <div className='card__content-emoji'>{emojis.getUnicode(emoji)}</div>
         }
+
+        <button onClick={() => this.props.deleteCallback(id)}>Delete</button>
       </section>
     )
   }
 }
 
 Card.propTypes = {
-
+  deleteCallback: PropTypes.func
 };
 
 export default Card;
