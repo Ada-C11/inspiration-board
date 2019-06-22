@@ -7,7 +7,7 @@ class App extends Component {
     return (
       <section>
         <header className="header">
-          <h1 className="header__h1"><span className="header__text">Inspiration Board</span></h1>
+          <h1 className="header__h1"><span className="header__text"> Elle's Inspirations</span></h1>
         </header>
         <Board
           url="https://inspiration-board.herokuapp.com/boards/"
@@ -26,3 +26,6 @@ export default App;
 //         "name": "elle"
 //     }
 // }
+
+// API Documentation:
+// https://github.com/AdaGold/inspiration-board-api

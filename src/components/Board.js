@@ -7,6 +7,7 @@ import Card from './Card';
 import NewCardForm from './NewCardForm';
 import CARD_DATA from '../data/card-data.json';
 
+
 class Board extends Component {
   constructor() {
     super();
@@ -16,10 +17,24 @@ class Board extends Component {
     };
   }
 
+  allCards = CARD_DATA.cards.map((card, i) => {
+    return <Card
+      key={i}
+      text={card.text}
+      emoji={card.emoji}
+    />
+  })
+
+  // setState({
+  //   this.state.cards: allCards
+  // )};
+
   render() {
     return (
       <div>
         Board
+        {this.allCards}
+
       </div>
     )
   }
