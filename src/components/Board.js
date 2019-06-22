@@ -42,7 +42,7 @@ class Board extends Component {
 
   componentDidMount() {
     console.log("insideComponentDidMount")
-    axios.get(BOARD_API_URL + '/boards/sarah-scotton/cards')
+    axios.get(this.props.url + this.props.boardName + '/cards')
       .then((response) => {
         // this.setState({ cards: response.data })
         const newCards = response.data.map((item) => {
@@ -62,7 +62,7 @@ class Board extends Component {
 
   addCard = (card) => {
 
-    axios.post(BOARD_API_URL + '/boards/sarah-scotton/cards/', card)
+    axios.post(this.props.url + this.props.boardName + '/cards', card)
       .then((response) => {
         console.log(response.data.card.id)
         card.id = response.data.card.id
@@ -74,10 +74,12 @@ class Board extends Component {
         this.setState({
           cards: newCards
         })
+
       })
       .catch((error) => {
         console.log(error)
       })
+
 
   }
 
@@ -99,8 +101,8 @@ class Board extends Component {
     axios.delete(BOARD_API_URL + '/cards/' + cardID)
       .then((response) => {
         const newCards = this.state.cards;
-        const card = newCards.splice(cardIndex, 1);
-        console.log(card)
+        newCards.splice(cardIndex, 1);
+
         this.setState({ cards: newCards })
       })
       .catch((error) => {
