@@ -29,7 +29,6 @@ class Board extends Component {
       });
   }
 
-
   addCardCallback = (card) => {
     console.log(card)
     axios.post(BASE_URL, card)
@@ -43,7 +42,6 @@ class Board extends Component {
         this.setState({ error: error.message });
       })
   }
-
 
   deleteCard = (cardID) => {
     const DELETE_URL = "https://inspiration-board.herokuapp.com/cards/" + cardID;
@@ -61,7 +59,6 @@ class Board extends Component {
       });
   }
 
-
   render() {
 
     const displayCards = this.state.cards.map((data) => {
@@ -75,11 +72,10 @@ class Board extends Component {
       />
     });
 
-    const displayErrors = (this.state.error) ? (<div className="validation-errors-display">Whoops! <ul className="validation-errors-display__list"><li>{this.state.error}</li></ul></div>) : null;
+    const displayErrors = (this.state.error) ? (<div className="validation-errors-display">Whoops!<ul className="validation-errors-display__list"><li>{this.state.error}</li></ul></div>) : null;
 
     return (
       <section>
-
         <div className="board" >
           {displayCards}
         </div>
