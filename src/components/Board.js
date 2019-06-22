@@ -33,11 +33,23 @@ class Board extends Component {
   deleteCard = (cardID) => {
     axios.delete(DELETE_URL + cardID)
     .then((response) => {
-      const updatedCards = [...this.state.cards]
+      const updatedCards = this.state.cards.filter(card => card.id !== cardID);
       this.setState({cards: updatedCards})
     })
     .catch((error) => {
       console.log(error)
+    })
+  }
+
+  addCard = (inputData) => {
+    axios.post(API_URL, inputData)
+    .then((response) => {
+      let updatedData = this.state.cards
+      updatedData.push(inputData)
+      this.setState({cards: updatedData})
+    })
+    .catch((error) => {
+      this.setState({error: error.message})
     })
   }
 
@@ -51,6 +63,9 @@ class Board extends Component {
 
     return (
       <div className="board">
+        <NewCardForm
+          addCardCallback={this.addCard}
+        />
        {cardCollection}
       </div>
     )

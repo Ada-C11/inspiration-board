@@ -19,7 +19,8 @@ class Card extends Component {
           <div className='card__content-emoji'>{emojis.getUnicode(emoji)}</div>
         }
 
-        <button onClick={() => this.props.deleteCallback(id)}>Delete</button>
+        <button onClick={() => this.props.deleteCallback(id)} type="button"
+              className = "card__delete">Delete</button>
       </section>
     )
   }
