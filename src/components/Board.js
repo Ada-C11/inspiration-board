@@ -38,7 +38,6 @@ class Board extends Component {
         updatedCards.push(response.data);
         this.setState({ cards: updatedCards });
 
-        // window.location.reload();
       })
       .catch((error) => {
         this.setState({ error: error.message });
@@ -48,7 +47,6 @@ class Board extends Component {
 
   deleteCard = (cardID) => {
     const DELETE_URL = "https://inspiration-board.herokuapp.com/cards/" + cardID;
-    console.log(cardID)
 
     axios.delete(DELETE_URL)
       .then(() => {
