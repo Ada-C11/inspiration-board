@@ -24,13 +24,16 @@ class Board extends Component {
         const cardList = response.data.map((card) => {
           const newCard = {
             ...card,
+            // console.log(newCard.card)
           }
+          // console.log(newCard)
           return newCard.card;
         })
 
         this.setState({
-          cards: cardList,
+          cards: cardList
         })
+        console.log(cardList)
       })
       
       .catch((error) => {
@@ -38,14 +41,39 @@ class Board extends Component {
       })
   }
 
+  onDeleteClick = (cardId) => {
+    const newCardList = this.state.cards.filter((card) => card.id !== cardId);
+
+    this.setState({
+      cards: newCardList
+    });
+
+    axios.delete(BOARD_API_URL + 'cards/' + cardId )
+      .then((response) => {
+        console.log(response);
+      })
+
+      .catch((error) => {
+        console.log(error);
+      })
+  }
+
+    // const newCardList = this.state.cards.filter(card => card.id !== cardId);
+
+    // this.setState({
+    //   cards: newCardList
+    // });
+
   render() {
     const cardList = this.state.cards.map((card, index) => {
-      const { text, emoji } = card;
+      const { id, text, emoji } = card;
       return ( <section>
                 <Card
+                id={id}
                 key={index}
                 text={text}
                 emoji={emoji}
+                onDeleteClick={this.onDeleteClick}
                 />
               </section>
       );
