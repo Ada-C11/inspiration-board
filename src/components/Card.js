@@ -5,22 +5,31 @@ import emoji from 'emoji-dictionary';
 import './Card.css';
 
 class Card extends Component {
+
+  deleteCard = () => {
+    this.props.onDeleteCardCallback(this.props.id);
+  }
+
+
   render() {
 
-    // const {id, text, emoji } = this.props;
+    const {id, text} = this.props;
 
-    // const emoji = require("emoji-dictionary");
+    let displayEmoji;
+    if (this.props.emoji) {
+      displayEmoji = emoji.getUnicode(this.props.emoji);
+    }
 
-   let displayEmoji;
-      if (this.props.emoji) {
-          displayEmoji = emoji.getUnicode(this.props.emoji);
-      }
-    
 
     return (
       <div className='card__content'>
-        <p className='card__content-text'>{this.props.text}</p>
+        <p className='card__content-text'>{id}</p>
+        <p className='card__content-text'>{text}</p>
         <p className='card__content-emoji'>{displayEmoji}</p>
+
+        <button class="card__delete" type="button" onClick={this.deleteCard}>
+          Delete
+        </button>
       </div>
     )
   }

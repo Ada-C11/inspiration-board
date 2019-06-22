@@ -13,7 +13,7 @@ class Board extends Component {
 
     this.state = {
       cards: [],
-      cardText: 'hello!',
+      // cardText: 'hello!',
       errorMessage: null
     };
   }
@@ -21,17 +21,7 @@ class Board extends Component {
   componentDidMount() {
     axios.get(this.props.url + this.props.boardName + '/cards')
       .then((response) => {
-        console.log("Here is my response!!!!!!!!!!", response);
-
-        // const cards = response.data.map(card => {
-
-        //   let allCards = this.state.cards;
-
-        //   return (
-        //     allCards.push(card)
-        //   );
-        // })
-
+     
         this.setState({
           cards: response.data
         })
@@ -43,39 +33,76 @@ class Board extends Component {
         })
       })
     console.log('here are all your cards!!!!!', this.state.cards)
+  }
+
+  onDeleteCard = (id) => {
+    // let savedCard;
+
+  let updatedListCards = this.state.cards;
+  let i = 0;
+
+    for (let card of updatedListCards) {
+      if (card.card.id === id) {
+        // savedCard = card;
+        break;
+      }
+      i += 1;
+    }
+
+    axios.delete(`https://inspiration-board.herokuapp.com/cards/${id}`)
+
+    this.setState({
+    cards: this.state.cards,
+    })
+    
+    // axios.get(this.props.url + this.props.boardName + '/cards')
+    //   .then((response) => {
+     
+    //     this.setState({
+    //       cards: response.data
+    //     })
+
+    //   })
+    //   .catch((error) => {
+    //     this.setState({
+    //       errorMessage: error.message
+    //     })
+    //   })
+
+    console.log('Im in onDeleteCard!!!!!!', id);
+    
+    // updatedListCards.splice(i, 1);
+
+    // this.setState({
+    //   cards: updatedListCards
+    // })
+
 
   }
 
 
-
-  // allIndividualCards = this.state.cards
-  //map through all of these cards and include JSX. Put them below where card components are.
-
-
-
   render() {
-   
 
+    const { cards, cardText, errorMessage } = this.state;
 
-    const showCard = this.state.cards.map((card, i) => {
+    const showCard = cards.map((card, i) => {
       return (
         <div className='card' key={i}>
           <Card
-           id={card.card.id}
-           text={card.card.text}
-           emoji={card.card.emoji}
-           />
+            index={i}
+            id={card.card.id}
+            text={card.card.text}
+            emoji={card.card.emoji}
+            onDeleteCardCallback={this.onDeleteCard}
+          />
         </div>
       );
     })
     return (
-      <div>
-        Board
-
-        <div className='board'>
-          {showCard}
-        </div>
+      <div className='board'>
+        {showCard}
       </div>
+
     )
   }
 
