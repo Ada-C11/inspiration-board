@@ -1,5 +1,9 @@
 .board {
   display: flex;
+  flex-flow: column-wrap;
+}
+.board-card-container__display {
+  display: flex;
   flex-wrap: wrap;
 }
 

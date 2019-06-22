@@ -6,9 +6,11 @@ import './Card.css';
 
 const Card = ({ text, emoji }) => {
   return (
-    <div className="card">
-      <p> {text} </p>
-      {emoji && <p> {Emoji.getUnicode(emoji)} </p>}
+    <div className="card card__content">
+      <p className="card__content-text"> {text} </p>
+      {emoji && (
+        <p className="card__content-emoj"> {Emoji.getUnicode(emoji)} </p>
+      )}
     </div>
   );
 };

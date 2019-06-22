@@ -57,11 +57,13 @@ class Board extends Component {
 
   render() {
     return (
-      <div>
+      <div className="board">
         <section>
           <NewCardForm postCardCallback={this.postCards} />
         </section>
-        <section>{this.cardCollection()}</section>
+        <section className="board-card-container__display ">
+          {this.cardCollection()}
+        </section>
       </div>
     );
   }

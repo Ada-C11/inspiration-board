@@ -73,9 +73,8 @@ class NewCardForm extends Component {
   render() {
     return (
       <div>
-        <div className="new-card-form">
-          <label className="new-card-form__header">Leave a Note:</label>
-        </div>
+        <h3 className="new-card-form__header">Leave a Note, Take a Note</h3>
+        <div className="new-card-form" />
         {this.createForm()}
       </div>
     );
