@@ -43,13 +43,49 @@ class Board extends Component {
       })
   }
 
-  render() {
-    return (
-      <div>
-        Board
-      </div>
-    )
+
+  onDeleteCard = (cardID) => {
+    const newCardList = this.state.cardList.filter(card => card.id !== cardID);
+
+    this.setState({ cardList: newCardList })
   }
+
+  addCardCallback = (card) => {
+    // this.state.cardList.map(card => card.id)
+
+    axios.post(this.ourURL, card)
+    .then((response) => {
+      console.log(response)
+      card.id = response.data.card.id;
+      console.log(card);
+
+      const newCards = [card, ...this.state.cardList];
+      this.setState({ cardList: newCards })
+    })
+    .catch((error) => {
+      this.setState({ error: error.message })
+    })
+  }
+
+    render() {
+      const displayCards = this.state.cardList.map((card, i) => {
+        return <Card 
+                  key={i}
+                  id={card.id}
+                  text={card.text}
+                  emoji={card.emoji}
+                  onDeleteCard={this.onDeleteCard}
+                />
+      })
+  
+      return (
+        <div>
+          Board
+          {/* <NewCardForm addCardCallback={this.addCardCallback} /> */}
+          { displayCards }
+        </div>
+      )
+    }
 
 }
 
