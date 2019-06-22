@@ -7,7 +7,7 @@ import './Card.css';
 class Card extends Component {
 
   render() {
-    console.log(this.props);
+    // console.log(this.props);
     const emojiUnicode = this.props.emoji;
     // const tempEmoji = emoji.getUnicode("heart_eyes_cat")
     return (
