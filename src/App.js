@@ -11,8 +11,8 @@ class App extends Component {
         </header>
         <Board
           url="https://inspiration-board.herokuapp.com/boards/"
-          boardName={`Ada-Lovelace`}
-          />
+          boardName={`sarah-scotton`}
+        />
       </section>
     );
   }
