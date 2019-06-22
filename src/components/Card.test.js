@@ -1,12 +1,12 @@
 import React from 'react';
-import Board from './Board';
+import Card from './Card';
 import { shallow } from 'enzyme';
 
-describe('Board', () => {
+describe('Card', () => {
   test('that it matches an existing snapshot', () => {
     // First Mount the Component in the testing DOM
     // Arrange
-    const wrapper = shallow( <Board key={1} id={1} text={"text"} emoji={"dog"} onDeleteCard={() => {}}/>);
+    const wrapper = shallow( <Card key={1} id={1} text={"text"} emoji={"dog"} onDeleteCard={() => {}}/>);
 
     // Assert that it looks like the last snapshot
     expect(wrapper).toMatchSnapshot();
