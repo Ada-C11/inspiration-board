@@ -12,7 +12,7 @@ class App extends Component {
         <Board
           url="https://inspiration-board.herokuapp.com/boards/"
           cardsUrl="https://inspiration-board.herokuapp.com/cards/"
-          boardName={`16`}
+          boardName={`Nara's Board`}
           />
       </section>
     );
