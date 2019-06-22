@@ -9,7 +9,7 @@ class Card extends Component {
   render() {
     console.log(this.props);
     const emojiUnicode = this.props.emoji;
-    const tempEmoji = emoji.getUnicode("heart_eyes_cat")
+    // const tempEmoji = emoji.getUnicode("heart_eyes_cat")
     return (
       <div className="card">
         <p> {this.props.text} </p>

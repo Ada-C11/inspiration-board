@@ -18,12 +18,15 @@ class Board extends Component {
   }
 
   allCards = CARD_DATA.cards.map((card, i) => {
+    // let message = card.text;
+    // if (!message){message = ''};
     return <Card
       key={i}
       text={card.text}
+      // text={message}
       emoji={card.emoji}
     />
-  })
+  });
 
   // setState({
   //   this.state.cards: allCards
