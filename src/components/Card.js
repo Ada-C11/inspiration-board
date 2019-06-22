@@ -6,25 +6,19 @@ import './Card.css';
 
 class Card extends Component {
 
-  onButtonClick = () => {
-    this.props.onDeleteCard(this.props.id);
-     
-  }
   render() {
     let emojiUnicode = this.props.emoji
     if (emojiUnicode){
       emojiUnicode = emoji.getUnicode(emojiUnicode)
     }
-    const {text} = this.props;
+    const {id, text, onDeleteCard} = this.props;
     return (
       
       <div className="card">
         <div className="card__content">
           <p className= "card__content-text"> {text}</p>
           <p className="card__content-emoji"> {emojiUnicode} </p>
-          {/* <button className="card__delete" onClick={() => onDeleteCard(id)} >Delete</button> */}
-          <button className="card__delete" onClick={this.onButtonClick} >Delete</button>
-
+          <button className="card__delete" onClick={() => onDeleteCard(id)} >Delete</button>
         </div>
       </div>
     )

@@ -35,11 +35,23 @@ class Board extends Component {
           this.setState({
             cards: newCardList
           });
-          console.log(this.state.cards)
         })
         .catch((error) => {
           this.setState({ error: error.message });
         });
+    }
+    addCard = (cardInfo) => {
+      const URL = this.props.url +'/'+this.props.boardName+'/cards'
+      console.log(cardInfo)
+      axios.post(URL, cardInfo)
+      .then((response) => {
+        let updatedData = this.state.cards;
+        updatedData.push(response.data);
+        this.setState({cards: updatedData});
+      })
+      .catch((error) => {
+        this.setState({ error: error.message });
+      });
     }
 
   render() {
@@ -60,10 +72,12 @@ class Board extends Component {
         <div className ="board">
           {cardList}
         </div>
+        <div>
+          <NewCardForm addCard={this.addCard}/>
+        </div>
       </section>
     )
   }
-
 }
 
 Board.propTypes = {
