@@ -27,36 +27,57 @@ class Board extends Component {
     axios.get(getAllCards)
     .then((response) => {
       console.log('In .then!!');
-      this.setState({cards: response.data})
-      console.log('Response data is', response.data)
-      // const allCards = response.data.map(card => {
-      //   if (card) {
-      //     return [{
-      //       ...card
-      //     }];
-      //   } else {
-      //     return [];
+      // const allCards = response.data.map((oneCard) => {
+      //   return{
+      //     text: oneCard.card.text,
+      //     id: oneCard.id,
+      //     emoji: oneCard.emoji,
       //   }
-      // });
-
-      // this.setState({cards: allCards, })
+      // })
+      this.setState({cards: response.data})
     })
     .catch((error) => {
       this.setState({
         error: error.message
       })
-    });
+    })
   }
 
-  render() {
-    // const boardCards = this.state.cards.map((card, index) => {
-    //   return <Card key={index} card={card} />
+  onDeleteCard = (id) => {
+    console.log('Inside of deleteCard!!')
+    console.log(id)
+    // const deleteCardPath = `https://inspiration-board.herokuapp.com/cards/${cardId}`;
+    // axios.delete(deleteCardPath)
+    // .then(() => {
+    //   console.log('inside of then in on delete carddddddd')
+    //   // const newCardList = this.state.cards
+    //   // const card = newCardList.splice()
+    //   // const newCardList = this.state.cards.filter(card => card.id === cardId);
+    //   // this.setState({ cards: newCardList });
     // })
+    // .catch((error) => {
+    //   this.setState({ 
+    //     error: error.message
+    //   });
+    // });
+  }
+   
+  
 
-    const allCards = this.state.cards.map((oneCard, index) => {
+  render() {
+    const allCards = this.state.cards.map((card, index) => {
+      const { id, text, emoji } = card.card;
+
+      const styledCard = {
+        id: id,
+        text: text,
+        emoji: emoji
+      };
+
+      console.log(styledCard.id)
       return (
-        <div key={index}>
-          <Card text={oneCard.card.text} />
+        <div>
+          <Card key={index} index={index} id={id} text={text} card={card} onDeleteCard={() => this.onDeleteCard(id)}/>
         </div>
       )
     });
@@ -68,15 +89,14 @@ class Board extends Component {
      </section>) : null;
 
     return (
-      <div className="board">
-        {/* {boardCards} */}
+      <section className="board">
         <div>
           { errorSection }
         </div>
         <div>
           { allCards }
         </div>
-      </div>
+      </section>
     )
   }
 
