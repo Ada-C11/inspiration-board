@@ -20,7 +20,8 @@ class Card extends Component {
 }
 
 Card.propTypes = {
-
+  text: PropTypes.string,
+  emoji: PropTypes.string
 };
 
 export default Card;
