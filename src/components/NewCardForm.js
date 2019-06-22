@@ -10,6 +10,7 @@ class NewCardForm extends Component {
     super(props)
 
     this.cleared = {
+      id: '',
       text: '',
       emoji: '',
     }
@@ -34,27 +35,37 @@ class NewCardForm extends Component {
     this.setState(updatedState)
   }
 
+  showEmojiList = EMOJI_LIST.map((item) => {
+    return <option value={ item }>{ emoji.getUnicode(item) }</option>
+  })
+
   render() {
     return (
-      <form
-      className="new-card-form"
+      <section className='new-card-form'>
+        <form
+      className="new-card-form__form"
       onSubmit={this.addCard}
-      className=""
     >
-      <h3>Add a Card</h3>
-      <label>
+      <h3 className='new-card-form__header'>Add a Card</h3>
+      <label className='new-card-form__form-label'>
         Text:
-        <textarea
+        <textarea className='new-card-form__form-textarea'
           name="text"
           value={this.state.text}
           onChange={this.onInputChange} />
       </label>
-      <label>
-        Emoji:
-        <input name="emoji" type="text" value={this.state.emoji} onChange={this.onInputChange}></input>
-      </label>
-      <input className="btn btn-success new-card-form--submit" type="submit" name="submit" value="Add a Card" />
+      <label className='new-card-form__form-label'>
+          Emoji:
+          <select className='new-card-form__form-select'
+            name="emoji"  
+            value={ this.state.emoji }
+            onChange={ this.onInputChange }>
+              { this.showEmojiList }
+          </select>
+        </label>
+      <input className="btn btn-success new-card-form__form-button" type="submit" name="submit" value="Add a Card" />
     </form>
+      </section>
     )
   }
 }

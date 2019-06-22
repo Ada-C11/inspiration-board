@@ -11,7 +11,8 @@ class Card extends Component {
     const {id, text, emoji} = this.props.card
     
     return (
-      <section className="card">
+      <div className='card'>
+        <section className="card__content">
         <h4>{text}</h4>
 
         {/* If there is an emoji, display it */}
@@ -19,9 +20,10 @@ class Card extends Component {
           <div className='card__content-emoji'>{emojis.getUnicode(emoji)}</div>
         }
 
-        <button onClick={() => this.props.deleteCallback(id)} type="button"
-              className = "card__delete">Delete</button>
-      </section>
+          <button onClick={() => this.props.deleteCallback(id)} type="button"
+          className = "card__delete">Delete</button>
+        </section>
+      </div>
     )
   }
 }

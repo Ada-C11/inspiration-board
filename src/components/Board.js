@@ -44,6 +44,7 @@ class Board extends Component {
   addCard = (inputData) => {
     axios.post(API_URL, inputData)
     .then((response) => {
+      inputData.id = response.card.id
       let updatedData = this.state.cards
       updatedData.push(inputData)
       this.setState({cards: updatedData})
@@ -62,12 +63,14 @@ class Board extends Component {
     });
 
     return (
-      <div className="board">
+      <section>
         <NewCardForm
           addCardCallback={this.addCard}
         />
-       {cardCollection}
-      </div>
+        <div className="board">
+          {cardCollection}
+        </div>
+      </section>
     )
   }
 
