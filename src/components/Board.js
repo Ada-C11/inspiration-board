@@ -5,17 +5,32 @@ import axios from 'axios';
 import './Board.css';
 import Card from './Card';
 import NewCardForm from './NewCardForm';
-import CARD_DATA from '../data/card-data.json';
 
 class Board extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    console.log(props);
+    super(props);
+    this.state = { cards: [] };
+  }
 
-    this.state = CARD_DATA;
+  componentDidMount = () => {
+    this.getCards();
+  };
+
+  getCards() {
+    const { url, boardName } = this.props;
+    axios
+      .get(url.concat(boardName).concat('/cards'))
+      .then(response => {
+        const cardsState = response.data.map(card => {
+          return { text: card.card.text, emojiName: card.card.emoji };
+        });
+        this.setState({ cards: cardsState });
+      })
+      .catch(error => {});
   }
 
   cardCollection = () => {
-    console.log(CARD_DATA);
     return this.state.cards.map((card, i) => {
       return <Card {...card} key={i} />;
     });
