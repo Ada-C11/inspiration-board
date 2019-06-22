@@ -83,9 +83,22 @@ class Board extends Component {
 
   removeCard = (cardId) => {
     const cards = this.state.cards;
-    const cardIndex = cards.findIndex((card) => card.id === cardId);
-    cards.splice(cardIndex, 1);
-    this.setState({cards, });
+    axios.delete(`https://inspiration-board.herokuapp.com/cards/${cardId}`)
+    .then((response) => {
+      const cardIndex = cards.findIndex((card) => card.id === cardId);
+      cards.splice(cardIndex, 1);
+      this.setState({cards, });
+    })
+    .catch((error) => {
+      const errorList = this.state.errorMessage;
+      const newError = error.response.data.errors.text;
+      newError.forEach((text) => {
+        errorList.push(text);
+      });
+      this.setState({ errorMessage: errorList });
+    })
+
+    
   }
 
   render() {
