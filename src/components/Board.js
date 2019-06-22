@@ -33,7 +33,6 @@ class Board extends Component {
   }
 
   componentDidMount() {
-    console.log("insideComponentDidMount")
     axios.get(this.props.url + this.props.boardName + '/cards')
       .then((response) => {
         const newCards = response.data.map((item) => {
@@ -54,13 +53,9 @@ class Board extends Component {
 
     axios.post(this.props.url + this.props.boardName + '/cards', card)
       .then((response) => {
-        console.log(response.data.card.id)
         card.id = response.data.card.id
-        console.log(card)
         const newCards = this.state.cards
-        console.log("New state", newCards)
         newCards.push(card)
-        console.log("New state 2", newCards)
         this.setState({
           cards: newCards
         })
@@ -69,8 +64,6 @@ class Board extends Component {
       .catch((error) => {
         console.log(error)
       })
-
-
   }
 
   removeCard = (cardIndex, cardID) => {
@@ -92,7 +85,6 @@ class Board extends Component {
       <div>
         <div className="board">
           {cardComponents}
-
         </div>
         <NewCardForm addCardCallback={this.addCard} />
       </div >

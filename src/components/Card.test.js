@@ -1,14 +1,20 @@
 import React from 'react';
-import Board from './Board';
+import Card from './Card';
 import { shallow } from 'enzyme';
 
-describe('Board', () => {
+describe('Card', () => {
   test('that it matches an existing snapshot', () => {
     // First Mount the Component in the testing DOM
     // Arrange
-    const wrapper = shallow(<Board
-      url="https://inspiration-board.herokuapp.com/boards/"
-      boardName={`sarah-scotton`} />);
+    const wrapper = shallow(<Card
+
+      key={1}
+      index={1}
+      id={1}
+      text={''}
+      emoji={''}
+      removeCardCallback={() => { }}
+    />);
 
     // Assert that it looks like the last snapshot
     expect(wrapper).toMatchSnapshot();
