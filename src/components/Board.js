@@ -11,23 +11,28 @@ class Board extends Component {
   constructor() {
     super();
 
-    this.state = {
-      cards: [],
-    };
+    this.state = CARD_DATA;
   }
+
+  cardCollection = () => {
+    console.log(CARD_DATA);
+    return this.state.cards.map((card, i) => {
+      return <Card {...card} key={i} />;
+    });
+  };
 
   render() {
     return (
       <div>
-        Board
+        <section>
+          <NewCardForm />
+        </section>
+        <section>{this.cardCollection()}</section>
       </div>
-    )
+    );
   }
-
 }
 
-Board.propTypes = {
-
-};
+Board.propTypes = {};
 
 export default Board;
