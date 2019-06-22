@@ -7,30 +7,40 @@ import Card from './Card';
 import NewCardForm from './NewCardForm';
 import CARD_DATA from '../data/card-data.json';
 
-const API_URL = 'https://inspiration-board.herokuapp.com/boards';
+const API_URL = 'https://inspiration-board.herokuapp.com/boards/carla-bosco/cards';
 
 class Board extends Component {
-  constructor(props) {
-    super(props);
+  
+   constructor(props) {
+     super(props)
 
-    this.state = {
+     this.state = {
       cards: [],
     };
-  }
+   }
+
+  
 
   componentDidMount() {
     axios.get(API_URL)
     .then ((response) => {
-      const cards = response.data.map((card) => {
-        
-      })
+      this.setState({cards: response.data})
+    })
+    .catch((error) => {
+      console.log(error)
     })
   }
 
   render() {
+    const cardCollection = this.state.cards.map((cardsArray, index) => {
+      return <Card key={index}
+        card={cardsArray.card}
+        />
+    });
+
     return (
-      <div>
-        Board
+      <div className="board">
+       {cardCollection}
       </div>
     )
   }
@@ -38,7 +48,7 @@ class Board extends Component {
 }
 
 Board.propTypes = {
-
+  
 };
 
 export default Board;
