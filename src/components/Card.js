@@ -5,29 +5,14 @@ import emoji from 'emoji-dictionary';
 import './Card.css';
 
 class Card extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      // text: props.text,
-      // emoji: props.emoji,
-      // index: props.index,
 
-
-    }
-  }
   removeCard = () => {
     this.props.removeCardCallback(this.props.index, this.props.id)
   }
   render() {
 
-    // console.log(this.state.text)
-    // console.log("Emoji")
-    // console.log(this.state.emoji)
     let emojiUni = (this.props.emoji) ? emoji.getUnicode(this.props.emoji) : "";
 
-
-    // console.log(emoji.getUnicode(this.state.emoji))
-    // console.log(emoji.unicode)
     return (
       <div className="card">
         <section className="card__content">

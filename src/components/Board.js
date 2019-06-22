@@ -17,16 +17,9 @@ class Board extends Component {
       cards: [],
     };
   }
-  // componentDidMount() {
-  //   const newCardState = CARD_DATA.cards.map
-  // }
+
   generateCardComponents = () => {
-    console.log("inside generate card components")
-    console.log(this.state.cards)
     return this.state.cards.map((card, i) => {
-      console.log("this is the card")
-      // console.log(card)
-      console.log(card.id)
       return (<Card
         key={i}
         index={i}
@@ -36,7 +29,6 @@ class Board extends Component {
         removeCardCallback={this.removeCard}
       />
       )
-
     });
   }
 
@@ -44,7 +36,6 @@ class Board extends Component {
     console.log("insideComponentDidMount")
     axios.get(this.props.url + this.props.boardName + '/cards')
       .then((response) => {
-        // this.setState({ cards: response.data })
         const newCards = response.data.map((item) => {
           return {
             text: item.card.text,
@@ -53,10 +44,9 @@ class Board extends Component {
           }
         })
         this.setState({ cards: newCards })
-        // console.log(response.data)
       })
       .catch((error) => {
-        // console.log(error)
+        console.log(error)
       })
   }
 
@@ -84,36 +74,20 @@ class Board extends Component {
   }
 
   removeCard = (cardIndex, cardID) => {
-    console.log("inside removeCard");
-    console.log("index=", cardIndex);
-    console.log("id =", cardID);
-    // const newCards = this.state.cards;
-    // console.log(newCards.length);
-    // // console.log(this.state.cards)
-    // const card = newCards.splice(cardIndex, 1);
-    // console.log(card)
-    // console.log(newCards.length);
-
-    // this.setState({
-    //   cards: newCards
-    // })
 
     axios.delete(BOARD_API_URL + '/cards/' + cardID)
       .then((response) => {
         const newCards = this.state.cards;
         newCards.splice(cardIndex, 1);
-
         this.setState({ cards: newCards })
       })
       .catch((error) => {
         console.log(error)
       })
-    console.log(this.state.cards)
   }
 
   render() {
     const cardComponents = this.generateCardComponents()
-    console.log(cardComponents)
     return (
       <div>
         <div className="board">

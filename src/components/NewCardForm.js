@@ -10,14 +10,13 @@ class NewCardForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      text: "",
-      emoji: "",
+      text: '',
+      emoji: '',
 
     }
   }
 
   onInputChange = (event) => {
-    console.log(this.state[event.target.name])
     const updatedState = {};
     updatedState[event.target.name] = event.target.value;
     this.setState(updatedState);
@@ -39,8 +38,6 @@ class NewCardForm extends Component {
         emoji: this.state.emoji,
 
       });
-
-
     this.setState({
       text: '',
       emoji: ''
