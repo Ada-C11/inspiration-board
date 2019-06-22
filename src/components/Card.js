@@ -13,7 +13,6 @@ class Card extends Component {
 
     return (
       <div className="card">
-        Card
         <section className="card__content">
           #{ this.props.id }:
             <p className="card__content-text"> { displayText } </p> 
@@ -32,7 +31,6 @@ class Card extends Component {
 }
 
 Card.propTypes = {
-
   id: PropTypes.number,
   text: PropTypes.string,
   emoji: PropTypes.string,

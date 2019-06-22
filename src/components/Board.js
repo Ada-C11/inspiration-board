@@ -5,25 +5,20 @@ import axios from 'axios';
 import './Board.css';
 import Card from './Card';
 import NewCardForm from './NewCardForm';
-import CARD_DATA from '../data/card-data.json';
-
-//Modify the Board component to use axios to retrieve card data from the end point, using the board endpoint you configured in the setup requirements.
 
 class Board extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      cards: [],
       cardList: [],
-      currentCard: undefined,
+      error: ''
     };
   }
 
   componentDidMount() {
       axios.get(`https://inspiration-board.herokuapp.com/boards/${this.props.boardName}/cards`)
       .then((response) => {
-        console.log(response.data);
 
         const cardList = response.data.map((data) => {
           const newCard = {
@@ -33,8 +28,6 @@ class Board extends Component {
           }
           return newCard;
         })
-  
-        console.log(cardList);
   
         this.setState({ cardList });
       })
@@ -51,13 +44,9 @@ class Board extends Component {
   }
 
   addCardCallback = (card) => {
-    // this.state.cardList.map(card => card.id)
-
-    axios.post(this.ourURL, card)
+    axios.post(`https://inspiration-board.herokuapp.com/boards/${this.props.boardName}/cards`, card)
     .then((response) => {
-      console.log(response)
       card.id = response.data.card.id;
-      console.log(card);
 
       const newCards = [card, ...this.state.cardList];
       this.setState({ cardList: newCards })
@@ -80,8 +69,7 @@ class Board extends Component {
   
       return (
         <div>
-          Board
-          {/* <NewCardForm addCardCallback={this.addCardCallback} /> */}
+          <NewCardForm addCardCallback={this.addCardCallback} />
           { displayCards }
         </div>
       )
@@ -90,7 +78,8 @@ class Board extends Component {
 }
 
 Board.propTypes = {
-
+  url: PropTypes.string,
+  boardName: PropTypes.string
 };
 
 export default Board;

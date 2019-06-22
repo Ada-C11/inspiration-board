@@ -37,8 +37,8 @@ class NewCardForm extends Component {
     this.setState(updatedState);
   }
 
-  displayEmojiList = EMOJI_LIST.map((emoticon) => {
-    return <option value={ emoticon }>{ emoji.getUnicode(emoticon) }</option>
+  displayEmojiList = EMOJI_LIST.map((emoticon, i) => {
+    return <option key={i} value={ emoticon }>{ emoji.getUnicode(emoticon) }</option>
   })
 
   render(){
