@@ -76,8 +76,10 @@ class Board extends Component {
       );
     })
     return (
-      <div className='board'>
-        {showCard}
+      <div>
+        <div><NewCardForm /></div>
+        <div className='board'>{showCard}</div>
+        
       </div>
 
     )
