@@ -7,7 +7,7 @@ import Card from './Card';
 import NewCardForm from './NewCardForm';
 import CARD_DATA from '../data/card-data.json';
 
-
+const GET_CARDS_URL = "https://inspiration-board.herokuapp.com/boards/PhDPlayerHatersDegree/cards";
 
 
 class Board extends Component {
@@ -20,13 +20,26 @@ class Board extends Component {
   }
 
   componentDidMount() {
-    const GET_CARDS_URL = "https://inspiration-board.herokuapp.com/boards/PhDPlayerHatersDegree/cards"
-
     axios.get(GET_CARDS_URL)
       .then((response) => {
         this.setState({ cards: response.data });
-        console.log(response.data)
-        console.log(this.state.cards)
+      })
+      .catch((error) => {
+        this.setState({ error: error.message });
+      });
+  }
+
+
+  deleteCard = (cardID) => {
+    const DELETE_URL = "https://inspiration-board.herokuapp.com/cards/" + cardID;
+    console.log(cardID)
+
+    axios.delete(DELETE_URL)
+      .then(() => {
+        const updatedCards = this.state.cards.filter(card => card.id !== cardID)
+
+        this.setState({ cards: updatedCards });
+        window.location.reload();
       })
       .catch((error) => {
         this.setState({ error: error.message });
@@ -35,31 +48,30 @@ class Board extends Component {
 
 
   render() {
-    let display;
+    // let display;
 
-    const cardComponents = this.state.cards.map((data, index) => {
+    const displayCards = this.state.cards.map((data, index) => {
       const { text, emoji, id } = data.card;
-      return (
-        <Card
-          key={index}
-          id={id}
-          text={text}
-          emoji={emoji}
-        />
-      )
+      return <Card
+        key={index}
+        id={id}
+        text={text}
+        emoji={emoji}
+        deleteCard={this.deleteCard}
+      />
     });
 
-    if (this.state.error) {
-      display = this.state.error.forEach((error) => {
-        return <p>{error.message}</p>
-      })
-    } else {
-      display = cardComponents;
-    }
+    // if (this.state.error) {
+    //   display = this.state.error.map((error) => {
+    //     return <p>{error.message}</p>
+    //   })
+    // } else {
+    //   display = cardComponents;
+    // }
 
     return (
       <div className="board">
-        {display}
+        {displayCards}
       </div>
     )
   }

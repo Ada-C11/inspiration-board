@@ -7,11 +7,9 @@ import './Card.css';
 
 class Card extends Component {
 
-  constructor(props) {
-    super(props);
-
-    this.state = {
-    }
+  onDeleteClick = () => {
+    console.log(this.props)
+    this.props.deleteCard(this.props.id);
   }
 
   render() {
@@ -30,7 +28,10 @@ class Card extends Component {
             </span>
           </div>
           <div className="button__container">
-            <button className="card__delete">Delete</button>
+            <button className="card__delete"
+              onClick={this.onDeleteClick}>
+              Delete
+            </button>
           </div>
         </div >
       </div >
@@ -40,7 +41,9 @@ class Card extends Component {
 
 Card.propTypes = {
   text: PropTypes.string,
-  emoji: PropTypes.string
+  emoji: PropTypes.string,
+  id: PropTypes.number,
+  deleteCard: PropTypes.func,
 };
 
 export default Card;
