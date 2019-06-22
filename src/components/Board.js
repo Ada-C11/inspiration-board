@@ -21,15 +21,23 @@ class Board extends Component {
   }
 
   componentDidMount() {
-    const cards = CARD_DATA["cards"].map((card) => {
-      const newCard = {
-        id: card.id,
-        text: card.text,
-        emoji: card.emoji
-      }
-      return newCard;
-    })
-    this.setState({ cards });
+    axios.get(this.props.url + this.props.boardName + '/cards')
+      .then((response) => {
+        console.log(response.data)
+        const cards = response.data.map((card) => {
+          const newCard = {
+            id: card.card.id,
+            text: card.card.text,
+            emoji: card.card.emoji
+          }
+          return newCard;
+        })
+        this.setState({ cards });
+      })
+      .catch((error) => {
+        this.setState({ error: error.message });
+      })
+ 
   }
 
   render() {
@@ -52,7 +60,8 @@ class Board extends Component {
 }
 
 Board.propTypes = {
-  url: PropTypes.string
+  url: PropTypes.string, 
+  boardName: PropTypes.string
 };
 
 export default Board;
