@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Card it matches snapshot 1`] = `
+<div
+  className="card"
+>
+  <section>
+    <button
+      aria-label="Close"
+      className="btn btn-danger"
+      onClick={[Function]}
+      type="button"
+    >
+      Delete
+    </button>
+  </section>
+  Fake it till you make it!
+  beer
+</div>
+`;
