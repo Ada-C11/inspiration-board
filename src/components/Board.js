@@ -16,11 +16,38 @@ class Board extends Component {
     };
   }
 
+  componentDidMount() {
+    const endpoint = this.props.url + this.props.boardName + "/cards"
+    axios.get(endpoint)
+      .then((response) => {
+        console.log(response.data);
+
+        const cardList = response.data.map((card) => {
+          
+          const newCard = { 
+            key: card.card.id,
+            quote: card.card.text,
+            Emoji: card.card.emoji
+          }
+          return newCard
+        })
+
+        console.log(cardList);
+
+        this.setState({cards: cardList});
+      
+      })
+      
+      .catch((error) => {
+        console.log(error);
+      })
+  }
+
   render() {
-    const display = CARD_DATA.cards.map((card) => {
-      const { text, Emoji} = card;
+    const display = this.state.cards.map((card) => {
+      const { quote, Emoji} = card;
       return (<section>
-        <Card quote={text} Emoji={Emoji} />
+        <Card quote={quote} Emoji={Emoji} />
       </section>);
     });
 
