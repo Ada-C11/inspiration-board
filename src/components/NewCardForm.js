@@ -12,12 +12,10 @@ class NewCardForm extends Component {
     this.state = {
       text: '',
       emoji: '',
-
     }
   }
 
   onChangeHandler = (event) => {
-    console.log('onChangeHandler')
     const field = {}
     field[event.target.name] = event.target.value
 
@@ -26,7 +24,6 @@ class NewCardForm extends Component {
 
   onClickSubmit = (event) => {
     event.preventDefault();
-    console.log('on Click Submit');
 
     this.props.onSubmitNewCardCallback(this.state)
     

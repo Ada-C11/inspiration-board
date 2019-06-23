@@ -13,7 +13,7 @@ class App extends Component {
     this.state = {
       cardList: [],
       message: '',
-    }
+    };
   }
 
   
@@ -47,16 +47,15 @@ class App extends Component {
         emoji: newCard.emoji
       };
   
-      console.log('pizza');
       // posting this new card to the API - updating the backend
       axios.post(URL, cardDataForApi) 
         .then((response) => {
-          console.log('party');
           let updatedCardList = this.state.cardList;
           updatedCardList.push({
-            text: newCard.text,
-            emoji: newCard.emoji,
-            id: response.data.id
+            // text: newCard.text,
+            // emoji: newCard.emoji,
+            id: response.data.id,
+            ...cardDataForApi,
           });
   
           // setting state to incorporate new card - updating the frontend
@@ -71,8 +70,6 @@ class App extends Component {
             message: error.messages
           });
         });
-  
-        // this.componentDidMount();
     }
 
     const onRemoveCallback = (id) => {

@@ -21,6 +21,8 @@ const Board = (props) => {
   });
 
   return (
+    // I realize this isn't the best use case for a fragment. I just really wanted
+    // to test out using it.
     <Fragment>
       <section className='validations-error-display'>
 
@@ -33,8 +35,11 @@ const Board = (props) => {
 }
 
 Board.propTypes = {
-  // update to array of objects
-  cardList: PropTypes.array.isRequired,
+  cardList: PropTypes.arrayOf(
+    PropTypes.shape({
+    text: PropTypes.string,
+    emoji: PropTypes.string,
+  })).isRequired,
   onRemoveCallback: PropTypes.func.isRequired,
 };
 
