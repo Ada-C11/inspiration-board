@@ -22,14 +22,11 @@ class Board extends Component {
     
     axios.get(`${this.props.url}/${this.props.boardName}/cards`)
       .then((response) => {
-        console.log(response);
         this.setState({
           currentError: null,
         });
 
         const cardList = response.data.map((card) => {
-
-
           const newCard = {
             id: card.card.id,
             text: card.card.text,
@@ -37,8 +34,6 @@ class Board extends Component {
           }
           return newCard;
         });
-
-        // console.log(cardList);
 
         this.setState({
           cardList,
@@ -73,7 +68,6 @@ class Board extends Component {
         this.setState({
           currentError: `Could not add card: ${error.response.data.errors.text}`
         })
-        console.log(error.response);
       });
   }
 

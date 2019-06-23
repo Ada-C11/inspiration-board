@@ -41,10 +41,13 @@ class BoardSelector extends Component {
 
   render () {
     return (
-      <select className="board-selector"
+      <section className="new-card-form">
+        <label htmlFor="board-select" className="new-card-form__form-label">Select a Board: </label>
+      <select className="new-card-form__form-select"
       onChange={this.onChangeSelect}>
         {this.generateOptions()}
       </select>
+      </section>
     )
   }
 }

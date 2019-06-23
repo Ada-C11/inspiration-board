@@ -12,21 +12,22 @@ class App extends Component {
   }
 
   onBoardChange = (name) => {
-    console.log(name);
     this.setState ({
       boardName: name
     })
   }
 
   render() {
-    console.log(`in render: ${this.state.boardName}`);
-    return (
+     return (
       <section>
         <header className="header">
           <h1 className="header__h1"><span className="header__text">Inspiration Board</span></h1>
         </header>
+        
         <BoardSelector onBoardChangeCallback={this.onBoardChange} 
         url="https://inspiration-board.herokuapp.com/boards/"/>
+        
+        
         <Board
           url="https://inspiration-board.herokuapp.com/boards/"
           deleteUrl="https://inspiration-board.herokuapp.com/cards"
