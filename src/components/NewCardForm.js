@@ -3,8 +3,7 @@ import PropTypes from 'prop-types';
 import emoji from 'emoji-dictionary';
 import './NewCardForm.css';
 
-const EMOJI_LIST = emoji.names;
-EMOJI_LIST.unshift("");
+const EMOJI_LIST = ["", "heart_eyes", "beer", "clap", "sparkling_heart", "heart_eyes_cat", "dog"];
 
 class NewCardForm extends Component {
   constructor(props) {
@@ -27,16 +26,15 @@ class NewCardForm extends Component {
   }
 
   onChangeHandler = (event) => {
-    const fields = {};
+    const fields = this.state;
     const eventName = event.target.name;
     const eventValue = event.target.value;
 
-    if(event.target.name === 'emoji') {
+    if(eventName === 'emoji') {
       fields[eventName] = emoji.getName(eventValue);
     } else {
       fields[eventName] = eventValue;
     }
-    
     this.setState(fields);
   }
 

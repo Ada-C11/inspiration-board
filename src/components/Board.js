@@ -45,7 +45,8 @@ class Board extends Component {
   }
 
   updateCardList = (cardData) => {
-    axios.post(`${this.props.url}${this.props.boardName}/cards`, cardData)
+    const url = `${this.props.url}${this.props.boardName}/cards`;
+    axios.post(url, cardData)
     .then((response) => {
       const cards = this.state.cards;
       const card = response.data['card'];
@@ -54,7 +55,10 @@ class Board extends Component {
         text: card.text,
         emoji: card.emoji,
       });
-      this.setState({ cards, });
+      this.setState({ 
+        cards,
+        errorMessage: [],
+      });
     })
     .catch((error) => {
       const errorList = this.state.errorMessage;
@@ -97,8 +101,6 @@ class Board extends Component {
       });
       this.setState({ errorMessage: errorList });
     })
-
-    
   }
 
   render() {
