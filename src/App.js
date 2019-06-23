@@ -27,7 +27,6 @@ class App extends Component {
         <BoardSelector onBoardChangeCallback={this.onBoardChange} 
         url="https://inspiration-board.herokuapp.com/boards/"/>
         
-        
         <Board
           url="https://inspiration-board.herokuapp.com/boards/"
           deleteUrl="https://inspiration-board.herokuapp.com/cards"
