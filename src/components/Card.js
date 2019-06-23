@@ -11,7 +11,7 @@ class Card extends Component {
         <header>Card</header>
         <section className="card__content">
           <p className="card__content-text">{this.props.quote}</p>
-          <p className="card__content-emoji">{this.props.emoji}</p>
+          <p className="card__content-emoji">{this.props.Emoji ? emoji.getUnicode(this.props.Emoji) : ""}</p>
         </section>
       </div>
     )

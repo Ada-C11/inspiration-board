@@ -20,7 +20,7 @@ class Board extends Component {
     return (
       <div>
         <header>Board</header>
-        <Card quote="Here is an inspirational quote!"/>
+        <Card quote="Here is an inspirational quote!" Emoji="beer"/>
       </div>
     )
   }
