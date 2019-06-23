@@ -24,16 +24,15 @@ class Board extends Component {
     .then((response) => {
       // console.log(response);
 
-      const allCards = response.data.map((card, i) => {
-        return <Card
-          key={i}
-          cardId={card.card.id}
-          text={card.card.text}
-          emoji={card.card.emoji}
-          removeCardCallback={this.removeCard}
-        />
-      });
-      this.setState({ cards: allCards });
+      const cardsFromApi = response.data;
+
+      let destructuredCards = cardsFromApi.map((cardObject, i) => {
+        // card object has this form:
+        // {card: {id: 1601, text: "temp text", emoji: "null"}}
+        return cardObject.card;
+      })
+
+      this.setState({ cards: destructuredCards });
       console.log('cards in state after componentDidMount ', this.state.cards);
     })
 
@@ -66,20 +65,9 @@ class Board extends Component {
     //   />
     // });
 
-    let allCards = this.state.cards;
-    const cardInfo = response.data['card'];
-    // console.log(cardInfo);
-    const makeNewCard = (cardInfo) => {
-      return <Card
-        key={8888}
-        cardId={cardInfo.id}
-        text={cardInfo.text}
-        emoji={cardInfo.emoji}
-        removeCardCallback={this.removeCard}
-      />
-    }
-    allCards.push(makeNewCard(cardInfo));
-    this.setState({ cards: {allCards} });
+    let updatedCardList = this.state.cards;
+    updatedCardList.push(newCard);
+    this.setState({ cards: updatedCardList });
   })
   .catch((error) => {
     this.props.showErrorMessageCallback(error)
@@ -120,16 +108,30 @@ class Board extends Component {
   }
 
 
-
-
-
   render() {
+    // const allCards =
+    console.log('In render on board. state cards: ', JSON.parse(JSON.stringify(this.state.cards)));
+    const displayAllCards = this.state.cards.map((card, i) => {
+      console.log('Board.js, render, this.state.cards.map card:', card);
+      return (
+        <div className='card' key={i}>
+          <Card
+            key={i}
+            cardId={card.id}
+            text={card.text}
+            emoji={card.emoji}
+            removeCardCallback={this.removeCard}
+          />
+        </div>)
+    });
     return (
       <section>
         <div> <NewCardForm
         addCardCallback={this.addCard} />
         </div>
-        <div> {this.state.cards} </div>
+
+        <div className='board'>{displayAllCards}</div>
+        {/*<div> {this.state.cards} </div>*/}
         {/* <div> {this.allCardsFromApi} </div> */}
       </section>
     )

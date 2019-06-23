@@ -13,8 +13,10 @@ class Card extends Component {
     const emojiUnicode = this.props.emoji;
     // const tempEmoji = emoji.getUnicode("heart_eyes_cat")
     return (
-      <div className="card">
-        <button
+      <div className="card__content">
+        <p className='card__content-text'> {this.props.text} </p>
+        {emojiUnicode ? (<p className='card__content-emoji'> {emoji.getUnicode(emojiUnicode)} </p>) : ""}
+        <button className='card__delete'
         type="button"
         className=""
         aria-label="Close"
@@ -25,12 +27,8 @@ class Card extends Component {
         // which calls the callback function
         onClick={() => this.props.removeCardCallback(this.props.cardId)}
         >
-        x
+        delete card
         </button>
-
-        <p> {this.props.text} </p>
-
-        {emojiUnicode ? (<p> {emoji.getUnicode(emojiUnicode)} </p>) : ""}
       </div>
     )
   }
