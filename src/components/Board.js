@@ -12,7 +12,7 @@ class Board extends Component {
     this.state = {
       cards: [],
       myUrl: props.boardUrl + props.boardName + '/cards',
-      errorMessages: [], 
+      errorMessages: '', 
       message: '',
     };
     
