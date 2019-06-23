@@ -23,8 +23,16 @@ class NewCardForm extends Component {
     }
 
     onInputChange = (event) => {
+        const updatedSubmission = {};
+
+        const field = event.target.name;
+        const value = event.target.value;
+
         console.log(event.target.name);
         console.log(event.target.value);
+
+        updatedSubmission[field] = value;
+        this.setState(updatedSubmission);
     }
 
     render() {
