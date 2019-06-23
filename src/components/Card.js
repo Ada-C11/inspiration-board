@@ -8,14 +8,18 @@ class Card extends Component {
   render() {
     return (
       <div className="card">
-        Card
+        <header>Card</header>
+        <section className="card__content">
+          <p className="card__content-text">{this.props.quote}</p>
+          <p className="card__content-emoji">{this.props.emoji}</p>
+        </section>
       </div>
     )
   }
 }
 
 Card.propTypes = {
-
+  quote: PropTypes.string.isRequired,
 };
 
 export default Card;

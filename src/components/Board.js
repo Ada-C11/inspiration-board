@@ -19,7 +19,8 @@ class Board extends Component {
   render() {
     return (
       <div>
-        Board
+        <header>Board</header>
+        <Card quote="Here is an inspirational quote!"/>
       </div>
     )
   }
