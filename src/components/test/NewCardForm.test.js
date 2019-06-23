@@ -4,7 +4,7 @@ import NewCardForm  from '../NewCardForm';
 
 
 describe('NewCardForm', () => {
-  it('should render correctly in "debug" mode', () => {
+  it('should match existing snapshot', () => {
     
     const component = shallow(<NewCardForm 
                                 addNewCardCallback={ () => {} }

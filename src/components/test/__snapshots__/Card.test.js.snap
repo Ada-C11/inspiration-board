@@ -1,5 +1,26 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Card should match existing snapshot 1`] = `
+<div
+  className="card__content"
+>
+  <p
+    className="card__content-text"
+  >
+    Hello Tester
+  </p>
+  <p
+    className="card__content-emoji"
+  />
+  <button
+    className="card-delete"
+    onClick={[Function]}
+  >
+    Delete
+  </button>
+</div>
+`;
+
 exports[`Card should render correctly in "debug" mode 1`] = `
 <div
   className="card__content"

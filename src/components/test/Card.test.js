@@ -4,7 +4,7 @@ import Card from '../Card';
 
 
 describe('Card', () => {
-  it('should render correctly in "debug" mode', () => {
+  it('should match existing snapshot', () => {
     const testCard = {id: 1, text: "Hello Tester", }
     const component = shallow(<Card 
       text={"Hello Tester"}
