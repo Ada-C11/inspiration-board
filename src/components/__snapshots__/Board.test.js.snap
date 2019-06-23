@@ -1,0 +1,55 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Board that it matches an existing snapshot 1`] = `
+<div>
+  <div
+    className="validation-errors-display"
+  >
+    <ul
+      className="validation-errors-display__list"
+    />
+  </div>
+  <NewCardForm
+    updateCardListCallback={[Function]}
+  />
+  <div
+    className="board"
+  >
+    <Card
+      cardEmoji=""
+      cardId={0}
+      cardMessage="Make sure you pet a dog this week!"
+      key="0"
+      removeCardCallback={[Function]}
+    />
+    <Card
+      cardEmoji="heart_eyes"
+      cardId={1}
+      cardMessage=""
+      key="1"
+      removeCardCallback={[Function]}
+    />
+    <Card
+      cardEmoji=""
+      cardId={2}
+      cardMessage="REST is part of work"
+      key="2"
+      removeCardCallback={[Function]}
+    />
+    <Card
+      cardEmoji=""
+      cardId={3}
+      cardMessage="Take a nap"
+      key="3"
+      removeCardCallback={[Function]}
+    />
+    <Card
+      cardEmoji="beer"
+      cardId={4}
+      cardMessage=""
+      key="4"
+      removeCardCallback={[Function]}
+    />
+  </div>
+</div>
+`;
