@@ -6,6 +6,12 @@ import './NewCardForm.css';
 
 const EMOJI_LIST = ["", "heart_eyes", "beer", "clap", "sparkling_heart", "heart_eyes_cat", "dog"]
 
+const emojiList = EMOJI_LIST.map((singleEmoji, i) => {
+    return (
+        <option value={`${singleEmoji}`}>{emoji.getUnicode(`${singleEmoji}`)}</option>
+    )
+});
+
 class NewCardForm extends Component {
   constructor(props) {
     super(props);
@@ -58,8 +64,7 @@ class NewCardForm extends Component {
             value={this.state.cardEmoji}
             onChange={this.onInputChange}>
               <option value="">Select an Emoji</option>
-              <option value="heart_eyes">{emoji.getUnicode("heart_eyes")}</option>
-              <option value="beer">{emoji.getUnicode("beer")}</option>
+              {emojiList}
           </select>
         </label>
         <input className="new-card-form__form-button" type="submit" name="submit" value="Add a Card" />

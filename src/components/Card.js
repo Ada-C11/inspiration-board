@@ -4,7 +4,6 @@ import emoji from 'emoji-dictionary';
 
 import './Card.css';
 
-// class Card extends Component {
 const Card = (props) => {
 
   const { text, cardEmoji, deleteCardCallback, id} = props;
@@ -34,7 +33,7 @@ const Card = (props) => {
       </div>
     </div>
   )
-  // }
+
 }
 
 Card.propTypes = {

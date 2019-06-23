@@ -14,7 +14,6 @@ class Board extends Component {
     this.state = {
       cards: [],
       errorMessage: null,
-      // cards: CARD_DATA.cards,
     };
   }
 
@@ -22,7 +21,6 @@ class Board extends Component {
     axios.get(`${this.props.url}/${this.props.boardName}/cards`)
       .then((response) => {
         this.setState({ cards: response.data });
-        // console.log('response.data is', response.data)
       })
       .catch((error) => {
         this.setState({
@@ -56,7 +54,6 @@ class Board extends Component {
 
   deleteCardCallback = (cardId) => {
     console.log(cardId)
-    //  console.log(card.id)
     axios.delete(`https://inspiration-board.herokuapp.com/cards/${cardId}`)
       .then((response) => {
         const newCardList = this.state.cards.filter(card => card.card.id !== cardId);
@@ -82,7 +79,6 @@ class Board extends Component {
 
     const cardComponents = this.state.cards.map((card, i) => {
       return (
-        // <div key={i} className="board">
           <Card
           key={i} 
             id={card.card.id}
@@ -90,7 +86,6 @@ class Board extends Component {
             cardEmoji={card.card.emoji}
             deleteCardCallback={this.deleteCardCallback}
           />
-        // </div>
       )
     });
 
