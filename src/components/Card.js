@@ -18,7 +18,11 @@ class Card extends Component {
         type="button"
         className=""
         aria-label="Close"
-        // onClick={removeCardCallback(id)}
+        // below lets you define the function on one line
+        // another option is to use
+        // onClick={this.props.removeCardCallback}
+        // and make a function in this Card class called removeCardCallback,
+        // which calls the callback function
         onClick={() => this.props.removeCardCallback(this.props.cardId)}
         >
         x

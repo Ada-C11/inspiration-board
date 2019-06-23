@@ -33,7 +33,7 @@ class Board extends Component {
           removeCardCallback={this.removeCard}
         />
       });
-      this.setState({cards: allCards});
+      this.setState({ cards: allCards });
     })
 
     .catch((error) => {
@@ -45,23 +45,22 @@ class Board extends Component {
 
   removeCard = (cardId) => {
     console.log('removing card ', cardId);
+    console.log('all cards: ', this.state.cards);
 
-    axios.delete(`https://inspiration-board.herokuapp.com/cards/${cardId}`)
-    .then((response) => {
-      console.log(response);
-    })
-    .catch((error) => {
-      // this.props.showErrorMessage(error)
-    });
+// ***** UNCOMMENT THIS FUNCTION TO REINSTATE THE ABILITY TO DELETE CARDS ******
+    // axios.delete(`https://inspiration-board.herokuapp.com/cards/${cardId}`)
+    // .then((response) => {
+    //   console.log(response);
+    // })
+    // .catch((error) => {
+    //   this.props.showErrorMessageCallback(error)
+    // });
+// *****************************************************************************
 
-    const tempCardList = this.state.cards.filter(card => card.cardId !== cardId)
-
-    this.setState({
-    cards: tempCardList
-    });
-
-    console.log('new card list: ', tempCardList);
-
+    const tempCardList = this.state.cards.filter(checkCard => checkCard.props.cardId !== cardId)
+    this.setState({ cards: tempCardList });
+    console.log('temp card list: ', tempCardList);
+    console.log('updated card list in state: ', this.state.cards);
   }
 
 
@@ -70,11 +69,7 @@ class Board extends Component {
 
   render() {
     return (
-      <div>
-        Board
-        {this.state.cards}
-
-      </div>
+      <div> {this.state.cards} </div>
     )
   }
 
