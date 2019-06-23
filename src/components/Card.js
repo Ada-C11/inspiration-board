@@ -14,10 +14,10 @@ class Card extends Component {
       <div className="card">
         <div className="card__content">
           <div className="card__content-text">
-            { this.props.cardText }
+            { this.props.card.text }
           </div>
           <div className="card__content-emoji">
-            {(this.props.cardEmoji) && (emoji.getUnicode(this.props.cardEmoji))}
+            {(this.props.card.emoji) && (emoji.getUnicode(this.props.card.emoji))}
           </div>
         </div>
       </div>
