@@ -12,7 +12,8 @@ class Board extends Component {
     this.state = {
       cards: [],
       myUrl: props.boardUrl + props.boardName + '/cards',
-      errorMessages: []
+      errorMessages: [], 
+      message: '',
     };
     
   }
@@ -40,18 +41,15 @@ class Board extends Component {
 
     axios.delete(this.props.baseURL + cardID )
       .then( response => {
-        alert(`Successfully deleted pet with ${cardID}`);
         const newState = this.state.cards;
         newState.splice(cardIndex, 1);
-
-        // TODO: get messages to display for user (not with alerts)
         newState.message = `Successfully deleted card with id: ${cardID}`;
-        this.setState(newState);
 
+        this.setState(newState);
       })
       .catch( error => {
-        console.log(error.message)
-        alert(`Encountered an error: ${error}`)
+        console.log(error.message);
+        this.setState({ errorMessages: error.message});
       });
 
   }
@@ -60,25 +58,25 @@ class Board extends Component {
     
     axios.post(`${this.state.myUrl}?text=${cardData.text}&emoji=${cardData.emoji}`)
       .then(response => {
-        console.log(response.data)
-        const newCardList = this.state.cards
-        cardData.id = response.data.card.id
-        newCardList.push(cardData)
-        this.setState({ cards: newCardList})
+        console.log(response.data);
+        const newCardList = this.state.cards;
+        cardData.id = response.data.card.id;
+        newCardList.push(cardData);
+        this.setState({ 
+          cards: newCardList, 
+          message: `Successfully added card with id: ${cardData.id}`});
       })
       .catch(error => {
-        console.log(error)
-        alert(`An error has occurred: ${error.message}`)
+        console.log(error);
+        this.setState({ errorMessages: error.message});
       })
   }
   
   render() {
     const generatedCards = this.state.cards.map((card, i ) => {
-      console.log(card)
      return( 
-      <div className="card">
+      <div key={i} className="card">
         <Card 
-          key={i}
           text={ card.text }
           emoji={ card.emoji }
           id={ card.id} 
@@ -88,11 +86,13 @@ class Board extends Component {
       </div>);
     });
 
-    const errorText = this.state.errorMessages
+    const errorText = this.state.errorMessages;
+    const successful = this.state.message;
     return ( 
       <div> 
         <section className="validation-errors-display">
-        {errorText}
+        {errorText ? errorText : null}
+        {successful ? successful : null}
         </section>
         <section className="board"> 
           {generatedCards} 
