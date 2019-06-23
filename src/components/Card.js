@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import emoji from 'emoji-dictionary';
 
@@ -9,7 +9,6 @@ const Card = (props) => {
   const { text, cardEmoji, deleteCardCallback, id} = props;
 
   const onClickDelete = () => {
-    console.log(id)
     return deleteCardCallback(id)
   }
 
@@ -22,8 +21,6 @@ const Card = (props) => {
         >
           Delete Card
         </button>
-
-        <p className="card__content-text">{id}</p>
         <p className="card__content-text">{text}</p>
         <p className="card__content-emoji">{cardEmoji ? emoji.getUnicode(cardEmoji) : ""}</p>
       </div>
