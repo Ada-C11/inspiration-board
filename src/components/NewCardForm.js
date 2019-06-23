@@ -7,9 +7,7 @@ import './NewCardForm.css';
 const EMOJI_LIST = ["", "heart_eyes", "beer", "clap", "sparkling_heart", "heart_eyes_cat", "dog"]
 
 const emojiList = EMOJI_LIST.map((singleEmoji, i) => {
-    return (
-        <option value={`${singleEmoji}`}>{emoji.getUnicode(`${singleEmoji}`)}</option>
-    )
+    return <option key={i} value={singleEmoji}>{emoji.getUnicode(singleEmoji)}</option> 
 });
 
 class NewCardForm extends Component {
@@ -77,7 +75,7 @@ class NewCardForm extends Component {
 }
 
 NewCardForm.propTypes = {
-//   addPetCallback: PropTypes.func.isRequired,
+  addCardCallback: PropTypes.func.isRequired,
 };
 
 export default NewCardForm;

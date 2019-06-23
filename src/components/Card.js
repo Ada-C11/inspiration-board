@@ -4,39 +4,44 @@ import emoji from 'emoji-dictionary';
 
 import './Card.css';
 
-const Card = (props) => {
+class Card extends Component {
 
-  const { text, cardEmoji, deleteCardCallback, id} = props;
+  constructor(props) {
+    super(props);
 
-  let displayEmoji = cardEmoji
-  if (cardEmoji) {
-    displayEmoji = emoji.getUnicode(cardEmoji)
+    this.state = {
+      id: props.id,
+      text: props.text,
+      cardEmoji: props.cardEmoji ? props.cardEmoji : '',
+      deleteCardCallback: props.deleteCardCallback
+    }
   }
-  const onClickDelete = () => {
-    console.log(id)
-    return deleteCardCallback(id)
-  }
-  return (
-    <div className="card">
-      <div className="card__content">
-      <button 
-          type="button" 
-          className="card__delete" 
-          
-          onClick={onClickDelete}
+
+  render() {
+    return (
+      <div className="card card__content">
+        <button
+          type="button"
+          className="card__delete"
+          onClick={() => this.state.deleteCardCallback(this.state.id)}
         >
           Delete Card
         </button>
-        <span className="card__content-text">{id}</span>
-        <span className="card__content-text">{text}</span>
-        <span className="card__content-emoji">{displayEmoji}</span>
-      </div>
-    </div>
-  )
 
+        <p className="card__content-text">{this.state.id}</p>
+        <p className="card__content-text">{this.state.text}</p>
+        <p className="card__content-emoji">{emoji.getUnicode(this.state.cardEmoji)}</p>
+      </div>
+    )
+  }
 }
 
+
 Card.propTypes = {
+  text: PropTypes.string,
+  emoji: PropTypes.string,
+  id: PropTypes.number.isRequired,
+  deleteCardCallback: PropTypes.func.isRequired
 
 };
 
