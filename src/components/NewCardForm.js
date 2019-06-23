@@ -22,6 +22,10 @@ class NewCardForm extends Component {
         this.props.addCardCallback();
     }
 
+    onInputChange = (event) => {
+        console.log("Inside onInputChange");
+    }
+
     render() {
   
         return (
@@ -30,7 +34,10 @@ class NewCardForm extends Component {
            <form className="new-card-form__form"> 
 
                <div>
-                <textarea className="new-card-form__form-textarea" placeholder="Enter Stuff Here">
+                <textarea
+                  onChange={this.onInputChange}
+                  className="new-card-form__form-textarea"
+                  placeholder="Enter Stuff Here">              
                 </textarea>
                </div>
 
