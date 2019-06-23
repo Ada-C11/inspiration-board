@@ -20,8 +20,6 @@ class Board extends Component {
   componentDidMount() {
     axios.get(`${this.props.url}${this.props.boardName}/cards`)
       .then((response) => {
-
-        console.log(response.data);
         const cardsFromApi = response.data.map(cardWrapper => {
     
             return {
@@ -39,16 +37,24 @@ class Board extends Component {
         })
       })
   };
+  
+  onDeleteCard = (cardId) => {
 
-  deleteCard = (cardId) => {
-    // axios.delete(`https://inspiration-board.herokuapp.com/cards/${}`)
-    // .then((response) => {
-    //   // What should we do when we know the delete request worked?
-    // })
-    // .catch((error) => {
-    //   // What should we do when we know the delete request failed?
-    // });
-    console.log("i am in Board.js and this is the card id", cardId)
+    axios.delete(`https://inspiration-board.herokuapp.com/cards/${cardId}`)
+    .then((response) => {
+      const currentCardList = this.state.cards.filter((card) => card.id !== cardId);
+
+      this.setState({ cards: currentCardList });
+
+      console.log('card was deleted with id', cardId);  
+    })
+    .catch((error) => {
+      this.setState({
+        errorMessage: error.message
+      })
+    });
+
+    console.log(this.state.cards.length);
   };
 
   render() {
@@ -57,7 +63,7 @@ class Board extends Component {
         <section key={i}>
           <Card
             {...card}
-            deleteCardCallback={this.deleteCard}
+            deleteCardCallback={this.onDeleteCard}
            />
         </section>
       );
