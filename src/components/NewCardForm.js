@@ -21,7 +21,7 @@ class NewCardForm extends Component {
           {emoji.getUnicode(emote)}
         </option>
       )
-    })
+    });
     return emojis;
   }
 
