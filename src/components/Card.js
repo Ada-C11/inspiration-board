@@ -6,8 +6,12 @@ import './Card.css';
 
 class Card extends Component {
 
+  // onDelete = () => {
+  //   this.props.deleteCallback(this.props.id)
+  // }
+
   render() {
-  const {text, emojiText} = this.props;
+  const {id, text, emojiText, deleteCallback} = this.props;
 
     return (
       <div className="card card__content">
@@ -17,14 +21,18 @@ class Card extends Component {
         <div className="card__content-emoji">
         {emojiText ? emoji.getUnicode(emojiText) : ""}
         </div>
+        <button onClick={() => deleteCallback(this.props)} className="card__delete"> Delete </button>
+
       </div>
     )
   }
 }
 
 Card.propTypes = {
+  id: PropTypes.number.isRequired,
   text: PropTypes.string,
-  emojiText: PropTypes.string
+  emojiText: PropTypes.string,
+  deleteCallback: PropTypes.func
 };
 
 export default Card;

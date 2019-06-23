@@ -14,13 +14,13 @@ class Board extends Component {
 
     this.state = {
       cards: [],
+      requestMessage: null
     };
   }
 
   componentDidMount() {
     axios.get(this.props.url + this.props.boardName + "/cards")
     .then((response) => {
-      // console.log("response");
       const cards = response.data.map((card, i) => {
         return card.card
       });
@@ -28,22 +28,51 @@ class Board extends Component {
       this.setState({
         cards,
       });
+    })
+
+    .catch((error) => {
+      this.setState({
+        requestMessage: error.message
+      })
     });
   }
-  
 
+  handleDelete = (card) => {
+
+    axios.delete("https://inspiration-board.herokuapp.com/cards/" + card.id)
+      .then((response) => {
+        if (response.status === 200) {
+          this.setState({
+            requestMessage: "Card has been deleted!"
+          });
+        }
+        const newCardList = this.state.cards.filter(currentCard => currentCard.id !== card.id);
+        this.setState({
+          cards: newCardList
+        });
+      })
+      .catch((error) => {
+        this.setState({requestMessage: error.message});
+      })
+    
+  }
 
   render() {
     const allCards = this.state.cards.flatMap((card, i) => {
       return <Card
                 key={i}
+                id={card.id}
                 text={card.text}
-                emojiText={card.Emoji? card.Emoji : card.emoji}/>
+                emojiText={card.Emoji? card.Emoji : card.emoji}
+                deleteCallback={this.handleDelete}
+                />
     });
+
     return (
-      <div>
+      <main>
+        {this.state.requestMessage}
         {allCards}
-      </div>
+      </main>
     )
   }
 
