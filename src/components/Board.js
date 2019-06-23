@@ -101,7 +101,7 @@ class Board extends Component {
     // });
 // *****************************************************************************
 
-    const tempCardList = this.state.cards.filter(checkCard => checkCard.props.cardId !== cardId)
+    const tempCardList = this.state.cards.filter(checkCard => checkCard.id !== cardId)
     this.setState({ cards: tempCardList });
     console.log('temp card list: ', tempCardList);
     console.log('updated card list in state: ', this.state.cards);
