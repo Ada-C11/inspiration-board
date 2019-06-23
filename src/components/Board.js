@@ -95,10 +95,10 @@ class Board extends Component {
     })
     return (
       <div>
-        <div className='validation-errors-display'>
+        {errorMessage && <div className='validation-errors-display'>
           <h3>Errors:</h3>
           <p className='validation-errors-display__list'>{errorMessage}</p>
-        </div>
+        </div>}
         <div><NewCardForm onPostMessageCallback={this.onPostMessage} /></div>
         <div className='board'>{showCard}</div>
 
