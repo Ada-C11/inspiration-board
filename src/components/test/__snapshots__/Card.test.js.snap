@@ -6,7 +6,9 @@ exports[`Card should render correctly in "debug" mode 1`] = `
 >
   <p
     className="card__content-text"
-  />
+  >
+    Hello Tester
+  </p>
   <p
     className="card__content-emoji"
   />
