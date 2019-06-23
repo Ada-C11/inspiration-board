@@ -12,11 +12,9 @@ class Board extends Component {
     this.state = {
       cards: [],
       myUrl: props.boardUrl + props.boardName + '/cards',
-      message: ''
     };
     
   }
-
 
   componentDidMount() {
     axios.get(this.state.myUrl)
@@ -34,14 +32,14 @@ class Board extends Component {
 
     axios.delete(this.props.baseURL + cardID )
       .then( response => {
-        // alert(`Successfully deleted pet with ${cardID}`);
+        alert(`Successfully deleted pet with ${cardID}`);
         const newState = this.state.cards;
-        newState.splice(cardID, 1);
+        newState.splice(cardIndex, 1);
 
         // TODO: get messages to display for user (not with alerts)
         newState.message = `Successfully deleted card with id: ${cardID}`;
         this.setState(newState);
-        this.componentDidMount()
+
       })
       .catch( error => {
         console.log(error.message)
@@ -55,16 +53,17 @@ class Board extends Component {
     axios.post(`${this.state.myUrl}?text=${cardData.text}&emoji=${cardData.emoji}`)
       .then(response => {
         alert("Succesffully created your new card")
-
+        const newCardList = this.state.cards
+        cardData.id = response.data.card.id
+        newCardList.push(cardData)
+        this.setState({cards: newCardList})
       })
       .catch(error => {
         alert(`An error has occurred: ${error.message}`)
       })
-      this.componentDidMount()
   }
   
   render() {
-    
     const generatedCards = this.state.cards.map((card, i ) => {
      return( 
       <div key={card.card.id} className="card">

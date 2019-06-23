@@ -19,9 +19,8 @@ class NewCardForm extends Component {
 
   addNewCard = (e) => {
     e.preventDefault();
-    console.log('submitting soon')
-
     this.props.addNewCardCallback(this.state)
+
     this.setState( {...this.cleared})
   }
 
