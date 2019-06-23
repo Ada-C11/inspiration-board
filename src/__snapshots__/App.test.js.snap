@@ -1,0 +1,146 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<App /> that it renders App with shallow rendering 1`] = `
+<section>
+  <header
+    className="header"
+  >
+    <h1
+      className="header__h1"
+    >
+      <span
+        className="header__text"
+      >
+        Inspiration Board
+      </span>
+    </h1>
+  </header>
+  <section>
+    <Board
+      baseURL="https://inspiration-board.herokuapp.com/cards/"
+      boardName="tatiana-q"
+      boardUrl="https://inspiration-board.herokuapp.com/boards/"
+    />
+  </section>
+</section>
+`;
+
+exports[`<App /> will match the last snapshot with deep rendering 1`] = `
+<App>
+  <section>
+    <header
+      className="header"
+    >
+      <h1
+        className="header__h1"
+      >
+        <span
+          className="header__text"
+        >
+          Inspiration Board
+        </span>
+      </h1>
+    </header>
+    <section>
+      <Board
+        baseURL="https://inspiration-board.herokuapp.com/cards/"
+        boardName="tatiana-q"
+        boardUrl="https://inspiration-board.herokuapp.com/boards/"
+      >
+        <div>
+          <section
+            className="board"
+          />
+          <section
+            className="new-card-form"
+          >
+            <NewCardForm
+              addNewCardCallback={[Function]}
+            >
+              <form
+                className="new-card-form__form"
+                onSubmit={[Function]}
+              >
+                <section>
+                  <h3
+                    className="new-card-form__header"
+                  >
+                     Add a new card
+                  </h3>
+                  <label
+                    className="new-card-form__form-label"
+                  >
+                    <textarea
+                      className="new-card-form__form-textarea"
+                      name="text"
+                      onChange={[Function]}
+                      value=""
+                    />
+                  </label>
+                  <label
+                    className="new-card-form__form-label"
+                  >
+                    Emoji:
+                    <select
+                      className="new-card-form__form-select"
+                      name="emoji"
+                      onChange={[Function]}
+                      value=""
+                    >
+                      <option
+                        key="0"
+                        value=""
+                      />
+                      <option
+                        key="1"
+                        value="heart_eyes"
+                      >
+                        😍
+                      </option>
+                      <option
+                        key="2"
+                        value="beer"
+                      >
+                        🍺
+                      </option>
+                      <option
+                        key="3"
+                        value="clap"
+                      >
+                        👏
+                      </option>
+                      <option
+                        key="4"
+                        value="sparkling_heart"
+                      >
+                        💖
+                      </option>
+                      <option
+                        key="5"
+                        value="heart_eyes_cat"
+                      >
+                        😻
+                      </option>
+                      <option
+                        key="6"
+                        value="dog"
+                      >
+                        🐶
+                      </option>
+                    </select>
+                  </label>
+                  <button
+                    className="new-card-form__form-button"
+                  >
+                    submit
+                  </button>
+                </section>
+              </form>
+            </NewCardForm>
+          </section>
+        </div>
+      </Board>
+    </section>
+  </section>
+</App>
+`;
