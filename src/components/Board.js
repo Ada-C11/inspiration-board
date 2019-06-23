@@ -93,6 +93,8 @@ class Board extends Component {
           {allCards}
         </div>
 
+        <NewCardForm />
+
       </main>
     );
 
