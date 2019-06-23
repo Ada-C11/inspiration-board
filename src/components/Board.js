@@ -17,14 +17,19 @@ class Board extends Component {
   }
 
   render() {
-    return (
-      <div>
-        <header>Board</header>
-        <Card quote="Here is an inspirational quote!" Emoji="beer"/>
-      </div>
-    )
-  }
+    const display = CARD_DATA.cards.map((card) => {
+      const { text, Emoji} = card;
+      return (<section>
+        <Card quote={text} Emoji={Emoji} />
+      </section>);
+    });
 
+    return (
+      <div className="board">
+        {display}
+      </div>
+    );     
+  }
 }
 
 Board.propTypes = {
