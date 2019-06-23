@@ -46,13 +46,13 @@ class NewCardForm extends Component {
       >
       <section>
         <h3 className="new-card-form__header"> Add a new card</h3>
-        <label className="new-card-form__form-label">
-          <textarea className="new-card-form__form-textarea"
-            name="text"
-            value={this.state.text}
-            onChange={this.onInputChange}
-          />
-        </label>
+          <div>
+            <textarea className="new-card-form__form-textarea"
+              name="text"
+              value={this.state.text}
+              onChange={this.onInputChange}
+            />
+          </div>
         <label className="new-card-form__form-label">
           Emoji:
           <select className="new-card-form__form-select"
@@ -62,9 +62,11 @@ class NewCardForm extends Component {
             {emojiOptions}
           </select>
         </label>
-        <button  className="new-card-form__form-button">
-          submit
-        </button>
+        <div>
+          <button  className="new-card-form__form-button">
+            submit
+          </button>
+        </div>
       </section>
       </form>
     )

@@ -67,16 +67,14 @@ exports[`<App /> will match the last snapshot with deep rendering 1`] = `
                   >
                      Add a new card
                   </h3>
-                  <label
-                    className="new-card-form__form-label"
-                  >
+                  <div>
                     <textarea
                       className="new-card-form__form-textarea"
                       name="text"
                       onChange={[Function]}
                       value=""
                     />
-                  </label>
+                  </div>
                   <label
                     className="new-card-form__form-label"
                   >
@@ -129,11 +127,13 @@ exports[`<App /> will match the last snapshot with deep rendering 1`] = `
                       </option>
                     </select>
                   </label>
-                  <button
-                    className="new-card-form__form-button"
-                  >
-                    submit
-                  </button>
+                  <div>
+                    <button
+                      className="new-card-form__form-button"
+                    >
+                      submit
+                    </button>
+                  </div>
                 </section>
               </form>
             </NewCardForm>
