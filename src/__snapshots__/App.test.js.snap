@@ -49,6 +49,9 @@ exports[`<App /> will match the last snapshot with deep rendering 1`] = `
       >
         <div>
           <section
+            className="validation-errors-display"
+          />
+          <section
             className="board"
           />
           <section

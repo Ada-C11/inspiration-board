@@ -3,6 +3,9 @@
 exports[`Board matches corresponding snapshot 1`] = `
 <div>
   <section
+    className="validation-errors-display"
+  />
+  <section
     className="board"
   />
   <section
