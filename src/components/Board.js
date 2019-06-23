@@ -12,6 +12,7 @@ class Board extends Component {
     this.state = {
       cards: [],
       myUrl: props.boardUrl + props.boardName + '/cards',
+      errorMessages: []
     };
     
   }
@@ -22,10 +23,10 @@ class Board extends Component {
         this.setState({ cards: response.data});
       })
       .catch( error => {
-        alert(`Error has occurred: ${error.message}`)
+        console.log(error.message)
+        this.setState({errorMessages: error.message})
       });
   }
-
 
   removeCard = (cardIndex, cardID) => {
     console.log(cardIndex, cardID)
@@ -43,7 +44,7 @@ class Board extends Component {
       })
       .catch( error => {
         console.log(error.message)
-        alert(`Encountered an error: ${error.message}`)
+        alert(`Encountered an error: ${error}`)
       });
 
   }
@@ -77,8 +78,12 @@ class Board extends Component {
       </div>);
     });
 
+    const errorText = this.state.errorMessages
     return ( 
       <div> 
+        <section className="validation-errors-display">
+        {errorText}
+        </section>
         <section className="board"> 
           {generatedCards} 
         </section>
