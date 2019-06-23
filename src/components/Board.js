@@ -20,7 +20,14 @@ class Board extends Component {
   componentDidMount() {
     axios.get(this.state.myUrl)
       .then( response => {
-        this.setState({ cards: response.data});
+        const apiCards = response.data.map( card => {
+          return {
+            id: card.card.id,
+            text: card.card.text,
+            emoji: card.card.emoji
+          }
+        })
+        this.setState({ cards: apiCards });
       })
       .catch( error => {
         console.log(error.message)
@@ -53,25 +60,28 @@ class Board extends Component {
     
     axios.post(`${this.state.myUrl}?text=${cardData.text}&emoji=${cardData.emoji}`)
       .then(response => {
-        alert("Succesffully created your new card")
+        console.log(response.data)
         const newCardList = this.state.cards
         cardData.id = response.data.card.id
         newCardList.push(cardData)
-        this.setState({cards: newCardList})
+        this.setState({ cards: newCardList})
       })
       .catch(error => {
+        console.log(error)
         alert(`An error has occurred: ${error.message}`)
       })
   }
   
   render() {
     const generatedCards = this.state.cards.map((card, i ) => {
+      console.log(card)
      return( 
-      <div key={card.card.id} className="card">
+      <div className="card">
         <Card 
-          text={ card.card.text }
-          emoji={card.card.emoji}
-          id={card.card.id}
+          key={i}
+          text={ card.text }
+          emoji={ card.emoji }
+          id={ card.id} 
           cardIndex={i} 
           deleteCardCallback={this.removeCard}
         />
