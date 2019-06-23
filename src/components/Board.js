@@ -61,7 +61,8 @@ class Board extends Component {
 
     axios.post(postURL, cardInfo)
       .then((response) => {
-        console.log(response.data.id);
+        console.log(response.data.card.id);
+        cardInfo.id = response.data.card.id;
       //What should we do when we know the post request worked?
         let updatedCards = [...this.state.cards];
         updatedCards.push(cardInfo);
@@ -75,15 +76,17 @@ class Board extends Component {
   }
 
 
-  deleteCard = (id) => {
+  deleteCard = (index) => {
+    console.log(index);
+
+    let updatedCards = this.state.cards;
+    let id = updatedCards[index].id;
+    console.log(id);
+
     const deleteUrl = "https://inspiration-board.herokuapp.com/cards/" + id;
 
     axios.delete(deleteUrl)
       .then((response) => {
-
-      let updatedCards = [...this.state.cards];
-
-      const index = updatedCards.findIndex((card) => card.id == id);
 
       updatedCards.splice(index, 1);
 

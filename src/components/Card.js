@@ -8,7 +8,8 @@ class Card extends Component {
 
   onDeleteButtonClick = (event) => {
     // console.log(event.target.id);
-    this.props.deleteCardCallback(event.target.id);
+    // console.log(this.props.index);
+    this.props.deleteCardCallback(this.props.index);
   }
   render() {
   
