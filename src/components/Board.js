@@ -13,9 +13,6 @@ class Board extends Component {
     super(props);
 
     this.state = {
-      // cards: [
-      //   'Ore wa kaizoku ou ni naru!'
-      // ],
       cards: [],
       error: null, 
     };
@@ -27,13 +24,6 @@ class Board extends Component {
     axios.get(getAllCards)
     .then((response) => {
       console.log('In .then!!');
-      // const allCards = response.data.map((oneCard) => {
-      //   return{
-      //     text: oneCard.card.text,
-      //     id: oneCard.id,
-      //     emoji: oneCard.emoji,
-      //   }
-      // })
       this.setState({cards: response.data})
     })
     .catch((error) => {
@@ -51,14 +41,10 @@ class Board extends Component {
     .then(() => {
       console.log('inside of then in on delete carddddddd')
 
-      // const newCardList = [...this.state.cards];
       const newCardList = this.state.filter(card => card.id !== id);
-
 
       this.setState({cards: newCardList});
 
-    //   // const newCardList = this.state.cards.filter(card => card.id === cardId);
-    //   // this.setState({ cards: newCardList });
     })
 
     .catch((error) => {
