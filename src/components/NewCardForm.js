@@ -65,9 +65,7 @@ class NewCardForm extends Component {
         <h3 className="new-card-form__header">Add a Card</h3>
         <div className="new-card-form__form">
           {this.textRequired()}
-          <label htmlFor="new-card-form__form-label">
-            Text:
-          </label>
+          <label htmlFor="new-card-form__form-label">Text:</label>
           <input
             name="text"
             value={this.state.text}

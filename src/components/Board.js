@@ -83,6 +83,11 @@ class Board extends Component {
   }
 }
 
-Board.propTypes = {};
+Board.propTypes = {
+  url: PropTypes.string,
+  boardName: PropTypes.string,
+  onDeleteCard: PropTypes.func,
+  addCard: PropTypes.func
+};
 
 export default Board;

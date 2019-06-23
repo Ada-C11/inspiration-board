@@ -5,14 +5,6 @@ import emoji from "emoji-dictionary";
 import "./Card.css";
 
 class Card extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      card: ""
-    };
-  }
-
   onDeleteClicked = () => {
     this.props.onDeleteCardCallback(this.props.id);
   };
@@ -36,5 +28,11 @@ class Card extends Component {
     );
   }
 }
+
+Card.propTypes = {
+  text: PropTypes.string,
+  emoji: PropTypes.string,
+  onDeleteClicked: PropTypes.func
+};
 
 export default Card;
