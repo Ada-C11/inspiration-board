@@ -20,11 +20,11 @@ class Board extends Component {
   componentDidMount() {
     axios.get(this.state.myUrl)
       .then( response => {
-        const apiCards = response.data.map( card => {
+        const apiCards = response.data.map( response => {
           return {
-            id: card.card.id,
-            text: card.card.text,
-            emoji: card.card.emoji
+            id: response.card.id,
+            text: response.card.text,
+            emoji: response.card.emoji
           }
         })
         this.setState({ cards: apiCards });
