@@ -5,8 +5,8 @@ import axios from 'axios';
 import './Board.css';
 import Card from './Card';
 import NewCardForm from './NewCardForm';
-import CARD_DATA from '../data/card-data.json';
-import { thisTypeAnnotation } from '@babel/types';
+// import CARD_DATA from '../data/card-data.json';
+// import { thisTypeAnnotation } from '@babel/types';
 
 class Board extends Component {
   constructor() {
@@ -14,7 +14,6 @@ class Board extends Component {
 
     this.state = {
       cards: [],
-      // cardText: 'hello!',
       errorMessage: null
     };
   }
@@ -33,7 +32,6 @@ class Board extends Component {
           errorMessage: error.message
         })
       })
-    console.log('here are all your cards!!!!!', this.state.cards)
   }
 
   onDeleteCard = (cardId) => {
@@ -59,22 +57,20 @@ class Board extends Component {
 
   onPostMessage = (card) => {
     axios.post(this.props.url + this.props.boardName + '/cards', card)
-    .then((response) => {
+      .then((response) => {
 
-      let updatedCardList = this.state.cards;
-      updatedCardList.push(card);
-      
-      this.setState = ({
-        cards: updatedCardList
-      });
-    })
-    .catch((error) => {
-      this.setState = ({
-        errorMessage: error.message
+        let updatedCardList = this.state.cards;
+        updatedCardList.push(card);
+
+        this.setState = ({
+          cards: updatedCardList
+        });
       })
-    });
-    
-    console.log('im in onPostMessage!!!!!', this.state.cards[2], card)
+      .catch((error) => {
+        this.setState = ({
+          errorMessage: error.message
+        })
+      });
 
   }
 
@@ -82,7 +78,7 @@ class Board extends Component {
 
   render() {
 
-    const { cards, cardText, errorMessage } = this.state;
+    const { cards, errorMessage } = this.state;
 
     const showCard = cards.map((card, i) => {
       return (
@@ -99,6 +95,10 @@ class Board extends Component {
     })
     return (
       <div>
+        <div className='validation-errors-display'>
+          <h3>Errors:</h3>
+          <p className='validation-errors-display__list'>{errorMessage}</p>
+        </div>
         <div><NewCardForm onPostMessageCallback={this.onPostMessage} /></div>
         <div className='board'>{showCard}</div>
 
@@ -110,7 +110,8 @@ class Board extends Component {
 }
 
 Board.propTypes = {
-
+  url: PropTypes.string.isRequired,
+  boardName: PropTypes.string.isRequired
 };
 
 export default Board;
