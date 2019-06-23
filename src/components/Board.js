@@ -22,7 +22,7 @@ const Board = (props) => {
 
   return (
     // I realize this isn't the best use case for a fragment. I just really wanted
-    // to test out using it.
+    // to test out using one. :) 
     <Fragment>
       <section className='validations-error-display'>
 
