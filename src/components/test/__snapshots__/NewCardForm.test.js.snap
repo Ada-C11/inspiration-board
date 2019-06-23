@@ -1,0 +1,292 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`New Card Form  matches snapshot 1`] = `
+<div
+  className="new-card-form"
+>
+  <h3
+    className="new-card-form__header"
+  >
+     Add Inspiration Here 
+  </h3>
+  <p
+    className="statusMessage"
+  >
+     
+     
+  </p>
+  <form
+    className="new-card-form__form"
+    onSubmit={[Function]}
+  >
+    <label
+      className="new-card-form__form-label"
+    >
+      Message:
+      <textarea
+        className="new-card-form__form-textarea"
+        name="text"
+        onChange={[Function]}
+        placeholder="message here"
+        value=""
+      />
+    </label>
+    <label>
+      Emoji:
+      <select
+        className="new-card-form__form-select"
+        name="emoji"
+        onChange={[Function]}
+        value=""
+      >
+        <option
+          value=""
+        >
+          Add an Emoji
+        </option>
+        <option
+          key=""
+          value=""
+        >
+          Thank u, next. No emoji
+        </option>
+        <option
+          key="heart_eyes"
+          value="heart_eyes"
+        >
+          😍
+        </option>
+        <option
+          key="beer"
+          value="beer"
+        >
+          🍺
+        </option>
+        <option
+          key="clap"
+          value="clap"
+        >
+          👏
+        </option>
+        <option
+          key="sparkling_heart"
+          value="sparkling_heart"
+        >
+          💖
+        </option>
+        <option
+          key="heart_eyes_cat"
+          value="heart_eyes_cat"
+        >
+          😻
+        </option>
+        <option
+          key="dog"
+          value="dog"
+        >
+          🐶
+        </option>
+      </select>
+    </label>
+    <button
+      className="new-card-form__form-button"
+    >
+      Add Note!
+    </button>
+  </form>
+</div>
+`;
+
+exports[`New Card Form it matches snapshot 1`] = `
+<div
+  className="new-card-form"
+>
+  <h3
+    className="new-card-form__header"
+  >
+     Add Inspiration Here 
+  </h3>
+  <p
+    className="statusMessage"
+  >
+     
+     
+  </p>
+  <form
+    className="new-card-form__form"
+    onSubmit={[Function]}
+  >
+    <label
+      className="new-card-form__form-label"
+    >
+      Message:
+      <textarea
+        className="new-card-form__form-textarea"
+        name="text"
+        onChange={[Function]}
+        placeholder="message here"
+        value=""
+      />
+    </label>
+    <label>
+      Emoji:
+      <select
+        className="new-card-form__form-select"
+        name="emoji"
+        onChange={[Function]}
+        value=""
+      >
+        <option
+          value=""
+        >
+          Add an Emoji
+        </option>
+        <option
+          key=""
+          value=""
+        >
+          Thank u, next. No emoji
+        </option>
+        <option
+          key="heart_eyes"
+          value="heart_eyes"
+        >
+          😍
+        </option>
+        <option
+          key="beer"
+          value="beer"
+        >
+          🍺
+        </option>
+        <option
+          key="clap"
+          value="clap"
+        >
+          👏
+        </option>
+        <option
+          key="sparkling_heart"
+          value="sparkling_heart"
+        >
+          💖
+        </option>
+        <option
+          key="heart_eyes_cat"
+          value="heart_eyes_cat"
+        >
+          😻
+        </option>
+        <option
+          key="dog"
+          value="dog"
+        >
+          🐶
+        </option>
+      </select>
+    </label>
+    <button
+      className="new-card-form__form-button"
+    >
+      Add Note!
+    </button>
+  </form>
+</div>
+`;
+
+exports[`NewCardForm it matches snapshot 1`] = `
+<div
+  className="new-card-form"
+>
+  <h3
+    className="new-card-form__header"
+  >
+     Add Inspiration Here 
+  </h3>
+  <p
+    className="statusMessage"
+  >
+     
+     
+  </p>
+  <form
+    className="new-card-form__form"
+    onSubmit={[Function]}
+  >
+    <label
+      className="new-card-form__form-label"
+    >
+      Message:
+      <textarea
+        className="new-card-form__form-textarea"
+        name="text"
+        onChange={[Function]}
+        placeholder="message here"
+        value=""
+      />
+    </label>
+    <label>
+      Emoji:
+      <select
+        className="new-card-form__form-select"
+        name="emoji"
+        onChange={[Function]}
+        value=""
+      >
+        <option
+          value=""
+        >
+          Add an Emoji
+        </option>
+        <option
+          key=""
+          value=""
+        >
+          Thank u, next. No emoji
+        </option>
+        <option
+          key="heart_eyes"
+          value="heart_eyes"
+        >
+          😍
+        </option>
+        <option
+          key="beer"
+          value="beer"
+        >
+          🍺
+        </option>
+        <option
+          key="clap"
+          value="clap"
+        >
+          👏
+        </option>
+        <option
+          key="sparkling_heart"
+          value="sparkling_heart"
+        >
+          💖
+        </option>
+        <option
+          key="heart_eyes_cat"
+          value="heart_eyes_cat"
+        >
+          😻
+        </option>
+        <option
+          key="dog"
+          value="dog"
+        >
+          🐶
+        </option>
+      </select>
+    </label>
+    <button
+      className="new-card-form__form-button"
+    >
+      Add Note!
+    </button>
+  </form>
+</div>
+`;
