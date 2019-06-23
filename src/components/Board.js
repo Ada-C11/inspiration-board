@@ -84,7 +84,6 @@ class Board extends Component {
       return (
         <div className='card' key={i}>
           <Card
-            index={i}
             id={card.card.id}
             text={card.card.text}
             emoji={card.card.emoji}
