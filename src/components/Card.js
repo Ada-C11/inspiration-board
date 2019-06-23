@@ -6,7 +6,16 @@ import './Card.css';
 
 class Card extends Component {
 
+  // can I not just delete it here instead of a callback, and the callback just refreshes the page?
+  onCardDelete = () => {
+    console.log(this.props.card.id);
+    // we want it to refresh right?
+    // event.preventDefault();
+    this.props.deleteCardCallback({
+      id: this.props.card.id,
+    })
 
+  };
 
 
   render() {
@@ -19,6 +28,13 @@ class Card extends Component {
           <div className="card__content-emoji">
             {(this.props.card.emoji) && (emoji.getUnicode(this.props.card.emoji))}
           </div>
+
+          { console.log(this.props.card) }
+          <button 
+            className="card__delete" 
+            onClick = {this.onCardDelete}
+          > Delete Card 
+          </button>
         </div>
       </div>
     )
