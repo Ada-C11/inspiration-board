@@ -24,6 +24,8 @@ class Card extends Component {
 }
 
 Card.propTypes = {
+  id: PropTypes.number,
+  index: PropTypes.number,
   quote: PropTypes.string,
   emoji: PropTypes.string,
   deleteCardCallback: PropTypes.func,
