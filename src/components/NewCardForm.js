@@ -7,6 +7,16 @@ const EMOJI_LIST = ["", "heart_eyes", "beer", "clap", "sparkling_heart", "heart_
 
 class NewCardForm extends Component {
 
+    constructor(props) {
+        super(props);
+    
+        this.state = {
+          text: "",
+          emoji: "",
+        }
+      }
+    
+
     onSubmitCardButtonClick = (event) => {
         event.preventDefault();
         this.props.addCardCallback();
