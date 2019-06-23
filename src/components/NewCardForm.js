@@ -29,9 +29,10 @@ class NewCardForm extends Component {
     const fields = this.state;
     const eventName = event.target.name;
     const eventValue = event.target.value;
+    console.log("value", eventValue);
 
     if(eventName === 'emoji') {
-      fields[eventName] = emoji.getName(eventValue);
+      fields[eventName] = eventValue === '' ? '' : emoji.getName(eventValue);
     } else {
       fields[eventName] = eventValue;
     }
