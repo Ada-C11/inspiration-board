@@ -11,6 +11,13 @@ class Card extends Component {
         <section className="card__content">
           <p className="card__content-text">{this.props.quote}</p>
           <p className="card__content-emoji">{this.props.Emoji ? emoji.getUnicode(this.props.Emoji) : ""}</p>
+          <button
+            type="button" 	          
+            className="card__delete" 	          
+            type="button"          
+            // onClick = {() => onDeletePet(id)}	
+            >Delete         
+          </button>
         </section>
       </div>
     )
