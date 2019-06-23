@@ -22,7 +22,7 @@ class Board extends Component {
   componentDidMount() {
     axios.get(`${this.props.url}/${this.props.boardName}/cards`)
     .then((response) => {
-      console.log(response);
+      // console.log(response);
 
       const allCards = response.data.map((card, i) => {
         return <Card
@@ -34,6 +34,7 @@ class Board extends Component {
         />
       });
       this.setState({ cards: allCards });
+      console.log('cards in state after componentDidMount ', this.state.cards);
     })
 
     .catch((error) => {
@@ -41,6 +42,35 @@ class Board extends Component {
         this.props.showErrorMessageCallback(error)
       // }
     });
+  }
+
+  addCard = (newCard) => {
+    // add the newCard to the cards array in state
+      // let allCards = this.state.cards;
+      // allCards.push(newCard);
+      // this.setState({ cards: {allCards} });
+
+      // ^^^^^^^^^^^code^^^^^^^^^
+      // notes --->>
+      // structure coming in from NewCardForm
+          //new card:
+          // card: {
+          //   text: this.state.text,
+          //   emoji: this.state.emoji}
+      // structure in console from API inside card: props:
+          // {cardId: 1143, text: "BE EXCELLENT TO EACHOTHER", emoji: null, removeCardCallback: ƒ}
+
+// *******************************
+
+// make the post request to add the new card to the database
+  axios.post(`${this.props.url}/${this.props.boardName}/cards`, newCard)
+  .then((response) => {
+    // put functionality above in here
+  })
+  .catch((error) => {
+    this.setState({error: error.message});
+  });
+
   }
 
   removeCard = (cardId) => {
@@ -69,7 +99,13 @@ class Board extends Component {
 
   render() {
     return (
-      <div> {this.state.cards} </div>
+      <section>
+        <div> <NewCardForm
+        addCardCallback={this.addCard} />
+        </div>
+
+        <div> {this.state.cards} </div>
+      </section>
     )
   }
 
