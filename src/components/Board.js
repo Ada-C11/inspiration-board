@@ -19,7 +19,6 @@ class Board extends Component {
     console.log('cards in state: ', this.state.cards);
   }
 
-
   componentDidMount() {
     axios.get(`${this.props.url}/${this.props.boardName}/cards`)
     .then((response) => {
@@ -28,9 +27,10 @@ class Board extends Component {
       const allCards = response.data.map((card, i) => {
         return <Card
           key={i}
-          id={card.card.id}
+          cardId={card.card.id}
           text={card.card.text}
           emoji={card.card.emoji}
+          removeCardCallback={this.removeCard}
         />
       });
       this.setState({cards: allCards});
@@ -42,6 +42,29 @@ class Board extends Component {
       // }
     });
   }
+
+  removeCard = (cardId) => {
+    console.log('removing card ', cardId);
+
+    axios.delete(`https://inspiration-board.herokuapp.com/cards/${cardId}`)
+    .then((response) => {
+      console.log(response);
+    })
+    .catch((error) => {
+      // this.props.showErrorMessage(error)
+    });
+
+    const tempCardList = this.state.cards.filter(card => card.cardId !== cardId)
+
+    this.setState({
+    cards: tempCardList
+    });
+
+    console.log('new card list: ', tempCardList);
+
+  }
+
+
 
 
 
