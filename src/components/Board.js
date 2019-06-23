@@ -55,8 +55,8 @@ class Board extends Component {
       });
   }
 
-  addCard = () => {
-    console.log("Inside addCard");
+  addCard = (cardInfo) => {
+    console.log(cardInfo);
   }
 
 
