@@ -23,7 +23,6 @@ class Board extends Component {
     axios.get(this.state.myUrl)
       .then( response => {
         this.setState({ cards: response.data});
-        console.log(response.status);
       })
       .catch( error => {
         alert(`Error has occurred: ${error.message}`)
@@ -71,7 +70,9 @@ class Board extends Component {
      return( 
       <div key={card.card.id} className="card">
         <Card 
-          card={ card.card }
+          text={ card.card.text }
+          emoji={card.card.emoji}
+          id={card.card.id}
           cardIndex={i} 
           deleteCardCallback={this.removeCard}
         />
