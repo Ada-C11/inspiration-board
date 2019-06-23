@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import emoji, {getUnicode} from 'emoji-dictionary';
+import emoji from 'emoji-dictionary';
 import './NewCardForm.css';
 
 const EMOJI_LIST = ["", "heart_eyes", "beer", "clap", "sparkling_heart", "heart_eyes_cat", "dog"]
@@ -14,6 +14,12 @@ class NewCardForm extends Component {
       text: '',
       emoji: '',
     };
+  }
+
+  generateEmojiListOptions = () => {
+    return EMOJI_LIST.map((emojiItem, index) => {
+      return <option value={emojiItem} key={index}>{emoji.getUnicode(emojiItem)}</option>
+    })
   }
 
   onInputChange = (event) => {
@@ -37,13 +43,6 @@ class NewCardForm extends Component {
   }
 
   render() {
-    const emojiList = EMOJI_LIST.map((emoji, i) => {
-      return (
-        <option key={i} value={emoji}>
-            {getUnicode(emoji)}
-        </option>
-      )})
-
     return (
       <section className='new-card-form'>
         <h3 className='new-card-form__header'>Add a New Card to the Inspiration Board</h3>
@@ -60,12 +59,14 @@ class NewCardForm extends Component {
           </div>
 
           <div>
-            <label htmlFor="emoji" className='new-card-form__form-label'>Emoji:</label>
+            <label htmlFor="emoji" className="new-card-form__form-label">Emoji:</label>
             <select
-              name='emoji'
-              defaultValue=''
-              onChange={this.onChangeHandler}>
-                {emojiList}
+              name="emoji"
+              className="new-card-form__form-select"
+              value={this.state.emoji}
+              onChange={this.onInputChange}
+              >
+              {this.generateEmojiListOptions()}
             </select>
           </div>
 
