@@ -25,9 +25,10 @@ class NewCardForm extends Component {
   
     handleSubmit = (event) => {
       event.preventDefault();
+
+      const newCard = this.state;
   
-      this.props.onFormSubmitCallback(
-      );
+      this.props.onFormSubmitCallback(newCard);
   
       this.setState({
         text: '',

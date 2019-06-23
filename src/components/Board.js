@@ -57,6 +57,23 @@ class Board extends Component {
     console.log(this.state.cards.length);
   };
 
+  addNewCard = (newCard) => {
+    axios.post(`${this.props.url}${this.props.boardName}/cards`, newCard)
+      .then((response) => {
+        const updateCardList = this.state.cards;
+        updateCardList.unshift(newCard);
+
+        this.setState({
+          cards: updateCardList,
+        })
+      })
+      .catch((error) => {
+        this.setState({
+          errorMessage: error.message
+        })
+      });
+  };
+
   render() {
     const allCards = this.state.cards.map((card, i) => {
       return (
@@ -93,7 +110,7 @@ class Board extends Component {
           {allCards}
         </div>
 
-        <NewCardForm />
+        <NewCardForm onFormSubmitCallback={this.addNewCard}/>
 
       </main>
     );
