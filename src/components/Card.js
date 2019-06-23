@@ -23,7 +23,9 @@ class Card extends Component {
 }
 
 Card.propTypes = {
-  card: PropTypes.object.isRequired,
+  text: PropTypes.string,
+  id: PropTypes.number.isRequired,
+  emoji: PropTypes.string,
   cardIndex: PropTypes.number,
   deletedCardCallback: PropTypes.func
 };
