@@ -11,14 +11,13 @@ class NewCardForm extends Component {
     super(props);
 
     this.state = {
-      // cardId:90909090, // set state from prop which gets maxID
       text: '',
       emoji: '',
     };
   }
 
   onInputChange = (event) => {
-    const field = {} // need this line?
+    const field = {}
     field[event.target.name] = event.target.value;
     this.setState(field);
   }
@@ -30,15 +29,12 @@ class NewCardForm extends Component {
         emoji: this.state.emoji
     });
     this.setState({
-      // cardId: {},
       text: '',
       emoji: ''
     });
 
 
   }
-
-
 
   render() {
     const emojiList = EMOJI_LIST.map((emoji, i) => {

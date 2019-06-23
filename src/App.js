@@ -4,8 +4,7 @@ import Board from './components/Board';
 
 class App extends Component {
 
-//need props in constructor here?
-  constructor(props){
+  constructor(){
     super();
 
     this.state = {

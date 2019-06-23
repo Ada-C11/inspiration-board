@@ -13,7 +13,7 @@ class Card extends Component {
     const emojiUnicode = this.props.emoji;
     // const tempEmoji = emoji.getUnicode("heart_eyes_cat")
     return (
-      <div className="card__content">
+      <div className="card card__content">
         <p className='card__content-text'> {this.props.text} </p>
         {emojiUnicode ? (<p className='card__content-emoji'> {emoji.getUnicode(emojiUnicode)} </p>) : ""}
         <button className='card__delete'
