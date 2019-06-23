@@ -33,7 +33,6 @@ class Board extends Component {
   };
 
   addCard = card => {
-    console.log({ card });
     const newState = this.state;
     newState.cards.push({ card });
 
@@ -64,7 +63,6 @@ class Board extends Component {
 
   render() {
     const firstCard = this.state.cards.map((message, i) => {
-      console.log(message);
       return (
         <Card
           key={i}
