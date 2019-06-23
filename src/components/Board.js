@@ -14,16 +14,48 @@ class Board extends Component {
     this.state = {
       cards: []
     };
-
-    console.log(this.state.cards)
   }
+
+  onDeleteCard = id => {
+    const cardIndex = this.state.cards.findIndex(card => {
+      return card["card"].id === id;
+    });
+
+    this.state.cards.splice(cardIndex, 1);
+
+    this.setState({ cards: this.state.cards });
+
+    axios
+      .delete(`https://inspiration-board.herokuapp.com/cards/${id}`)
+      .catch(error => {
+        this.setState({ error: error.message });
+      });
+  };
+
+  addCard = card => {
+    console.log({ card });
+    const newState = this.state;
+    newState.cards.push({ card });
+
+    this.setState(newState);
+
+    axios
+      .post(
+        `https://inspiration-board.herokuapp.com/boards/${
+          this.props.boardName
+        }/cards`,
+        card
+      )
+      .catch(error => {
+        this.setState({ error: error.message });
+      });
+  };
 
   componentDidMount() {
     axios
       .get(`${this.props.url}${this.props.boardName}/cards`)
       .then(response => {
-        console.log(response)
-        this.setState({ cards: response.data});
+        this.setState({ cards: response.data });
       })
       .catch(error => {
         this.setState({ error: error.message });
@@ -31,13 +63,25 @@ class Board extends Component {
   }
 
   render() {
-    const firstCard = this.state.cards.map(message => {
+    const firstCard = this.state.cards.map((message, i) => {
+      console.log(message);
       return (
-        <Card text={message["card"].text} emoji={message["card"].emoji} />
+        <Card
+          key={i}
+          id={message["card"].id}
+          text={message["card"].text}
+          emoji={message["card"].emoji}
+          onDeleteCardCallback={this.onDeleteCard}
+        />
       );
     });
 
-    return <div>{firstCard}</div>;
+    return (
+      <div>
+        {firstCard}
+        <NewCardForm addCardCallback={this.addCard} />
+      </div>
+    );
   }
 }
 
