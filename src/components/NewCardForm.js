@@ -38,10 +38,10 @@ class NewCardForm extends Component {
     render(){
         const EMOJI_LIST = ["", "heart_eyes", "beer", "clap", "sparkling_heart", "heart_eyes_cat", "dog"]
         const emojis = EMOJI_LIST.map((emoj) => {
-            return (<option value={emoji.getUnicode(emoj)}>{emoji.getUnicode(emoj)}</option>)
+            return (<option value={emoj}>{emoji.getUnicode(emoj)}</option>)
         });
         return (
-            <form className="new-card-form new-card-form__form" onSubmit={this.addCard}>
+            <form className="new-card-form__form" onSubmit={this.addCard}>
                 <h1 className="new-card-form__header">Add a Card</h1>
                 <label className="new-card-form__form-label ">
                     Text:
@@ -56,7 +56,6 @@ class NewCardForm extends Component {
                     Emoji:
                     <select className="new-card-form__form-select"
                         name="emoji"
-                        value={this.state.emoji}
                         onChange={this.onInputChange}>
                            {emojis} 
                     </select>

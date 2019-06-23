@@ -90,7 +90,7 @@ class Board extends Component {
     });
 
     return (
-      <main>
+      <main className="board">
         <NewCardForm addCardCallback={this.addCard}/>
 
         {this.state.requestMessage}
