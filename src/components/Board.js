@@ -44,34 +44,60 @@ class Board extends Component {
     });
   }
 
+// The difference between a weed and a flower is judgement.
+  // allCardsFromApi = this.state.cards;
+
   addCard = (newCard) => {
-    // add the newCard to the cards array in state
-      // let allCards = this.state.cards;
-      // allCards.push(newCard);
-      // this.setState({ cards: {allCards} });
+  // make the post request to add the new card to the database
 
-      // ^^^^^^^^^^^code^^^^^^^^^
-      // notes --->>
-      // structure coming in from NewCardForm
-          //new card:
-          // card: {
-          //   text: this.state.text,
-          //   emoji: this.state.emoji}
-      // structure in console from API inside card: props:
-          // {cardId: 1143, text: "BE EXCELLENT TO EACHOTHER", emoji: null, removeCardCallback: ƒ}
+  const postURL = `${this.props.url}/${this.props.boardName}/cards`
+  axios.post(postURL, newCard)
 
-// *******************************
 
-// make the post request to add the new card to the database
-  axios.post(`${this.props.url}/${this.props.boardName}/cards`, newCard)
   .then((response) => {
-    // put functionality above in here
+    // add the newCard to the cards array in state
+    // const allCards = response.data.map((card, i) => {
+    //   return <Card
+    //     key={i}
+    //     cardId={card.card.id}
+    //     text={card.card.text}
+    //     emoji={card.card.emoji}
+    //     removeCardCallback={this.removeCard}
+    //   />
+    // });
+
+    let allCards = this.state.cards;
+    const cardInfo = response.data['card'];
+    // console.log(cardInfo);
+    const makeNewCard = (cardInfo) => {
+      return <Card
+        key={8888}
+        cardId={cardInfo.id}
+        text={cardInfo.text}
+        emoji={cardInfo.emoji}
+        removeCardCallback={this.removeCard}
+      />
+    }
+    allCards.push(makeNewCard(cardInfo));
+    this.setState({ cards: {allCards} });
   })
   .catch((error) => {
-    this.setState({error: error.message});
-  });
+    this.props.showErrorMessageCallback(error)
+    });
+};
 
-  }
+// *******************************
+// notes --->>
+// structure coming in from NewCardForm
+    //new card:
+    // card: {
+    //   text: this.state.text,
+    //   emoji: this.state.emoji}
+// structure in console from API inside card: props:
+    // {cardId: 1143, text: "BE EXCELLENT TO EACHOTHER", emoji: null, removeCardCallback: ƒ}
+// *******************************
+
+
 
   removeCard = (cardId) => {
     console.log('removing card ', cardId);
@@ -103,8 +129,8 @@ class Board extends Component {
         <div> <NewCardForm
         addCardCallback={this.addCard} />
         </div>
-
         <div> {this.state.cards} </div>
+        {/* <div> {this.allCardsFromApi} </div> */}
       </section>
     )
   }

@@ -16,6 +16,12 @@ class App extends Component {
   showErrorMessage = (error) => {
     console.log('API response error: ', error);
     this.setState({ errorMessage: error.message });
+    // const errorList = this.state.errorMessage;
+    //   const newError = error.response.data.errors.text;
+    //   newError.forEach((text) => {
+    //     errorList.push(text);
+    //   })
+    //   this.setState({ errorMessage: errorList });
   }
 
 
