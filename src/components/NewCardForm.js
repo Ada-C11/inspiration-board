@@ -23,10 +23,13 @@ class NewCardForm extends Component {
     }
 
     onInputChange = (event) => {
-        console.log("Inside onInputChange");
+        console.log(event.target.name);
+        console.log(event.target.value);
     }
 
     render() {
+
+        const { text, emoji } = this.state;
   
         return (
           <div className="new-card-form">
@@ -35,6 +38,8 @@ class NewCardForm extends Component {
 
                <div>
                 <textarea
+                  name="text"
+                  value={text}
                   onChange={this.onInputChange}
                   className="new-card-form__form-textarea"
                   placeholder="Enter Stuff Here">              
