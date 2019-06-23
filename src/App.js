@@ -33,46 +33,47 @@ class App extends Component {
       // updating message state
       this.setState({
         message: error.message
-      })
-  })
-}
-
-  onSubmitNewCardCallback = (newCard) => {
-    // new card we're getting from the form
-    const cardDataForApi = {
-      text: newCard.text,
-      emoji: newCard.emoji
-    };
-
-    // posting this new card to the API - updating the backend
-    axios.post(URL, cardDataForApi) 
-  
-      .then((response) => {
-        let updatedCardList = this.state.cardList;
-        updatedCardList.push({
-          text: newCard.text,
-          emoji: newCard.emoji,
-          id: response.data.id
-        });
-
-        // setting state to incorporate new card - updating the frontend
-        this.setState({
-          cardList: updatedCardList,
-        });
-      })
-      .catch((error) => {
-        console.log(error.messages);
-    
-        this.setState({
-          message: error.messages
-        });
       });
-    
-    window.location.reload();
+    });
   }
-
+  
 
   render() {
+
+    const onSubmitNewCardCallback = (newCard) => {
+      // new card we're getting from the form
+      const cardDataForApi = {
+        text: newCard.text,
+        emoji: newCard.emoji
+      };
+  
+      console.log('pizza');
+      // posting this new card to the API - updating the backend
+      axios.post(URL, cardDataForApi) 
+        .then((response) => {
+          console.log('party');
+          let updatedCardList = this.state.cardList;
+          updatedCardList.push({
+            text: newCard.text,
+            emoji: newCard.emoji,
+            id: response.data.id
+          });
+  
+          // setting state to incorporate new card - updating the frontend
+          this.setState({
+            cardList: updatedCardList,
+          });
+        })
+        .catch((error) => {
+          console.log(error.messages);
+      
+          this.setState({
+            message: error.messages
+          });
+        });
+  
+        // this.componentDidMount();
+    }
 
     const onRemoveCallback = (id) => {
       for (let i = 0; i < this.state.cardList.length; i++) { 
@@ -96,7 +97,7 @@ class App extends Component {
         </section>
         <section className='cardForm'>
           <NewCardForm 
-          onSubmitNewCardCallback={this.onSubmitNewCardCallback}
+          onSubmitNewCardCallback={onSubmitNewCardCallback}
           />
         </section>
         <section className='board'>
