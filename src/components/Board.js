@@ -37,6 +37,26 @@ class Board extends Component {
     });
   }
 
+  addCard = (card) => {
+    const cardToApi = {
+      text: card.text,
+      emoji: card.emoji
+    }
+
+    axios.post('https://inspiration-board.herokuapp.com/boards/' + this.props.boardName + '/cards', cardToApi)
+      .then((response) => {
+        if (response.status === 200) {
+          this.setState({
+            requestMessage: "Card has been successfully created!"
+          });
+        }
+      })
+
+      .catch((error) => {
+        this.setState({requestMessage: error.message})
+      })
+  }
+
   handleDelete = (card) => {
 
     axios.delete("https://inspiration-board.herokuapp.com/cards/" + card.id)
@@ -45,11 +65,12 @@ class Board extends Component {
           this.setState({
             requestMessage: "Card has been deleted!"
           });
+        
+          const newCardList = this.state.cards.filter(currentCard => currentCard.id !== card.id);
+          this.setState({
+            cards: newCardList
+          });
         }
-        const newCardList = this.state.cards.filter(currentCard => currentCard.id !== card.id);
-        this.setState({
-          cards: newCardList
-        });
       })
       .catch((error) => {
         this.setState({requestMessage: error.message});
@@ -70,6 +91,8 @@ class Board extends Component {
 
     return (
       <main>
+        <NewCardForm addCardCallback={this.addCard}/>
+
         {this.state.requestMessage}
         {allCards}
       </main>

@@ -3,4 +3,69 @@ import PropTypes from 'prop-types';
 import emoji from 'emoji-dictionary';
 import './NewCardForm.css';
 
-const EMOJI_LIST = ["", "heart_eyes", "beer", "clap", "sparkling_heart", "heart_eyes_cat", "dog"]
+class NewCardForm extends Component {
+
+    static propTypes = {
+        text: PropTypes.string.isRequired,
+        emoji: PropTypes.string,
+    }
+
+    constructor(props) {
+        super(props);
+        this.cleared = {
+            text: "",
+            emoji: "",
+        };
+        this.state = {...this.cleared}
+
+    }
+
+    addCard = (event) => {
+        event.preventDefault();
+        const card = this.state;
+        this.props.addCardCallback(card)
+        this.setState({...this.cleared});
+    }
+
+    onInputChange = (event) => {
+        const updatedState = {};
+        const field = event.target.name;
+        const value = event.target.value;
+        updatedState[field] = value;
+        this.setState(updatedState);
+    }
+
+    render(){
+        const EMOJI_LIST = ["", "heart_eyes", "beer", "clap", "sparkling_heart", "heart_eyes_cat", "dog"]
+        const emojis = EMOJI_LIST.map((emoj) => {
+            return (<option value={emoji.getUnicode(emoj)}>{emoji.getUnicode(emoj)}</option>)
+        });
+        return (
+            <form className="new-card-form new-card-form__form" onSubmit={this.addCard}>
+                <h1 className="new-card-form__header">Add a Card</h1>
+                <label className="new-card-form__form-label ">
+                    Text:
+                    <input className="new-card-form__form-textarea"
+                        name="text"
+                        type="text"
+                        value={this.state.text}
+                        onChange={this.onInputChange}>
+                    </input>
+                </label>
+                <label className="new-card-form__form-label">
+                    Emoji:
+                    <select className="new-card-form__form-select"
+                        name="emoji"
+                        value={this.state.emoji}
+                        onChange={this.onInputChange}>
+                           {emojis} 
+                    </select>
+                </label>
+                <button className="new-card-form__form-button">Submit</button>
+            </form>
+        );
+    }
+
+}
+
+export default NewCardForm;
