@@ -1,0 +1,80 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`New Pet Form it matches snapshot 1`] = `
+<section
+  className="new-card-form"
+>
+  <form
+    className="new-card-form__form"
+    onSubmit={[Function]}
+  >
+    <h3
+      className="new-card-form__header"
+    >
+      Add a Card
+    </h3>
+    <label
+      className="new-card-form__form-label"
+    >
+      Text:
+      <textarea
+        className="new-card-form__form-textarea"
+        name="text"
+        onChange={[Function]}
+        value=""
+      />
+    </label>
+    <label
+      className="new-card-form__form-label"
+    >
+      Emoji:
+      <select
+        className="new-card-form__form-select"
+        name="emoji"
+        onChange={[Function]}
+        value=""
+      >
+        <option
+          value=""
+        />
+        <option
+          value="heart_eyes"
+        >
+          😍
+        </option>
+        <option
+          value="beer"
+        >
+          🍺
+        </option>
+        <option
+          value="clap"
+        >
+          👏
+        </option>
+        <option
+          value="sparkling_heart"
+        >
+          💖
+        </option>
+        <option
+          value="heart_eyes_cat"
+        >
+          😻
+        </option>
+        <option
+          value="dog"
+        >
+          🐶
+        </option>
+      </select>
+    </label>
+    <input
+      className="btn btn-success new-card-form__form-button"
+      name="submit"
+      type="submit"
+      value="Add a Card"
+    />
+  </form>
+</section>
+`;
