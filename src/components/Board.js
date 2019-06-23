@@ -5,7 +5,6 @@ import axios from 'axios';
 import './Board.css';
 import Card from './Card';
 import NewCardForm from './NewCardForm';
-import CARD_DATA from '../data/card-data.json';
 
 class Board extends Component {
   constructor(props) {
@@ -53,7 +52,7 @@ class Board extends Component {
   }
 
   deleteCardCallback = (cardId) => {
-    console.log(cardId)
+    console.log("cardId", cardId)
     axios.delete(`https://inspiration-board.herokuapp.com/cards/${cardId}`)
       .then((response) => {
         const newCardList = this.state.cards.filter(card => card.card.id !== cardId);
@@ -80,7 +79,7 @@ class Board extends Component {
     const cardComponents = this.state.cards.map((card, i) => {
       return (
           <Card
-          key={i} 
+            key={i} 
             id={card.card.id}
             text={card.card.text}
             cardEmoji={card.card.emoji}

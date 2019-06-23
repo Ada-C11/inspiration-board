@@ -4,45 +4,38 @@ import emoji from 'emoji-dictionary';
 
 import './Card.css';
 
-class Card extends Component {
+const Card = (props) => {
 
-  constructor(props) {
-    super(props);
+  const { text, cardEmoji, deleteCardCallback, id} = props;
 
-    this.state = {
-      id: props.id,
-      text: props.text,
-      cardEmoji: props.cardEmoji ? props.cardEmoji : '',
-      deleteCardCallback: props.deleteCardCallback
-    }
+  const onClickDelete = () => {
+    console.log(id)
+    return deleteCardCallback(id)
   }
 
-  render() {
     return (
       <div className="card card__content">
         <button
           type="button"
           className="card__delete"
-          onClick={() => this.state.deleteCardCallback(this.state.id)}
+          onClick={onClickDelete}
         >
           Delete Card
         </button>
 
-        <p className="card__content-text">{this.state.id}</p>
-        <p className="card__content-text">{this.state.text}</p>
-        <p className="card__content-emoji">{emoji.getUnicode(this.state.cardEmoji)}</p>
+        <p className="card__content-text">{id}</p>
+        <p className="card__content-text">{text}</p>
+        <p className="card__content-emoji">{cardEmoji ? emoji.getUnicode(cardEmoji) : ""}</p>
       </div>
     )
-  }
 }
 
 
 Card.propTypes = {
   text: PropTypes.string,
   emoji: PropTypes.string,
-  id: PropTypes.number.isRequired,
+  id: PropTypes.number,
   deleteCardCallback: PropTypes.func.isRequired
-
 };
 
 export default Card;
