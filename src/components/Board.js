@@ -6,6 +6,7 @@ import './Board.css';
 import Card from './Card';
 import NewCardForm from './NewCardForm';
 import CARD_DATA from '../data/card-data.json';
+import { thisTypeAnnotation } from '@babel/types';
 
 class Board extends Component {
   constructor() {
@@ -21,7 +22,7 @@ class Board extends Component {
   componentDidMount() {
     axios.get(this.props.url + this.props.boardName + '/cards')
       .then((response) => {
-     
+
         this.setState({
           cards: response.data
         })
@@ -40,22 +41,43 @@ class Board extends Component {
     axios.delete(`https://inspiration-board.herokuapp.com/cards/${cardId}`)
 
     axios.get(this.props.url + this.props.boardName + '/cards')
-    .then((response) => {
-   
-      const newCardList = this.state.cards.filter(card => card.card.id !== cardId);
+      .then((response) => {
 
-      this.setState({
-        cards: newCardList
+        const newCardList = this.state.cards.filter(card => card.card.id !== cardId);
+
+        this.setState({
+          cards: newCardList
+        })
+
       })
+      .catch((error) => {
+        this.setState({
+          errorMessage: error.message
+        })
+      })
+  }
 
+  onPostMessage = (card) => {
+    axios.post(this.props.url + this.props.boardName + '/cards', card)
+    .then((response) => {
+
+      let updatedCardList = this.state.cards;
+      updatedCardList.push(card);
+      
+      this.setState = ({
+        cards: updatedCardList
+      });
     })
     .catch((error) => {
-      this.setState({
+      this.setState = ({
         errorMessage: error.message
       })
-    })
+    });
     
+    console.log('im in onPostMessage!!!!!', this.state.cards[2], card)
+
   }
+
 
 
   render() {
@@ -77,9 +99,9 @@ class Board extends Component {
     })
     return (
       <div>
-        <div><NewCardForm /></div>
+        <div><NewCardForm onPostMessageCallback={this.onPostMessage} /></div>
         <div className='board'>{showCard}</div>
-        
+
       </div>
 
     )

@@ -12,20 +12,56 @@ class NewCardForm extends Component {
 
         this.state = {
             text: '',
-            emoji: '',
+            emoji: ''
 
         }
     }
 
+    onChangeHandler = (event) => {
+        const field = {}
+        field[event.target.name] = event.target.value;
+
+//         const field = {
+// card: {
+//     event.target.name = event.target.value
+// }
+
+//         }
+    
+        this.setState(field);
+      }
+
+      handleSubmit = (event) => {
+        event.preventDefault();
+    
+        this.props.onPostMessageCallback({
+          text: this.state.text,
+          emoji: this.state.emoji
+        });
+    
+        // this.props.onPostMessageCallback({
+        //     card: 
+        //     {text: this.state.text,
+        //     emoji: this.state.emoji}
+        //   });
+
+        // console.log(this.state.text);
+    
+        this.setState({
+            text: '',
+            emoji: ''
+        });
+      }
+    
     render() {
 
         const { text } = this.state;
 
         const emojiList = EMOJI_LIST.map((emoji, i) => {
             return (
-                    <option key={i} value={emoji}>
+                <option key={i} value={emoji}>
                     {getUnicode(emoji)}
-                    </option>
+                </option>
 
             )
 
@@ -36,7 +72,7 @@ class NewCardForm extends Component {
             <div className='new-card-form'>
                 <h3 className='new-card-form__header'>Add a New Message to the Board</h3>
 
-                <form className='new-card-form__form'>
+                <form className='new-card-form__form' onSubmit={this.handleSubmit}>
                     <div>
                         <label className='new-card-form__form-label' for='text'>Message: </label>
                         <input
@@ -44,26 +80,22 @@ class NewCardForm extends Component {
                             name='text'
                             size='50'
                             value={text}
+                            onChange={this.onChangeHandler}
                             className=''
                         />
                     </div>
+                    
 
                     <div>
-                    <label for='emoji'>Add an Emoji</label>
-                    <select name='emoji'>
-                        {emojiList}
-
-                    </select>
+                        <label className='new-card-form__form-label' for='emoji'>Add an Emoji</label>
+                        <select name='emoji' value={emoji} onChange={this.onChangeHandler}>
+                            {emojiList}
+                        </select>
                     </div>
 
                     <div>
                         <input type='submit' value='Add Message' className="new-card-form__form-button" />
-
                     </div>
-
-
-
-
 
                 </form>
 
