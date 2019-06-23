@@ -17,12 +17,26 @@ class Board extends Component {
     };
   }
 
+  componentDidMount() {
+    axios.get(this.props.url + this.props.boardName + "/cards")
+    .then((response) => {
+      // console.log("response");
+      const cards = response.data.map((card, i) => {
+        return card.card
+      });
+
+      this.setState({
+        cards,
+      });
+    });
+  }
   
 
 
   render() {
-    const allCards = CARD_DATA.cards.map((card) => {
-      return <Card 
+    const allCards = this.state.cards.flatMap((card, i) => {
+      return <Card
+                key={i}
                 text={card.text}
                 emojiText={card.Emoji? card.Emoji : card.emoji}/>
     });
@@ -36,7 +50,8 @@ class Board extends Component {
 }
 
 Board.propTypes = {
-
+  url: PropTypes.string.isRequired,
+  boardName: PropTypes.string.isRequired
 };
 
 export default Board;
