@@ -27,31 +27,29 @@ class Board extends Component {
       .catch((error) => {
         this.setState({ error: error.message });
       });
-  }
+  };
 
-  // TO DO: get page to refresh after a card is deleted
-
-  render() {
-
-    const deleteCard = (id) => {
-      axios.delete(`https://inspiration-board.herokuapp.com/cards/${id}`)
+  deleteCard = (id) => {
+    axios.delete(`https://inspiration-board.herokuapp.com/cards/${id}`)
       .catch((error) => {
         this.setState({ error: error.message });
       });
 
-      const boardPath = this.state.url + `/${this.state.name}/cards`;
-      axios.get(boardPath)
-        .then((response) => {
-          this.setState({ cards: response.data });
-        })
-        .catch((error) => {
-          this.setState({ error: error.message });
-        });
-    }
+    const afterDelete = this.state.cards.filter(
+      card => card.id !== id
+    );
 
-    const allCards = this.state.cards.map((cardObj) => {
-      return <Card text={cardObj.card.text} emoji={cardObj.card.emoji} id={cardObj.card.id} deleteHandler={deleteCard}/>
+    this.setState({ cards: afterDelete });
+  }
+
+  getUpdatedCards = () => {
+    const allCards = this.state.cards.map((cardObj, i) => {
+      return <Card key={i} text={cardObj.card.text} emoji={cardObj.card.emoji} id={cardObj.card.id} deleteHandler={this.deleteCard} />
     });
+    return allCards;
+  };
+
+  render() {
 
     return (
       <section>
@@ -61,7 +59,7 @@ class Board extends Component {
           </ul>
         </section>
         <section className="board">
-          {this.state.error ? ("") : (allCards) }
+          {this.state.error ? ("") : (this.getUpdatedCards())}
         </section>
       </section>
     )
