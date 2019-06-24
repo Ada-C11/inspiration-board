@@ -118,12 +118,20 @@ class Board extends Component {
 
 
     return (
-      <div>
-        Board
-        {cards}
+      <section>
 
+      <div className="validation-errors-display validation-errors-display__list">
+
+      </div>
+
+      <div className="board">
+        {cards}
+      </div>
+
+      <div className="board">
         <NewCardForm addCardCallback={this.addCard}/>
       </div>
+      </section>
     )
   }
 
