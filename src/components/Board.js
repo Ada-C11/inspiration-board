@@ -8,21 +8,36 @@ import NewCardForm from './NewCardForm';
 import CARD_DATA from '../data/card-data.json';
 
 class Board extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       cards: [],
     };
   }
 
+  componentDidMount() {
+    axios.get(`${this.props.url}${this.props.boardName}/cards`)
+      .then((response) => {
+        console.log(response);
+        const updatedCards = response.data.map((object)=>{
+          return (<Card text={object.card.text} emoji={object.card.emoji}/>);
+        });
+        this.setState({
+          cards: updatedCards,
+        });
+      })
+      .catch((error) => {
+        this.setState({
+          cards: ["Failed to load cards"]
+        });
+      })
+  }
+
   render() {
-    const cards = CARD_DATA.cards.map((card)=>{
-      return (<Card text={card.text} emoji={card.emoji}/>);
-    });
     return (
       <div>
-        {cards}
+        {this.state.cards}
       </div>
     )
   }
