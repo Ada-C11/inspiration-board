@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import Board from './components/Board';
+// import NewCardForm from './components/NewCardForm';
 
 class App extends Component {
   render() {
@@ -11,7 +12,7 @@ class App extends Component {
         </header>
         <Board
           url="https://inspiration-board.herokuapp.com/boards/"
-          boardName={`Ada-Lovelace`}
+          boardName={`jansen-martin`}
           />
       </section>
     );
