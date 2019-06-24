@@ -13,6 +13,9 @@ class Card extends Component {
           {this.props.text && <div className="card__content-text">{this.props.text}</div>}
           {this.props.emoji && <div className="card__content-emoji">{emoji.getUnicode(this.props.emoji)}</div>}
         </section>
+        <section>
+          <button className="card__delete">Delete</button>
+        </section>
       </div>
     )
   }
