@@ -20,7 +20,7 @@ class Card extends Component {
           className='card__delete'
           onClick = {() => onDeleteCard(id)}
           >
-          Delete
+          X
         </button>
       </div>
     )
