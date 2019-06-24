@@ -77,7 +77,7 @@ class Board extends Component {
   render() {
     const allCards = this.state.cards.map((card, i) => {
       return (
-        <section key={i}>
+        <section className='card' key={i}>
           <Card
             {...card}
             deleteCardCallback={this.onDeleteCard}
@@ -98,7 +98,7 @@ class Board extends Component {
     };
 
     return (
-      <main className="board">
+      <main>
         
         <section className="validation-errors-display">
           <ul className="validation-errors-display__list">
@@ -106,7 +106,7 @@ class Board extends Component {
           </ul>
         </section>
 
-        <div>
+        <div className="board">
           {allCards}
         </div>
 
