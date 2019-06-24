@@ -9,14 +9,44 @@ class NewCardForm extends Component {
   constructor() {
     super();
     this.state = {
-        text: null,
-        emoji: null,
+      text: "",
+      emoji: "",
     };
+  }
+
+  addQuote = (event) => {
+    event.preventDefault();
+    const quote = {
+      text: this.state.text,
+      emoji: this.state.emoji
+    }
+    
+    console.log(quote)
+    this.props.addQuoteCallback(quote);
+    this.clearForm();
+  }
+
+  clearForm = () => {
+    const updatedState = this.state;
+    updatedState.text = "" ;
+    updatedState.emoji = "" ;
+    this.setState(updatedState);
+  }
+
+  onInputChange = (event) => {
+    const updatedState = {};
+    const field = event.target.name;
+    const value = event.target.value;
+
+    updatedState[field] = value;
+    console.log(updatedState)
+    this.setState(updatedState);
   }
 
   render() {
     return (
-      <form>
+      <form
+        onSubmit={this.addQuote}>
         <h3>Add an inspirational quote!</h3>
           <label>
             Text:
@@ -24,7 +54,7 @@ class NewCardForm extends Component {
               name='text'
               type='text'
               value={this.state.text}
-              // onChange
+              onChange={this.onInputChange}
             ></input>
           </label>
           <label>
@@ -32,12 +62,19 @@ class NewCardForm extends Component {
             <select 
               name="emoji"
               value={this.state.species}
-              // onChange
+              onChange={this.onInputChange}
               >
                 { EMOJI_LIST.map(emoji => <option value={emoji}>{emoji}</option>) }
             </select>
           </label>
+          <input 
+            className="" 
+            type="submit" 
+            name="submit" 
+            value="Add quote" />
       </form>
     );
   }
 }
+
+export default NewCardForm;

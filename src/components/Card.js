@@ -14,16 +14,10 @@ class Card extends Component {
   }
 
   render() {
-    // console.log('hi')
-    // console.log(emoji.getUnicode(this.props.emoji));
-    // console.log(this.props.emoji.unicode)
-    // console.log(this.props.emoji)
-
-    
     return (
       <div className="card">
         <h4>{this.props.text}</h4>
-        <h4>{this.props.emoji}</h4>
+        <h4>{emoji.getUnicode(this.props.emoji)}</h4>
         <input 
             type="button" 
             value="Delete" 

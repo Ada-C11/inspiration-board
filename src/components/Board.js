@@ -22,12 +22,14 @@ class Board extends Component {
     axios.get(BOARD_API_URL + 'boards/' + this.props.boardName + '/cards')
       .then((response) => { 
         const cardList = response.data.map((card) => {
+          console.log(card)
           const newCard = {
-            ...card,
-            // console.log(newCard.card)
+            ...card.card,
+            text: card.card.text==null ? "" : card.card.text,
+            emoji: card.card.emoji==null ? "" : card.card.emoji
           }
-          // console.log(newCard)
-          return newCard.card;
+          console.log(newCard)
+          return newCard;
         })
 
         this.setState({
@@ -58,11 +60,19 @@ class Board extends Component {
       })
   }
 
-    // const newCardList = this.state.cards.filter(card => card.id !== cardId);
-
-    // this.setState({
-    //   cards: newCardList
-    // });
+  addQuote = (quote) => {
+    axios.post(BOARD_API_URL + 'boards/' + this.props.boardName + '/cards', quote)
+      .then((response) => { 
+        console.log(response);
+        let updatedData = this.state.cards;
+        updatedData.push(quote);
+        this.setState({cards: updatedData})
+      })
+      
+      .catch((error) => {
+        console.log(error);
+      })
+  }
 
   render() {
     const cardList = this.state.cards.map((card, index) => {
@@ -82,7 +92,10 @@ class Board extends Component {
     return (
       <div>
         {cardList}
-      </div>
+        <NewCardForm 
+        addQuoteCallback={this.addQuote}
+        />
+      </div> 
     )
   }
 
