@@ -7,8 +7,6 @@ import Card from './Card';
 import NewCardForm from './NewCardForm';
 import CARD_DATA from '../data/card-data.json';
 
-// const URL = "https://inspiration-board.herokuapp.com/boards/jansen-martin/cards";
-
 class Board extends Component {
   constructor() {
     super();
