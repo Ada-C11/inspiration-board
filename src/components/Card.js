@@ -6,16 +6,28 @@ import './Card.css';
 
 class Card extends Component {
   render() {
+
     return (
-      <div className="card">
-        Card
+      <div className="card card__content">
+          
+          {this.props.text && <p className="card__content-text">{this.props.text}</p>}
+          {this.props.emoji && <p className="card__content-emoji">{emoji.getUnicode(this.props.emoji)}</p>}
+    
+          <button 
+            className="card__delete"
+            onClick = { () => this.props.deleteCardCallback(this.props.id) }
+            >
+              Delete
+          </button>
       </div>
     )
   }
 }
 
 Card.propTypes = {
-
+  text: PropTypes.string,
+  emoji: PropTypes.string,
+  deleteCardCallback: PropTypes.func,
 };
 
 export default Card;

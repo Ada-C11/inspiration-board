@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Board that it matches an existing snapshot 1`] = `
+<main>
+  <section
+    className="validation-errors-display"
+  >
+    <ul
+      className="validation-errors-display__list"
+    />
+  </section>
+  <div
+    className="board"
+  />
+  <NewCardForm
+    onFormSubmitCallback={[Function]}
+  />
+</main>
+`;
