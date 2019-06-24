@@ -43,13 +43,27 @@ class Board extends Component {
   }
 
   getUpdatedCards = () => {
+    console.log(this.state.cards);
     const allCards = this.state.cards.map((cardObj, i) => {
       return <Card key={i} text={cardObj.card.text} emoji={cardObj.card.emoji} id={cardObj.card.id} deleteHandler={this.deleteCard} />
     });
     return allCards;
   };
 
+
   render() {
+
+    const addCard = (cardContent) => {
+      axios.post(`https://inspiration-board.herokuapp.com/boards/${this.state.name}/cards`, cardContent)
+      .then((response) => {
+        let cardList = this.state.cards;
+        cardList.push({card: response.data.card});
+        this.setState({cards: cardList});
+      })
+      .catch((error) => {
+        this.setState({ error: error.message });
+      });
+    };
 
     return (
       <section>
@@ -60,6 +74,9 @@ class Board extends Component {
         </section>
         <section className="board">
           {this.state.error ? ("") : (this.getUpdatedCards())}
+        </section>
+        <section>
+          <NewCardForm addCardCallback={addCard}/>
         </section>
       </section>
     )
