@@ -26,6 +26,7 @@ class Board extends Component {
           
           const newCard = { 
             key: card.card.id,
+            id: card.card.id,
             quote: card.card.text,
             Emoji: card.card.emoji
           }
@@ -43,11 +44,26 @@ class Board extends Component {
       })
   }
 
+  onDeleteCard = (cardId) => {
+    const endpoint = this.props.url + "cards/" + cardId
+    
+    axios.delete(endpoint)
+    .then((response) => {
+      const newCardList = this.state.cards.filter(card => card.id !== cardId);
+      this.setState({cards: newCardList});
+      console.log(response.data);
+    })
+
+    .catch((error) => {
+      console.log(error);
+    })
+  }
+
   render() {
     const display = this.state.cards.map((card) => {
-      const { quote, Emoji} = card;
+      const { id, quote, Emoji} = card;
       return (<section>
-        <Card quote={quote} Emoji={Emoji} />
+        <Card quote={quote} Emoji={Emoji} onDeleteCard={this.onDeleteCard} id={id}/>
       </section>);
     });
 

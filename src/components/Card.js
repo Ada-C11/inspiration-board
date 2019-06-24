@@ -5,6 +5,10 @@ import emoji from 'emoji-dictionary';
 import './Card.css';
 
 class Card extends Component {
+  onButtonClick = () => {
+    this.props.onDeleteCard(this.props.id);
+  }
+
   render() {
     return (
       <div className="card">
@@ -15,7 +19,7 @@ class Card extends Component {
             type="button" 	          
             className="card__delete" 	          
             type="button"          
-            // onClick = {() => onDeletePet(id)}	
+            onClick={this.onButtonClick}	
             >Delete         
           </button>
         </section>
@@ -26,6 +30,7 @@ class Card extends Component {
 
 Card.propTypes = {
   quote: PropTypes.string.isRequired,
+  emoji: PropTypes.string
 };
 
 export default Card;
