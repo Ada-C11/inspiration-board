@@ -4,3 +4,43 @@ import emoji from 'emoji-dictionary';
 import './NewCardForm.css';
 
 const EMOJI_LIST = ["", "heart_eyes", "beer", "clap", "sparkling_heart", "heart_eyes_cat", "dog"]
+
+class NewCardForm extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
+  render () {
+    const emojiOptions = EMOJI_LIST.map((icon) => {
+      if (icon === "") {
+        return <option value={icon}></option>
+        } else {
+        return <option value={icon}>{emoji.getUnicode(`${icon}`)}</option>
+        };
+    })
+
+    return (
+      <section className="new-card-form">
+        <h3 className="new-card-form__header">
+          Add a Card
+        </h3>
+        <form className="new-card-form__form">
+          <label for="text" className="new-card-form__form-label">
+          Text (optional)
+          </label>
+          <input type="text" name="text" />
+          <label for="emoji" className="new-card-form__form-label">
+          Emoji (optional)
+          </label>
+          <select name="emoji" >
+            {emojiOptions}
+          </select>  
+        </form>
+      </section>
+    )
+  }
+
+};
+
+export default NewCardForm;
