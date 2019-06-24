@@ -32,7 +32,6 @@ class Board extends Component {
         })
 
         this.setState({ cards });
-        console.log(this.state.cards)
 
       })
       .catch((error) => {
@@ -40,13 +39,18 @@ class Board extends Component {
       });
   }
 
+
   addCardCallback = (cardInfo) => {
     const fullUrl = this.props.url + this.props.boardName + "/cards"
-    console.log(this.state.cards)
     axios.post(fullUrl, cardInfo)
       .then((response) => {
+        const card = response.data["card"]
         let updatedData = this.state.cards;
-        updatedData.push(cardInfo);
+        updatedData.push({
+          id: card.id,
+          text: cardInfo.text,
+          emoji: cardInfo.emoji
+        });
         this.setState({ cards: updatedData })
       })
       .catch((error) => {
@@ -56,14 +60,12 @@ class Board extends Component {
 
   deleteCardCallback = (id) => {
     const updatedCards = this.state.cards.filter((card) => card.id !== id)
-    console.log(id)
 
     this.setState({
       cards: updatedCards
     });
 
     const fullUrl = `https://inspiration-board.herokuapp.com/cards/${id}`
-    console.log(fullUrl)
     axios.delete(fullUrl)
       .then((response) => {
 

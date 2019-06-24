@@ -6,22 +6,9 @@ import emoji from 'emoji-dictionary';
 import './Card.css';
 
 class Card extends Component {
-  // constructor(props){
-  //   super(props);
-  //   this.state = {
-
-  //   }
-  // }
-  // isEmoji = (emoji) => {
-  //   if (this.props.emoji !== undefined) {
-  //     return this.props.emoji
-  //   } else {
-  //     return ""
-  //   }
 
 
   render() {
-    const isText = (this.props.text) ? this.props.text : ""
     const isEmoji = (this.props.emoji) ? this.props.emoji : ""
     const id = this.props.id
     return (
