@@ -33,25 +33,32 @@ class NewCardForm extends Component {
         this.setState(updatedState);
       }
 
+    generateEmoji = (emojis) => {
+        return emojis.map((emojiText, i) => {
+            return <option value={emojiText} key={i}>{emoji.getUnicode(emojiText)}</option>
+        })
+    }
+    
     render() {
         return (
             <div className='new-card-form'>
                 <form onSubmit={this.addCard} className='new-card-form__form'>
                     <h3 className='new-card-form__header'>Add a Card</h3>
                     <label className='new-card-form__form-label'>Text:</label>
-                    <input
+                    <textarea
                         name="text"
-                        type="text"
                         value={this.state.text}
+                        className='new-card-form__form-textarea'
                         onChange={this.onInputChange}>  
-                    </input>
+                    </textarea>
                     <label className='new-card-form__form-label'>Emoji:</label>
-                    <input
+                    <select
                         name="emoji"
-                        type="text"
                         value={this.state.emoji}
+                        className='new-card-form__form-select'
                         onChange={this.onInputChange}>  
-                    </input>
+                            {this.generateEmoji(EMOJI_LIST)}
+                    </select>
                     <input className="new-card-form__form-button" type="submit" name="submit" value="Add a Card" />
                 </form>
             </div>
