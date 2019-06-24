@@ -39,7 +39,9 @@ class Card extends Component {
 
             <button 
             type="button"
-            className="card__delete">
+            className="card__delete"
+            onClick ={() => this.props.onDeleteCard(id)}
+            >
             x
             </button> 
 

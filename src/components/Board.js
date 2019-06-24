@@ -13,12 +13,14 @@ class Board extends Component {
 
     this.state = {
       cards: [],
+      boardUrl: this.props.url,
+      cardUrl: this.props.url + this.props.boardName
     };
   }
-
   
+
   componentDidMount() {
-    axios.get('https://inspiration-board.herokuapp.com/boards/Ada-Lovelace/cards')
+    axios.get(this.state.cardUrl + '/' + 'cards')
     .then((response) => {
 
       this.setState({
@@ -30,18 +32,33 @@ class Board extends Component {
   }
 
   onDeleteCard = (cardId) => {
+
+    const newCardList = this.state.cards.filter(cardObject => cardObject.card.id !== cardId)
+
+    this.setState({
+      cards: newCardList
+    })
+
     axios.delete(`https://inspiration-board.herokuapp.com/cards/:${cardId}`)
     .then(res => {
       console.log(res);
       console.log(res.data);
     })
+    .catch((error) => {
+      this.setState({error:error.message});
+    })
+
   }
 
+  addCardCallback = (card) => {
+    axios.post()
+    console.log()
+  }
   render() {
 
     const cards = this.state.cards.map((cardObject,i) => { 
       return [<Card
-          id = {i}
+          id = {cardObject.card.id}
           text = {cardObject.card.text}
           symbol = {cardObject.card.emoji}
           onDeleteCard={this.onDeleteCard}
@@ -49,15 +66,18 @@ class Board extends Component {
     });
 
     const errorSection = (this.state.error) ?
-    (<section>
+    (<section className="validation-errors-display">
       Error: {this.state.error}
     </section>) : null;
 
 
     return (
-      <div>
-       {errorSection}
-       {cards}
+      <div className="board">
+        {errorSection}
+        
+          <NewCardForm addCardCallback={this.addCardCallback}/>
+          {cards}
+       
       </div>
     )
   }
