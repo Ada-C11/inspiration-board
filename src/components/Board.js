@@ -71,7 +71,6 @@ class Board extends Component {
       .catch((error) => {
         console.log(error);
         this.setState({ error: `${error.message} while adding your card!` })
-      // What should we do when we know the post request failed?
       })
   }
 
@@ -97,6 +96,7 @@ class Board extends Component {
       })
       .catch((error) => {
         console.log(error);
+        this.setState({ error: `${error.message} while deleting your card!`})
       })
   };
 
