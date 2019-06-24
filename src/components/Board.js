@@ -16,36 +16,63 @@ class Board extends Component {
     };
   }
 
-  componentDidMount() {
+  onDeleteButtonClick= (cardID) => {
+      axios.delete(`https://inspiration-board.herokuapp.com/cards/${cardID}`)
+        .then((response) => {
+          this.getCards();
+        })
+        .catch((error) => {
+          console.log(error);
+          this.setState({
+            error: error.message
+          });
+        })
+  }
+  getCards() {
     axios.get(`${this.props.url}${this.props.boardName}/cards`)
       .then((response) => {
         console.log(response);
         const updatedCards = response.data.map((object)=>{
-          return (<Card text={object.card.text} emoji={object.card.emoji}/>);
+          return (
+              <Card 
+                id={object.card.id} 
+                key={object.card.id}
+                text={object.card.text} 
+                emoji={object.card.emoji}
+                deleteButtonCallback={this.onDeleteButtonClick}/>);
         });
         this.setState({
           cards: updatedCards,
         });
       })
       .catch((error) => {
+        console.log(error);
         this.setState({
-          cards: ["Failed to load cards"]
+          error: error.message
         });
       })
+  }
+  componentDidMount() {
+    this.getCards();
   }
 
   render() {
     return (
-      <div>
+      <div className="board">
+        <div className="validation-errors-display">
+          {this.state.error ? this.state.error : null}
+        </div>
         {this.state.cards}
       </div>
+
     )
   }
 
 }
 
 Board.propTypes = {
-
+  url: PropTypes.string.isRequired,
+  boardName: PropTypes.string.isRequired
 };
 
 export default Board;
