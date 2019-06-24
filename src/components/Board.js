@@ -78,8 +78,9 @@ class Board extends Component {
     const allCards = this.state.cards.map((card, i) => {
       return <Card
                 key={i}
-                id={i}
-                content={card}
+                id={card["card"["id"]]}
+                text={card["card"]["text"]}
+                emoji={card["card"]["emoji"]}
                 deleteCardCallBack = {this.state.deleteCardCallBack}
       />
     })

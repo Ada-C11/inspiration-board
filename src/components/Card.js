@@ -8,18 +8,19 @@ import './Card.css';
 class Card extends Component {
 
   onDelete = () => {
-    this.props.deleteCardCallBack(this.props.content["card"]["id"])
+    this.props.deleteCardCallBack(this.props.id)
   }
 
   render() {
     let foundEmoji = ""
-    if(this.props.content["card"]["emoji"]){
-      foundEmoji = emoji.getUnicode(this.props.content["card"]["emoji"])
+    if(this.props.emoji){
+      
+      foundEmoji = emoji.getUnicode(this.props.emoji)
     }
     return (
       <div className="card">
         <div className="card__content">
-        <div className="card__content-text"> {this.props.content["card"]["text"]}</div>
+        <div className="card__content-text"> {this.props.text}</div>
         <div className="card__content-emoji"> {foundEmoji}</div>
         </div>
         <button className="btn btn-primary card__delete" onClick={this.onDelete} >
@@ -31,7 +32,8 @@ class Card extends Component {
 }
 
 Card.propTypes = {
-  content: PropTypes.object.isRequired,
+  text: PropTypes.string,
+  emoji: PropTypes.string,
   deleteCardCallBack: PropTypes.func.isRequired
 };
 
