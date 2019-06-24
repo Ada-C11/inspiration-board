@@ -11,7 +11,7 @@ class NewCardForm extends Component {
 
     this.state = {
     text: '',
-    emoji: null,
+    emoji: '',
     };
   }
 
@@ -32,7 +32,7 @@ class NewCardForm extends Component {
 
     this.setState({
         text: '',
-        emoji: null,
+        emoji: '',
     });
   }
 

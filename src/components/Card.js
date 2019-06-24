@@ -12,7 +12,7 @@ const Card = (props) => {
   }
 
   const deleteCardClick = () => {
-    deleteCardCallback(id);
+    return deleteCardCallback(id);
   }
 
   return (

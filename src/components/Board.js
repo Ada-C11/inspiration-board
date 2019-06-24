@@ -41,7 +41,7 @@ class Board extends Component {
 
   deleteCardCallback = (cardId) => {
     axios.delete(`https://inspiration-board.herokuapp.com/cards/${cardId}`)
-      .then((response) => {
+    .then((response) => {
         const newList = this.state.cards.filter(card => card.card.id !== cardId);
         this.setState({
           cards: newList,
