@@ -35,6 +35,8 @@ class NewCardForm extends Component {
         emoji: '',
       });
     };
+
+    
   
     render() {
   
@@ -53,15 +55,23 @@ class NewCardForm extends Component {
                   type='text'
                   onChange={this.onChangeHandler} 
                 />
-              
-                <input
-                  className='new-card-form__form-textarea'
-                  name='emoji'
+                
+                <select 
+                  className='new-card-form__form-select'
+                  name='emoji' 
                   value={this.state.emoji}
-                  placeholder='Add emoji'
-                  type='text'
                   onChange={this.onChangeHandler}
-                />
+                >
+                  <option value="" disabled>Optional emoji</option>
+                  {EMOJI_LIST.map(option => {
+                    return (
+                      <option
+                        value={option}
+                        label={option}>{option}
+                      </option>
+                    );
+                  })};
+                </select>
             </div>
   
             <div>
