@@ -19,14 +19,33 @@ class Card extends Component {
     if (symbol !== null) {
     return (
       <div className="card">
-        <p>{text}</p>
-        <p>{emoji.getUnicode(symbol)}</p>
+        <section className="card__content">
+          <button 
+            type="button"
+            className="card__delete">
+            x
+          </button>
+          <p className="card__content-text">{text}</p>
+          <p className="card__content-emoji">{emoji.getUnicode(symbol)}</p>
+        </section>
       </div>
     )
   } else  {
     return (
       <div className="card">
-        <p>{text}</p>
+         <section className="card__content">
+
+            <button 
+            type="button"
+            className="card__delete">
+            x
+            </button> 
+
+            <p className="card__content-text">
+            {text}
+            </p>
+
+        </section>
       </div>
     )
   }
