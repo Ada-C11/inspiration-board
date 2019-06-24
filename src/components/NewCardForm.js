@@ -22,7 +22,7 @@ class NewCardForm extends Component {
 
     const card = this.state;
 
-    this.props.addNewCard(card)
+    this.props.onAddCard(card)
 
     this.setState({ ...this.cleared });
   }
