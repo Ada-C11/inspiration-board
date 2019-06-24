@@ -36,7 +36,7 @@ class Board extends Component {
         })
       })
       .catch((error) => {
-        this.setState({ errorMessages: error.message })
+        this.setState({ error: error.message })
       })
   }
 
@@ -45,16 +45,18 @@ class Board extends Component {
   }
   //from Ada Pets
   addCardCallback = (card) => {
-    const url = (this.props.url);
-    const name = (this.props.boardName);
-    const myURL = url+name+"/cards"
+    const myURL = this.props.url + this.props.boardName + "/cards"; 
 
     axios.post(myURL, card)
       .then((response) => {
+        const info = response.data["card"]
         let updatedCard = this.state.cards;
-        updatedCard.push(card);
+        updatedCard.push({
+          id: info.id, 
+          text: card.text, 
+          emoji: card.emoji
+        });
         this.setState({cards: updatedCard});
-
       })
       .catch((error) => {
         this.setState({ error: error.message })
@@ -63,27 +65,30 @@ class Board extends Component {
 
 
   render() {
-    const cards = this.state.cards.map((card, i) => {
-      return <Card
+    const displayCards = this.state.cards.map((card, i) => {
+      return (<Card
                 key={i}
                 id={card["card"].id}
                 text={text["card"].text}
-                emoji={emoji["card"].emoji} />
+                emoji={emoji["card"].emoji} 
+              />)
     })
     return (
       <section>
         <div className="board">
-          {cards}
-          Board
+          <NewCardForm addCardCallback={this.addCardCallback} />
+          {displayCards}
         </div>
       </section>
+    
     )
   }
 
 }
 
 Board.propTypes = {
-  boardName: PropTypes.string
+  boardName: PropTypes.string,
+  myUrl: PropTypes.string.isRequired,
 };
 
 export default Board;
