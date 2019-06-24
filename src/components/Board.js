@@ -19,27 +19,39 @@ class Board extends Component {
 
   renderCards = () => {
     if (this.state.cards) {
-      const cards = this.state.cards.map(card => <Card text={card.card.text} emoji={card.card.emoji}/>);
+      const cards = this.state.cards.map(card => 
+        <Card 
+          key={card.card.id}
+          id={card.card.id}
+          text={card.card.text} 
+          emoji={card.card.emoji}
+          deleteCardCallback={this.deleteCard}
+        />);
       return cards; 
     }
   }
 
-  // addCards = () => {
-  //   this.setState({
-  //     cards: CARD_DATA.cards
-  //   });
-  // }
-
-  componentDidMount() {
-    // this.addCards();
+  getCards = () => {
     axios.get(`${this.props.url}${this.props.boardName}/cards`)
-      .then((response) => {
-        console.log(response)
-        this.setState({ cards: response.data });
-      })
-      .catch((error) => {
-        this.setState({ error: error.message });
-      });
+    .then((response) => {
+      this.setState({ cards: response.data });
+    })
+    .catch((error) => {
+      this.setState({ error: error.message });
+    });
+  }
+  componentDidMount() {
+    this.getCards();
+  }
+
+  deleteCard = (cardId) => {
+    axios.delete(`https://inspiration-board.herokuapp.com/cards/${cardId}`)
+    .then((response) => {
+      this.getCards();
+    })
+    .catch((error) => {
+      this.setState({ error: error.message });
+    });
   }
 
   render() {
