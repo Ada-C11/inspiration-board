@@ -22,24 +22,41 @@ class Board extends Component {
     .then((response) => {
 
       this.setState({
-        cards: response.data
-      })
-    });
+        cards: response.data});
+    })
+    .catch((error) => {
+      this.setState({error:error.message});
+    })
   }
 
-
+  onDeleteCard = (cardId) => {
+    axios.delete(`https://inspiration-board.herokuapp.com/cards/:${cardId}`)
+    .then(res => {
+      console.log(res);
+      console.log(res.data);
+    })
+  }
 
   render() {
+
     const cards = this.state.cards.map((cardObject,i) => { 
       return [<Card
           id = {i}
           text = {cardObject.card.text}
           symbol = {cardObject.card.emoji}
+          onDeleteCard={this.onDeleteCard}
           />];
     });
 
+    const errorSection = (this.state.error) ?
+    (<section>
+      Error: {this.state.error}
+    </section>) : null;
+
+
     return (
       <div>
+       {errorSection}
        {cards}
       </div>
     )

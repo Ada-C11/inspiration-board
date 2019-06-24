@@ -22,7 +22,9 @@ class Card extends Component {
         <section className="card__content">
           <button 
             type="button"
-            className="card__delete">
+            className="card__delete"
+            onClick ={() => this.props.onDeleteCard(id)}
+          >
             x
           </button>
           <p className="card__content-text">{text}</p>
