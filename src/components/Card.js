@@ -1,30 +1,36 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import emoji from 'emoji-dictionary';
 
 import './Card.css';
 
-class Card extends Component {
-  addEmoji = () => {
-    const { noteEmoji } = this.props
+const Card = (props) => {  
+  const { id, text, cardEmoji, deleteCardCallback } = props;
 
-    return noteEmoji && emoji.getUnicode(noteEmoji);
+  const getEmoji = () => {
+    return cardEmoji && emoji.getUnicode(cardEmoji);
   }
-  render() {
-    return (
-      <div className="card">
-        <div className="card__content">
-          <span className="card__content-text">{ this.noteText }</span>
-          <span className="card__content-emoji">{ this.addEmoji() }</span>
-        </div>
-      </div>
-    )
+
+  const deleteCardClick = () => {
+    deleteCardCallback(id);
   }
+
+  return (
+    <section className="card">
+      <section className="card__content">
+        <p className="card__content-text">{text}</p>
+        <p className="card__content-emoji">{getEmoji()}</p>
+      </section>
+        <div className="card__delete" onClick={deleteCardClick}>X</div>
+    </section>
+  )
 }
 
 Card.propTypes = {
-  noteText: PropTypes.string,
-  noteEmoji: PropTypes.string,
+  id: PropTypes.number,
+  text: PropTypes.string,
+  emoji: PropTypes.string,
+  deleteCardCallback: PropTypes.func.isRequired,
 };
 
 export default Card;

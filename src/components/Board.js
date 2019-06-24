@@ -5,15 +5,13 @@ import axios from 'axios';
 import './Board.css';
 import Card from './Card';
 import NewCardForm from './NewCardForm';
-import CARD_DATA from '../data/card-data.json';
+// import CARD_DATA from '../data/card-data.json';
 
 class Board extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      url: this.props.url,
-      boardName: this.props.boardName,
       cards: [],
       errorMessage: null,
     };
@@ -27,38 +25,50 @@ class Board extends Component {
             return {
               text: card.card.text,
               emoji: card.card.emoji,
-              id: card.card_id,
+              id: card.card.id,
             }
           })
           this.setState({
             cards: newCards,
-            errorMessage: null,
           });
         })
         .catch((error) => {
           this.setState({
-            errorMessage: error.message,
+            errorMessage: `${error.message} when retrieving cards.`,
           });
         });
   }
 
-  postCard = (cardInfo) => {
-    const { url, boardName } = this.props;
-    const theURL = url + boardName + "/cards";
-    axios.post(theURL, cardInfo)
+  deleteCardCallback = (cardId) => {
+    axios.delete(`https://inspiration-board.herokuapp.com/cards/${cardId}`)
       .then((response) => {
-        const newCard = { ...response.data.card }
-        const updatedCards = this.state.cards;
-        updatedCards.push(newCard);
-
+        const newList = this.state.cards.filter(card => card.card.id !== cardId);
         this.setState({
-          cards: updatedCards,
-          errorMessage: null,
+          cards: newList,
         });
       })
       .catch((error) => {
         this.setState({
-          errorMessage: error.response.data.errors.text,
+          errorMessage: `${error.message} when deleting card`,
+        });
+      });
+  }
+
+  addCardCallback = (cardInfo) => {
+    const { url, boardName } = this.props;
+    axios.post((url + boardName + "/cards"), cardInfo)
+      .then((response) => {
+        const newCard = { ...response.data.card }
+        const currentCards = this.state.cards;
+        currentCards.push(newCard);
+
+        this.setState({
+          cards: currentCards,
+        });
+      })
+      .catch((error) => {
+        this.setState({
+          errorMessage: `${error.message} when adding a card.`,
         });
       });
   }
@@ -66,7 +76,13 @@ class Board extends Component {
   render() {
     const cards = this.state.cards.map((card, i) => {
       return (
-          <Card key={ i } id={card.id} text={card.text} emoji={card.emoji} />
+        <Card 
+          key={i} 
+          id={card.id} 
+          text={card.text} 
+          cardEmoji={card.emoji} 
+          deleteCardCallback={this.deleteCardCallback}
+        />
       );
     })
 
@@ -76,7 +92,10 @@ class Board extends Component {
        {this.state.errorMessage}
     </div>
     <div className="board">
-      {cards};
+      <NewCardForm addCardCallback={this.addCardCallback} />
+    </div>
+    <div className="board">
+      {cards}
     </div>
     </section>
   )};
