@@ -121,7 +121,7 @@ class Board extends Component {
       <section>
 
       <div className="validation-errors-display validation-errors-display__list">
-
+        {this.state.errors}
       </div>
 
       <div className="board">
