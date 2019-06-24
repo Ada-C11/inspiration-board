@@ -60,25 +60,25 @@ class Board extends Component {
     });
   };
 
-  renderFieldValidationErrors = (field, errorArray) => {
-    const list = errorArray.map((message, index) => {
-      return <li key={`${field}-${index}`}>{message}</li>;
+  rendEachError = (errField, errorArray) => {
+    const errList = errorArray.map((message, index) => {
+      return <li key={`${errField}-${index}`}>{message}</li>;
     });
     return (
       <div>
-        <strong>{field}:</strong>
-        <ul className="validation-errors-display__list">{list}</ul>
+        <strong>{errField}:</strong>
+        <ul className="validation-errors-display__list">{errList}</ul>
       </div>
     );
   };
 
-  renderValidationErrors = responseData => {
+  showErrors = responseData => {
     if (responseData['errors']) {
-      const validationErrors = responseData['errors'];
-      const errorList = Object.keys(validationErrors).map(field => {
+      const foundErrors = responseData['errors'];
+      const errorList = Object.keys(foundErrors).map(errField => {
         return (
-          <div key={`${field}`}>
-            {this.renderFieldValidationErrors(field, validationErrors[field])}
+          <div key={`${errField}`}>
+            {this.renderEachError(errField, foundErrors[errField])}
           </div>
         );
       });
