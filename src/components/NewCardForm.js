@@ -36,8 +36,6 @@ class NewCardForm extends Component {
       });
     };
 
-    
-  
     render() {
   
       return (
