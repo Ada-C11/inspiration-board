@@ -22,22 +22,18 @@ class NewCardForm extends Component {
   constructor(props) {
     super(props);
 
-    this.cleared = {
+    this.state = {
       text: '',
       emoji: '',
-    };
-
-    this.state = { ...this.cleared };
+    }
   }
 
   addNewCard = (event) => {
     event.preventDefault();
 
     const card = this.state;
-
+    
     this.props.addCardCallback(card);
-
-    this.setState({ ...this.cleared });
   };
 
   inputChange = (event) => {
