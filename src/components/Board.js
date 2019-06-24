@@ -10,7 +10,6 @@ class Board extends Component {
   constructor(props) {
     super(props);
     this.state = { cards: [] };
-    console.log(props);
   }
 
   componentDidMount = () => {
@@ -88,6 +87,10 @@ class Board extends Component {
   }
 }
 
-Board.propTypes = {};
+Board.propTypes = {
+  base: PropTypes.string.isRequired,
+  url: PropTypes.string.isRequired,
+  boardName: PropTypes.string.isRequired,
+};
 
 export default Board;

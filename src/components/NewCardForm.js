@@ -14,8 +14,8 @@ const EMOJI_LIST = [
 ];
 
 class NewCardForm extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       text: '',
       emoji: '',
@@ -80,5 +80,9 @@ class NewCardForm extends Component {
     );
   }
 }
+
+NewCardForm.propTypes = {
+  postCardCallback: PropTypes.func.isRequired,
+};
 
 export default NewCardForm;
