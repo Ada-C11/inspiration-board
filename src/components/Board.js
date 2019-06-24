@@ -61,7 +61,7 @@ class Board extends Component {
     axios.post(`${this.props.url}${this.props.boardName}/cards`, newCard)
       .then((response) => {
         const updateCardList = this.state.cards;
-        updateCardList.unshift(newCard);
+        updateCardList.push(newCard);
 
         this.setState({
           cards: updateCardList,
