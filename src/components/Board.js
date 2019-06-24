@@ -59,7 +59,9 @@ class Board extends Component {
   addCard = (cardInfo) => {
     console.log(cardInfo);
 
-    const postURL = this.props.url + this.props.boardName + "/cards";
+    const { url, boardName } = this.props;
+  
+    const postURL = url + boardName + "/cards";
 
     axios.post(postURL, cardInfo)
       .then((response) => {
