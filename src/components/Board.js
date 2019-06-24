@@ -5,7 +5,7 @@ import axios from "axios";
 import "./Board.css";
 import Card from "./Card";
 import NewCardForm from "./NewCardForm";
-import CARD_DATA from "../data/card-data.json";
+//import CARD_DATA from "../data/card-data.json";
 
 class Board extends Component {
   constructor(props) {
@@ -19,21 +19,18 @@ class Board extends Component {
   }
 
   componentDidMount() {
-    axios
-      .get(`${this.props.url}/${this.props.boardName}/cards`)
-      .then(response => {
+    axios.get(`${this.props.url}/${this.props.boardName}/cards`)
+      .then((response) => {
         this.setState({ cards: response.data });
-        //console.log('we got a response', response.data)
       })
-      .catch(error => {
+      .catch((error) => {
         this.setState({
           errorMessage: error.message
-        });
-        console.log(error.message);
-      });
+        })
+      })
   }
 
-  addCardCallBack = (card) => {
+  addCardCallback = (card) => {
     const infoCard = {
       text: card.text,
       emoji: card.cardEmoji,
@@ -61,23 +58,21 @@ class Board extends Component {
       });
   }
 
-  deleteCardCallBack = (cardId) => {
+  deleteCardCallback = (cardId) => {
     axios.delete(`https://inspiration-board.herokuapp.com/cards/${cardId}`)
       .then((response) => {
-        const updatedCardList = this.state.cards.filter(
-          card => card.card.id !== cardId
-        );
+        const updatedCardList = this.state.cards.filter(card => card.card.id !== cardId);
 
         this.setState({
           cards: updatedCardList
         });
       })
-      .catch(error => {
+      .catch((error) => {
         this.setState({
-          errorMessage: error.message
+          errorMessage: error.message,
         });
       });
-  };
+  }
 
   render() {
     const errorDisplay = this.state.errorMessage ? (
@@ -88,30 +83,32 @@ class Board extends Component {
 
     const cardList = this.state.cards.map((card, i) => {
       return (
-        //<div key={i}>
         <Card
           key={i}
           id={card.card.id}
           text={card.card.text}
           cardEmoji={card.card.emoji}
-          deleteCardCallBack={this.deleteCardCallBack}
+          deleteCardCallback={this.deleteCardCallback}
         />
-        //</div>
       )
     });
 
     return (
       <section>
-        <div>{errorDisplay}</div>
         <div>
-          <NewCardForm addCardCallBack={this.addCardCallBack} />
+        {errorDisplay}
+        </div>
+        <div>
+          <NewCardForm addCardCallback={this.addCardCallback} />
         </div>
         <div className="board">{cardList}</div>
       </section>
-    );
+    )
   }
 }
 
-Board.propTypes = {};
-
+Board.propTypes = {
+url: PropTypes.string.isRequired,
+boardName: PropTypes.string.isRequired
+};
 export default Board;

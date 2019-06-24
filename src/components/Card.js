@@ -1,41 +1,39 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import emoji from "emoji-dictionary";
+import React from 'react';
+import PropTypes from 'prop-types';
+import emoji from 'emoji-dictionary';
 
-import "./Card.css";
+import './Card.css';
 
-//class Card extends Component {
 const Card = (props) => {
-  //console.log(emoji.getUnicode("heart_eyes"));
-  const { text, cardEmoji, deleteCardCallBack, id } = props;
 
-  let showEmoji = cardEmoji
-  if (cardEmoji) {
-    showEmoji = emoji.getUnicode(cardEmoji);
-  }
-  //render() {
+  const { text, cardEmoji, deleteCardCallback, id} = props;
 
   const toDelete = () => {
-    console.log(id);
-    return deleteCardCallBack(id);
-  };
+    return deleteCardCallback(id)
+  }
 
-  return (
-    <div className="card">
-      <div className="card__content">
-        <button type="button" className="card__delete" onClick={toDelete}>
+    return (
+      <div className="card card__content">
+        <button
+          type="button"
+          className="card__delete"
+          onClick={toDelete}
+        >
           Delete Card
         </button>
-        <div className="card__content">
-          <span className="card__content-text">{id}</span>
-          <span className="card__content-text">{text}</span>
-          <span className="card__content-emoji">{showEmoji}</span>
-        </div>
+        <p className="card__content-text">{id}</p>
+        <p className="card__content-text">{text}</p>
+        <p className="card__content-emoji">{cardEmoji ? emoji.getUnicode(cardEmoji) : ""}</p>
       </div>
-    </div>
-  );
-};
+    )
+}
 
-Card.propTypes = {};
+
+Card.propTypes = {
+  text: PropTypes.string,
+  emoji: PropTypes.string,
+  id: PropTypes.number,
+  deleteCardCallback: PropTypes.func.isRequired
+};
 
 export default Card;

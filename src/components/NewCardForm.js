@@ -10,13 +10,11 @@ const EMOJI_LIST = [
   "clap",
   "sparkling_heart",
   "heart_eyes_cat",
-  "dog"
+  "dog",
 ];
 
 const emojiList = EMOJI_LIST.map((oneEmoji, i) => {
-    return (
-        <option value={`${oneEmoji}`}>{emoji.getUnicode(`${oneEmoji}`)}</option>
-    )
+        return <option key={i} value={oneEmoji}>{emoji.getUnicode(oneEmoji)}</option>
 });
 
 
@@ -26,23 +24,23 @@ class NewCardForm extends Component {
 
     this.cleared = {
       text: '',
-      emoji: ''
+      emoji: '',
     };
 
     this.state = { ...this.cleared };
   }
 
-  addNewCard = event => {
+  addNewCard = (event) => {
     event.preventDefault();
 
     const card = this.state;
 
-    this.props.addCardCallBack(card);
+    this.props.addCardCallback(card);
 
     this.setState({ ...this.cleared });
   };
 
-  inputChange = event => {
+  inputChange = (event) => {
     const stateUpdate = {};
 
     const field = event.target.name;
@@ -91,6 +89,8 @@ class NewCardForm extends Component {
   }
 }
 
-NewCardForm.propTypes = {};
+NewCardForm.propTypes = {
+addCardCallback: PropTypes.func.isRequired,
+};
 
 export default NewCardForm;
