@@ -18,9 +18,7 @@ class Card extends Component {
   //   } else {
   //     return ""
   //   }
-  
 
-  
 
   render() {
     const isText = (this.props.text) ? this.props.text : ""
@@ -36,7 +34,7 @@ class Card extends Component {
             {emoji.getUnicode(isEmoji)}
           </div>
           <div>
-            <button type="button" value="Delete" onClick={this.props.deleteCardCallback(id)} className="card__delete"/>
+            <button onClick={() => this.props.deleteCardCallback(id)} className="card__delete"> Delete </button>
           </div>
         </div>
       </div>

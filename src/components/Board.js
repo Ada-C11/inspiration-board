@@ -14,6 +14,7 @@ class Board extends Component {
 
     this.state = {
       cards: [],
+      errorMessages: ""
     };
   }
 
@@ -25,39 +26,51 @@ class Board extends Component {
           const newCard = {
             text: card.card.text,
             emoji: card.card.emoji,
+            id: card.card.id
           }
           return newCard;
         })
 
         this.setState({ cards });
+        console.log(this.state.cards)
+
       })
       .catch((error) => {
-        this.setState({ error: error.message });
+        this.setState({ errorMessages: error.message });
       });
   }
 
   addCardCallback = (cardInfo) => {
     const fullUrl = this.props.url + this.props.boardName + "/cards"
+    console.log(this.state.cards)
     axios.post(fullUrl, cardInfo)
-    .then((response) => {
-      let updatedData = this.state.cards;
-      updatedData.push(cardInfo);
-      this.setState({cards: updatedData})
-    })
-    .catch((error) => {
-      this.setState({ error: error.message });
-    });
+      .then((response) => {
+        let updatedData = this.state.cards;
+        updatedData.push(cardInfo);
+        this.setState({ cards: updatedData })
+      })
+      .catch((error) => {
+        this.setState({ errorMessages: error.message });
+      });
   }
 
-  deleteCardCallback = (cardID) => {
-    const fullUrl = "https://inspiration-board.herokuapp.com/cards/:" + {cardID}
-    axios.delete(fullUrl)
-    .then((response) => {
+  deleteCardCallback = (id) => {
+    const updatedCards = this.state.cards.filter((card) => card.id !== id)
+    console.log(id)
 
-    })
-    .catch((error) => {
-      this.setState({ error: error.message });
+    this.setState({
+      cards: updatedCards
     });
+
+    const fullUrl = `https://inspiration-board.herokuapp.com/cards/${id}`
+    console.log(fullUrl)
+    axios.delete(fullUrl)
+      .then((response) => {
+
+      })
+      .catch((error) => {
+        this.setState({ errorMessages: error.message });
+      });
   }
 
 
@@ -74,10 +87,11 @@ class Board extends Component {
       />)
     })
 
-
+    const errors = <div className="validation-errors-display">Error: {this.state.errorMessages}</div>
     return (
       <div className="board">
-        <NewCardForm addCardCallback={this.addCardCallback}/>
+        {this.state.errorMessages ? errors : ""}
+        <NewCardForm addCardCallback={this.addCardCallback} />
         {showCards}
       </div>
     )
