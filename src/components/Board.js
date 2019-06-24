@@ -16,22 +16,48 @@ class Board extends Component {
     };
   }
 
-  onDeleteButtonClick= (cardID) => {
+  onDeleteButtonClick = (cardID) => {
       axios.delete(`https://inspiration-board.herokuapp.com/cards/${cardID}`)
         .then((response) => {
           this.getCards();
         })
         .catch((error) => {
-          console.log(error);
-          this.setState({
-            error: error.message
-          });
+          if (error.response && error.response.data) {
+            this.setState({
+              error: error.response.data.cause,
+            });
+          } else {
+            this.setState({
+              error: error.message,
+            });
+          }
         })
   }
+
+  addNewQuote = (text, emoji) =>{
+    axios.post(`${this.props.url}${this.props.boardName}/cards`, { text, emoji,})
+    .then((response) => {
+      this.getCards();
+    })
+    .catch((error) => {
+      console.log([error]);
+      if (error.response && error.response.data) {
+        this.setState({
+          error: error.response.data.cause,
+          validationErrors:error.response.data.errors
+        });
+      } else {
+        this.setState({
+          error: error.message,
+          
+        });
+      }
+    })
+  }
+  
   getCards() {
     axios.get(`${this.props.url}${this.props.boardName}/cards`)
       .then((response) => {
-        console.log(response);
         const updatedCards = response.data.map((object)=>{
           return (
               <Card 
@@ -43,27 +69,53 @@ class Board extends Component {
         });
         this.setState({
           cards: updatedCards,
+          error: null,
+          validationErrors: null
         });
       })
       .catch((error) => {
-        console.log(error);
-        this.setState({
-          error: error.message
-        });
+        if (error.response && error.response.data) {
+          this.setState({
+            error: error.response.data.cause,
+          });
+        } else {
+          this.setState({
+            error: error.message,
+          });
+        }
       })
   }
+
+  displayValidationErrors = (errors) => {
+    let errorList = [];
+    for (const field in errors) {
+      for (const problem of errors[field]) {
+        errorList.push(<li>{field}: {problem}</li>);
+      }
+    }
+      return errorList;
+  }
+  
   componentDidMount() {
     this.getCards();
   }
 
   render() {
     return (
-      <div className="board">
+      <div>
         <div className="validation-errors-display">
           {this.state.error ? this.state.error : null}
+          <ul className="validation-errors-display__list">
+            {this.state.validationErrors ? this.displayValidationErrors(this.state.validationErrors) : null}
+          </ul>
+          
         </div>
-        {this.state.cards}
+        <div className="board">
+          {this.state.cards}
+          <NewCardForm submitCallback={this.addNewQuote}/>
       </div>
+      </div>
+      
 
     )
   }
