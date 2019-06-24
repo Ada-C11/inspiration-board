@@ -27,9 +27,6 @@ class Board extends Component {
 
     const getURL = url + boardName + "/cards";
 
-    // console.log("This is the URL");
-    // console.log(this.props.url);
-
     axios.get(getURL)
       .then((response) => {
       console.log(response.data);
@@ -60,7 +57,6 @@ class Board extends Component {
     console.log(cardInfo);
 
     const { url, boardName } = this.props;
-  
     const postURL = url + boardName + "/cards";
 
     axios.post(postURL, cardInfo)
