@@ -9,14 +9,15 @@ class Card extends Component {
   render() {
     return (
       <div className="card">
-        Card
+        <div>{this.props.text}</div>
+        <div>{this.props.emoji}</div>
       </div>
     )
   }
 }
 
 Card.propTypes = {
-  message: PropTypes.string,
+  text: PropTypes.string,
   emoji: PropTypes.string,
 };
 
