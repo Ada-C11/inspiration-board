@@ -21,8 +21,8 @@ class Board extends Component {
     axios
       .get(url.concat(boardName).concat('/cards'))
       .then(response => {
-        const cardsState = response.data.map(card => {
-          return { text: card.card.text, emoji: card.card.emoji };
+        const cardsState = response.data.map(cardObject => {
+          return cardObject.card;
         });
         this.setState({ cards: cardsState.reverse() });
       })
@@ -38,7 +38,7 @@ class Board extends Component {
       .post(url.concat(boardName).concat('/cards'), cardPostParams)
       .then(response => {
         const cardsState = this.state.cards;
-        cardsState.unshift(cardPostParams);
+        cardsState.unshift(response.data.card);
         this.setState(cardsState);
       })
       .catch(error => {

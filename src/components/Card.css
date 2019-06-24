@@ -13,6 +13,7 @@
   display: grid;
   grid-template-columns: 1fr 5fr 1fr;
   align-items: center;
+
 }
 
 .card__content {
@@ -33,7 +34,7 @@
 }
 
 .card__content-emoji {
-  font-size: 3rem;
+  font-size: 1em;
 }
 
 .card__content-text, .card__content-emoji {

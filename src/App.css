@@ -5,7 +5,7 @@
 
 body {
   font-family: 'Raleway', sans-serif;
-  background: rgb(160, 196, 185);
+  background: rgba(0, 213, 85, 0.938);
 }
 
 h1, h2 {
@@ -24,13 +24,12 @@ h1, h2 {
 
 .header__text {
   padding: 1rem;
-
   display: inline-block;
-  background-color: #222;
-  color: white;
+  background-color:white;
+  color: rgb(60, 26, 153);
   text-transform: uppercase;
-  font-weight: 800;
   font-size: 3rem;
+  border-style: inset;
 
   transform: rotate(-3deg) skew(-3deg);
 }
