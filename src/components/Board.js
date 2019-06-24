@@ -5,29 +5,89 @@ import axios from 'axios';
 import './Board.css';
 import Card from './Card';
 import NewCardForm from './NewCardForm';
-import CARD_DATA from '../data/card-data.json';
+// import CARD_DATA from '../data/card-data.json';
 
 class Board extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       cards: [],
-    };
+      error: null,
+    }
+  }
+
+  componentDidMount() {
+    axios.get(this.props.url + 'boards/' + this.props.boardName + '/cards')
+      .then((response) => {
+        console.log(response.data)
+        const cards = response.data.map((card) => {
+          const newCard = {
+            id: card.card.id,
+            text: card.card.text,
+            emoji: card.card.emoji
+          }
+          return newCard;
+        })
+        this.setState({ cards });
+      })
+      .catch((error) => {
+        this.setState({ error: error.message });
+      })
+  }
+
+  onDeleteCard = (cardId) => {
+    const newCardList = this.state.cards.filter(card => card.id !== cardId);
+    this.setState({
+      cards: newCardList
+    });
+
+    axios.delete(this.props.url + 'cards/' + cardId)
+      .then((response) => {
+        console.log(`Deleted card ${response.data.card.id}`)
+      })
+      .catch((error) => {
+        this.setState({ error: error.message });
+      })
+  }
+
+  addCardCallback = (card) => {
+    axios.post(this.props.url + 'boards/' + this.props.boardName + '/cards', card)
+      .then((response) => {
+        this.setState({
+          cards: [...this.state.cards, response.data.card]
+        });
+      })
+      .catch((error) => {
+        this.setState({error: error.message});
+      });
   }
 
   render() {
+    const cardComponents = this.state.cards.map((card, index) => {
+    
     return (
-      <div>
-        Board
-      </div>
-    )
-  }
+      <Card
+        key={index}
+        id={card.id}
+        text={card.text}
+        emoji={card.emoji}
+        onDeleteCard={this.onDeleteCard}
+      />
+      );
+    });
 
+  return (
+    <div className="board">
+      {cardComponents}
+      <NewCardForm addCardCallback={this.addCardCallback} />
+    </div>)
+  }
 }
 
 Board.propTypes = {
-
+  url: PropTypes.string, 
+  boardName: PropTypes.string
 };
 
 export default Board;
