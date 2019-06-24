@@ -7,15 +7,16 @@ import './Card.css';
 class Card extends Component {
   render() {
     return (
-      <div className="card">
-        Card
-      </div>
-    )
+
+    );
   }
 }
 
 Card.propTypes = {
-
+  text: PropTypes.string,
+  emoji: PropTypes.string,
+  id: PropTypes.number.isRequired,
+  deleteCardCallback: PropTypes.func.isRequired
 };
 
 export default Card;
