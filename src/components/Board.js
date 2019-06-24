@@ -17,7 +17,7 @@ class Board extends Component {
   }
 
   renderCards = () => {
-    const cards = this.state.cards.map(card => <Card text={card.text} card={card.emoji}/>);
+    const cards = this.state.cards.map(card => <Card text={card.text} emoji={card.emoji}/>);
     return cards; 
   }
 
@@ -40,7 +40,7 @@ class Board extends Component {
 
   render() {
     return (
-      <div>
+      <div className="board">
         {this.renderCards()}
       </div>
     )
