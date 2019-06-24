@@ -57,7 +57,8 @@ class NewCardForm extends Component {
                         onChange={this.onInputChange}
                         ></input>
                     <select name="emoji" 
-                            value={this.state.text}
+                            value={this.state.emoji}
+                            selected={this.state.emoji}
                             onChange={this.onInputChange}
                             >
                         {this.generateOptions()}
