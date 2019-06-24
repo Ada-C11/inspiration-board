@@ -16,20 +16,26 @@ class Card extends Component {
   render() {
     return (
       <div className="card">
-        <h4>{this.props.text}</h4>
-        <h4>{emoji.getUnicode(this.props.emoji)}</h4>
-        <input 
-            type="button" 
-            value="Delete" 
-            onClick={this.onDeleteClick}
-            />
+        <div className="card__content">
+          <h2 className="card__content-text">{this.props.text}</h2>
+          <h2 className="card__content-emoji">{emoji.getUnicode(this.props.emoji)}</h2>
+        </div>
+        <button 
+          className="card__delete" 
+          onClick={this.onDeleteClick}>
+          Delete
+        </button>
+
       </div>
     )
   }
 }
 
 Card.propTypes = {
-
+  id: PropTypes.number.isRequired,
+  text: PropTypes.string.isRequired,
+  emoji: PropTypes.string.isRequired,
+  deleteCardCallback: PropTypes.func.isRequired,
 };
 
 export default Card;

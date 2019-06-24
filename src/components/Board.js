@@ -90,7 +90,7 @@ class Board extends Component {
     })
 
     return (
-      <div>
+      <div className="board">
         {cardList}
         <NewCardForm 
         addQuoteCallback={this.addQuote}

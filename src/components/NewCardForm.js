@@ -45,36 +45,46 @@ class NewCardForm extends Component {
 
   render() {
     return (
-      <form
-        onSubmit={this.addQuote}>
-        <h3>Add an inspirational quote!</h3>
-          <label>
+      <div className="new-card-form">
+        <h3 className="new-card-form__header">Add an inspirational quote!</h3>
+        <form
+          className="new-card-form__form"
+          onSubmit={this.addQuote}
+        >
+          <label className="new-card-form__form-label" >
             Text:
-            <input
+            <textarea
+              className="new-card-form__form-textarea"
               name='text'
               type='text'
               value={this.state.text}
               onChange={this.onInputChange}
-            ></input>
+            ></textarea>
           </label>
-          <label>
+          <label className="new-card-form__form-label" >
             Emoji:
             <select 
+              className="new-card-form__form-select"
               name="emoji"
               value={this.state.species}
               onChange={this.onInputChange}
               >
-                { EMOJI_LIST.map(emoji => <option value={emoji}>{emoji}</option>) }
+                { EMOJI_LIST.map(symbol => <option value={symbol}>{emoji.getUnicode(symbol)}</option>) }
             </select>
           </label>
           <input 
-            className="" 
+            className="new-card-form__form-button" 
             type="submit" 
             name="submit" 
             value="Add quote" />
-      </form>
+        </form>
+      </div>
     );
   }
 }
+
+NewCardForm.propTypes = {
+  addQuoteCallback: PropTypes.func.isRequired,
+};
 
 export default NewCardForm;
