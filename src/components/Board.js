@@ -40,9 +40,8 @@ class Board extends Component {
     })
 
     axios.delete(`https://inspiration-board.herokuapp.com/cards/:${cardId}`)
-    .then(res => {
-      console.log(res);
-      console.log(res.data);
+    .then((response) => {
+      console.log(response.data);
     })
     .catch((error) => {
       this.setState({error:error.message});
@@ -50,9 +49,32 @@ class Board extends Component {
 
   }
 
-  addCardCallback = (card) => {
-    axios.post()
-    console.log()
+  addCard = (card) => {
+    console.log(card);
+
+    const cardDataToSendToApi = {
+      text: card.text,
+      emoji: card.emoji,
+    };
+
+    axios.post('https://inspiration-board.herokuapp.com/boards/ngoc-fabulous/cards',cardDataToSendToApi)
+    .then((response) => {
+      console.log(response.data)
+      let updatedCardlist = this.state.cards;
+      updatedCardlist.push({ card: {
+        text: card.text,
+        emoji: card.emoji,
+        id: response.data.id,
+      }
+      });
+      this.setState({
+        cards: updatedCardlist
+      });
+    })
+    .catch((error) => {
+      this.setState({error:error.message});
+    })
+  
   }
   render() {
 
@@ -75,7 +97,7 @@ class Board extends Component {
       <div className="board">
         {errorSection}
         
-          <NewCardForm addCardCallback={this.addCardCallback}/>
+          <NewCardForm addCardCallback={this.addCard}/>
           {cards}
        
       </div>
