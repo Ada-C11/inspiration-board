@@ -43,7 +43,6 @@ class Board extends Component {
   }
 
   getUpdatedCards = () => {
-    console.log(this.state.cards);
     const allCards = this.state.cards.map((cardObj, i) => {
       return <Card key={i} text={cardObj.card.text} emoji={cardObj.card.emoji} id={cardObj.card.id} deleteHandler={this.deleteCard} />
     });
