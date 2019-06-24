@@ -23,7 +23,9 @@ class Board extends Component {
 
     console.log("Inside componentDidMount");
 
-    const getURL = this.props.url + this.props.boardName + "/cards";
+    const { url, boardName } = this.props;
+
+    const getURL = url + boardName + "/cards";
 
     // console.log("This is the URL");
     // console.log(this.props.url);
