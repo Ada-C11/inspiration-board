@@ -8,7 +8,7 @@ class Card extends Component {
   addEmoji = () => {
     const { noteEmoji } = this.props
 
-    return noteEmoji;
+    return noteEmoji && emoji.getUnicode(noteEmoji);
   }
   render() {
     return (
