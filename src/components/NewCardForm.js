@@ -48,7 +48,7 @@ class NewCardForm extends Component {
         onSubmit={this.addCard}
       >
         <h3 className="new-card-form__header">Add a Card</h3>
-        <label>
+        <label className="new-card-form__form-label">
           Quote:
           <input
             name="quote"
@@ -56,17 +56,17 @@ class NewCardForm extends Component {
             value={this.state.quote}
             onChange={this.onInputChange}></input>
         </label>
-        <label>
+        <label className="new-card-form__form-label">
           Emoji: 
           <select
             name="Emoji"
             value={this.state.Emoji}
-            onChange={this.onInputChange}>
-            <option>Please Select an Emoji</option>
+            onChange={this.onInputChange}
+            className="new-card-form__form-select">
             {emojiDisplay}
           </select>
         </label>
-        <input className="btn btn-success new-pet-form--submit" type="submit" name="submit" value="Add a Pet" />
+        <input className="new-card-form__form-button" type="submit" name="submit" value="Add Card" />
       </form></section>
     );
   }
