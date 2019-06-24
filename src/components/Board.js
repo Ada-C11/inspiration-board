@@ -19,7 +19,8 @@ class Board extends Component {
   render() {
     const cardList = this.state.cards.map((card, i) => {
      return <Card key={i}
-     card={card}/>
+     card={card}
+     cardEmoji={card.emoji}/>
   });
     return (
 
