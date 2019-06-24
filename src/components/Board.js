@@ -8,26 +8,58 @@ import NewCardForm from './NewCardForm';
 import CARD_DATA from '../data/card-data.json';
 
 class Board extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
-      cards: CARD_DATA.cards,
+      cards: [],
+      errorMessage: null,
+      // cards: CARD_DATA.cards,
     };
   }
 
-  render() {
-    const cardList = this.state.cards.map((card, i) => {
-     return <Card key={i}
-     card={card}
-     cardEmoji={card.emoji}/>
-  });
-    return (
+  componentDidMount() {
+    axios.get(`${this.props.url}/${this.props.boardName}/cards`)
+      .then((response) => {
+        this.setState({ cards: response.data });
+        console.log('we got a response', response.data)
+      })
+      .catch((error) => {
+        this.setState({
+          errorMessage: error.message
+        })
+        console.log(error.message)
+      })
+  }
 
-      <div>
-        Board
-        {cardList}
-      </div>
+  render() {
+
+    const errorDisplay = (this.state.errorMessage) ?
+      (<section className="validation-errors-display">
+        Error: {this.state.errorMessage}
+      </section>) : null;
+
+
+    const cardList = this.state.cards.map((card, i) => {
+      return (
+        <div key={i}>
+          <Card
+            text={card.card.text}
+            cardEmoji={card.card.emoji} />
+        </div>
+
+      )
+    });
+
+    return (
+      <section>
+        <div>
+          {errorDisplay}
+        </div>
+        <div>
+          {cardList}
+        </div>
+      </section>
     )
   }
 
