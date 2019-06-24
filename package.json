@@ -29,7 +29,9 @@
     "enzyme-to-json": "^3.3.5",
     "gh-pages": "^2.0.1"
   },
-  "jest": { 
-    "snapshotSerializers": ["enzyme-to-json/serializer"] 
-  }    
+  "jest": {
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ]
+  }
 }
