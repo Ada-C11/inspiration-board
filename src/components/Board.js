@@ -19,36 +19,44 @@ class Board extends Component {
   }
   
   componentDidMount() {
-    const url = (this.props.url);
-    const name = (this.props.boardName);
-    const myURL = url+name+"/cards"
+    const myURL = this.props.url + this.props.boardName + "/cards"; 
     axios.get(myURL)
       .then((response) => {
         console.log(response.data);
+        const cards = response.data.map((info) => {
+          const newCard = {
+            text: info.text, 
+            emoji: info.emoji, 
+            id: info.id
+          }
+          return newCard;
+        })
         this.setState({
-          cards: response.data
+          cards
         })
       })
       .catch((error) => {
-        console.log(error);
+        this.setState({ errorMessages: error.message })
       })
   }
 
   onDeleteCard =(cardID) => {
 
   }
-
-  addCardCallback = (cardInfo) => {
-    const cardIds = this.state.cards;
+  //from Ada Pets
+  addCardCallback = (card) => {
+    const url = (this.props.url);
+    const name = (this.props.boardName);
+    const myURL = url+name+"/cards"
 
     axios.post(myURL, card)
       .then((response) => {
         let updatedCard = this.state.cards;
-        updatedCard.push(cardInfo);
+        updatedCard.push(card);
         this.setState({cards: updatedCard});
 
       })
-      .catch((errors) => {
+      .catch((error) => {
         this.setState({ error: error.message })
     });
   }
