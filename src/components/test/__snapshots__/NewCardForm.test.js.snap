@@ -22,10 +22,59 @@ exports[`NewCardForm that it matches an existing snapshot 1`] = `
       />
     </div>
     <div>
-      <input
-        placeholder="emoji"
-        type="text"
-      />
+      <label
+        className="new-card-form__form-label"
+        htmlFor="emoji"
+      >
+        Emoji
+      </label>
+      <select
+        className="new-card-form_form-select"
+        name="emoji"
+        onChange={[Function]}
+        value=""
+      >
+        <option
+          key="0"
+          value=""
+        />
+        <option
+          key="1"
+          value="heart_eyes"
+        >
+          😍
+        </option>
+        <option
+          key="2"
+          value="beer"
+        >
+          🍺
+        </option>
+        <option
+          key="3"
+          value="clap"
+        >
+          👏
+        </option>
+        <option
+          key="4"
+          value="sparkling_heart"
+        >
+          💖
+        </option>
+        <option
+          key="5"
+          value="heart_eyes_cat"
+        >
+          😻
+        </option>
+        <option
+          key="6"
+          value="dog"
+        >
+          🐶
+        </option>
+      </select>
     </div>
     <div>
       <input
