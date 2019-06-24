@@ -14,12 +14,14 @@ class Card extends Component {
   render() {
   
     return (
-      <div className="card">
-        {this.props.quote}
+      <section className="card">
+        <div className="card__content-text card__content">{this.props.quote}</div>
+        <div className="card__content-emoji card__content">{this.props.emoji && emoji.getUnicode(this.props.emoji)}</div>
+        
         {/* Try single-line conditional rendering here */}
-        {this.props.emoji && emoji.getUnicode(this.props.emoji)}
+        
         {<button id={this.props.id} className="card__delete" onClick={this.onDeleteButtonClick}>Delete</button>}
-      </div>
+      </section>
     )
   }
 }
