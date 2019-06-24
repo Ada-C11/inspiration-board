@@ -80,12 +80,10 @@ class NewCardForm extends Component {
                         <select
                         className="new-card-form_form-select"
                         onChange={this.onInputChange}
-                        value={this.state.emoji}>
+                        name="emoji"
+                        value={emoji}>
                             {this.emojiList()}
                         </select>
-                        <input
-                            placeholder="emoji"
-                            type="text" />
                     </div>
 
                     <div>
