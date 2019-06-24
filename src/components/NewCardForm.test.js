@@ -1,9 +1,12 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import NewCardForm from './NewCardForm';
+import { shallow } from 'enzyme';
 
-it('renders without crashing', () => {
-  const div = document.createElement('div');
-  ReactDOM.render(<NewCardForm />, div);
-  ReactDOM.unmountComponentAtNode(div);
+describe('NewCardForm', () => {
+  test('that it matches an existing snapshot', () => {
+    const wrapper = shallow( <NewCardForm onAddCard={() => {} } />);
+
+    // Assert that it looks like the last snapshot
+    expect(wrapper).toMatchSnapshot();
+  });
 });

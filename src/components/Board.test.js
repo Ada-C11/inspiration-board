@@ -1,9 +1,13 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import Board from './Board';
+import { shallow } from 'enzyme';
 
-it('renders without crashing', () => {
-  const div = document.createElement('div');
-  ReactDOM.render(<Board />, div);
-  ReactDOM.unmountComponentAtNode(div);
+describe('Board', () => {
+  test('that it matches an existing snapshot', () => {
+    const wrapper = shallow( <Board url="https://inspiration-board.herokuapp.com/"
+    boardName={`boards/eln-board`} />);
+
+    // Assert that it looks like the last snapshot
+    expect(wrapper).toMatchSnapshot();
+  });
 });
