@@ -3,12 +3,14 @@
 .new-card-form {
   width: 50%;
   margin: auto;
-  padding-bottom: 4rem;
+  padding-right: 10em;
 }
 
 .new-card-form__header {
   text-align: center;
   text-transform: uppercase;
+  font-size: 1.5em;
+
 }
 
 .new-card-form__form {
