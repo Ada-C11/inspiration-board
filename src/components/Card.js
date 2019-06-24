@@ -12,8 +12,6 @@ class Card extends Component {
       id: this.props.id,
       text: this.props.text,
       emoji: this.props.emoji,
-      onDeleteCardCallback: this.props.onDeleteCardCallback,
-
     }
     
   }
@@ -26,8 +24,7 @@ class Card extends Component {
 
 
   render() {
-    // console.log(this.state)
-
+    
     let emojiIcon;
     if (this.props.emoji !== undefined){
       emojiIcon = emoji.getUnicode(this.state.emoji || '')

@@ -41,7 +41,6 @@ class Board extends Component {
 
   onDeleteCardCallback = (cardId) => {
 
-
     axios.delete(` https://inspiration-board.herokuapp.com/cards/${cardId}`)
     .then((response) => {
     
@@ -49,9 +48,35 @@ class Board extends Component {
       this.setState({
         cards: newCardsList
       })
-      
+
+    })
+    .catch((error) => {
+      this.setState({
+        errorMessage: error.message
+      })
     })
     
+
+  }
+
+  onAddCardCallback = (card) => {
+
+    axios.post(`${this.state.url}/${this.state.boardName}/cards`,card)
+    .then((response)=>{
+      console.log(response)
+      let updatedCardList = this.state.cards
+      updatedCardList.unshift(response.data)
+
+      this.setState({
+        cards: updatedCardList
+      })
+
+    })
+    .catch((error)=>{
+      this.setState({
+        errorMessage: error.message
+      })
+    })
 
   }
 
@@ -59,11 +84,12 @@ class Board extends Component {
   render() {
     let cards = this.state.cards.map((card)=>{
       return(
-        <Card key={card.card.id} id={card.card.id} text={card.card.text} emoji={card.card.emoji} onDeleteCardCallback={this.onDeleteCardCallback}/>)
+        <Card key={card.card.id} id={card.card.id} text={card.card.text} emoji={card.card.emoji} onDeleteCardCallback={this.onDeleteCardCallback} />)
   })
   
     return (
       <div className="board">
+        <NewCardForm onAddCardCallback={this.onAddCardCallback}/>
         {cards}
       </div>
     )
@@ -72,7 +98,8 @@ class Board extends Component {
 }
 
 Board.propTypes = {
-
+  url: PropTypes.string,
+  boardName: PropTypes.string,
 };
 
 export default Board;
