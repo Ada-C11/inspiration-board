@@ -33,7 +33,6 @@ class NewCardForm extends Component {
 
         updatedState[field] = value;
         this.setState(updatedState);
-        console.log(this.state)
     }    
     render() {
         const emoji = require("emoji-dictionary");

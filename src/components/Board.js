@@ -50,8 +50,7 @@ class Board extends Component {
   }
 
   addCard = (card) => {
-    console.log(card);
-
+    
     const cardDataToSendToApi = {
       text: card.text,
       emoji: card.emoji,
@@ -97,9 +96,9 @@ class Board extends Component {
       <div className="board">
         {errorSection}
         
-          <NewCardForm addCardCallback={this.addCard}/>
-          {cards}
-       
+        <NewCardForm addCardCallback={this.addCard}/>
+        {cards}
+        
       </div>
     )
   }
