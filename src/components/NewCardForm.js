@@ -8,15 +8,48 @@ const EMOJI_LIST = ["", "heart_eyes", "beer", "clap", "sparkling_heart", "heart_
 class NewCardForm extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      addCard: this.props.addCardCallback,
+      cardContents: {
+        text: "",
+        emoji: ""
+      }
+    };
+
+  };
+
+  submitHandler = (event) => {
+    event.preventDefault();
+
+    const cardContents = this.state.cardContents;
+
+    this.state.addCard(cardContents);
+
+    this.setState({cardContents: {
+      text: "",
+      emoji: ""
+    }})
+  };
+
+  onInputChange = (event) => {
+    const updatedState = this.state.cardContents;
+
+    const field = event.target.name;
+    const value = event.target.value;
+
+    updatedState[field] = value;
+    this.setState({cardContents: updatedState});
   }
 
+  // onInputChange() and submitHandler comes from the Ada Developers' Academy instructors
+  // https://github.com/Ada-C11/ada-pets-react/blob/sockets-axios/src/components/NewPetForm.js
+
   render () {
-    const emojiOptions = EMOJI_LIST.map((icon) => {
+    const emojiOptions = EMOJI_LIST.map((icon, i) => {
       if (icon === "") {
-        return <option value={icon} ></option>
+        return <option value={icon} key={i}></option>
         } else {
-        return <option value={icon} >{emoji.getUnicode(`${icon}`)}</option>
+        return <option value={icon} key={i}>{emoji.getUnicode(`${icon}`)}</option>
         };
     })
 
@@ -25,23 +58,27 @@ class NewCardForm extends Component {
         <h3 className="new-card-form__header">
           Add a Card
         </h3>
-        <form className="new-card-form__form">
-          <label for="text" className="new-card-form__form-label">
+        <form className="new-card-form__form" onSubmit={this.submitHandler}>
+          <label className="new-card-form__form-label">
           Text (optional)
           </label>
-          <textarea name="text" className="new-card-form__form-textarea" />
-          <label for="emoji" className="new-card-form__form-label">
+          <textarea name="text" value={this.state.cardContents.text} className="new-card-form__form-textarea" onChange={this.onInputChange}/>
+          <label className="new-card-form__form-label">
           Emoji (optional)
           </label>
-          <select name="emoji" className="new-card-form__form-select">
+          <select name="emoji" className="new-card-form__form-select" value={this.state.cardContents.emoji} onChange={this.onInputChange} >
             {emojiOptions}
           </select>  
+          <input type="submit" value="Add Card to Board" className="new-card-form__form-button" />
         </form>
-        <button type="submit" className="new-card-form__form-button">Add Card to Board</button>
       </section>
     )
   }
 
+};
+
+NewCardForm.propTypes = {
+  addCardCallback: PropTypes.func,
 };
 
 export default NewCardForm;
