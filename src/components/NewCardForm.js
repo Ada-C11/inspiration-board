@@ -11,6 +11,9 @@ const EMOJI_LIST = [
   "sparkling_heart",
   "heart_eyes_cat",
   "dog",
+  "pizza",
+  "see_no_evil",
+  "apple",
 ];
 
 const emojiList = EMOJI_LIST.map((oneEmoji, i) => {
@@ -32,7 +35,7 @@ class NewCardForm extends Component {
     event.preventDefault();
 
     const card = this.state;
-    
+
     this.props.addCardCallback(card);
   };
 
