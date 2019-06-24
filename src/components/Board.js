@@ -59,16 +59,39 @@ class Board extends Component {
     })
   }
 
+  onAddCard = (card) => {
+    const endpoint = this.props.url + this.props.boardName + '/cards'
+    
+    axios.post(endpoint, {text: card.quote, emoji: card.Emoji})
+    .then((response) => {
+      const newCardList = this.state.cards
+      newCardList.push(card)
+
+      this.setState({cards: newCardList});
+      console.log(response.data);
+    })
+
+    .catch((error) => {
+      console.log(error);
+    })
+  }
+
   render() {
     const display = this.state.cards.map((card) => {
       const { id, quote, Emoji} = card;
       return (<section>
-        <Card quote={quote} Emoji={Emoji} onDeleteCard={this.onDeleteCard} id={id}/>
+        <Card 
+          id={id}
+          quote={quote} 
+          Emoji={Emoji} 
+          onDeleteCard={this.onDeleteCard} 
+        />
       </section>);
     });
 
     return (
       <div className="board">
+        <NewCardForm onAddCard={this.onAddCard}/>
         {display}
       </div>
     );     
