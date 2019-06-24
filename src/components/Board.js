@@ -17,6 +17,7 @@ class Board extends Component {
 
     this.state = {
       cards: [],
+      error: null,
     }
   }
 
@@ -47,11 +48,23 @@ class Board extends Component {
 
     axios.delete(this.props.url + 'cards/' + cardId)
       .then((response) => {
-        console.log(response.data)
+        console.log(`Deleted card ${response.data.card.id}`)
       })
       .catch((error) => {
         this.setState({ error: error.message });
       })
+  }
+
+  addCardCallback = (card) => {
+    axios.post(this.props.url + 'boards/' + this.props.boardName + '/cards', card)
+      .then((response) => {
+        this.setState({
+          cards: [...this.state.cards, response.data.card]
+        });
+      })
+      .catch((error) => {
+        this.setState({error: error.message});
+      });
   }
 
   render() {
@@ -71,6 +84,7 @@ class Board extends Component {
   return (
     <div className="board">
       {cardComponents}
+      <NewCardForm addCardCallback={this.addCardCallback} />
     </div>)
   }
 }
