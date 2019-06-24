@@ -14,9 +14,9 @@ class NewCardForm extends Component {
   render () {
     const emojiOptions = EMOJI_LIST.map((icon) => {
       if (icon === "") {
-        return <option value={icon}></option>
+        return <option value={icon} ></option>
         } else {
-        return <option value={icon}>{emoji.getUnicode(`${icon}`)}</option>
+        return <option value={icon} >{emoji.getUnicode(`${icon}`)}</option>
         };
     })
 
@@ -29,14 +29,15 @@ class NewCardForm extends Component {
           <label for="text" className="new-card-form__form-label">
           Text (optional)
           </label>
-          <input type="text" name="text" />
+          <textarea name="text" className="new-card-form__form-textarea" />
           <label for="emoji" className="new-card-form__form-label">
           Emoji (optional)
           </label>
-          <select name="emoji" >
+          <select name="emoji" className="new-card-form__form-select">
             {emojiOptions}
           </select>  
         </form>
+        <button type="submit" className="new-card-form__form-button">Add Card to Board</button>
       </section>
     )
   }
