@@ -1,10 +1,10 @@
 import React from 'react';
-import Board from './Board.js';
+import Card from './Card.js';
 import { shallow } from 'enzyme';
 
-describe('Board', () => {
+describe('Card', () => {
   test('that it matches an existing snapshot', () => {
-    const wrapper = shallow( <Board name="evelynn" />);
+    const wrapper = shallow(<Card text="" emoji="heart_eyes" id="1" deleteHandler={() => {}} />);
 
     expect(wrapper).toMatchSnapshot();
   });
