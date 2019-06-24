@@ -48,7 +48,7 @@ class Board extends Component {
 
       })
       .catch((error) => {
-        this.setState({ error: error.message });
+        this.setState({ error: `${error.message} while loading your cards!` });
       });
   }
 
