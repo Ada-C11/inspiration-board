@@ -18,7 +18,7 @@ class NewCardForm extends Component {
 
   generateEmojiListOptions = () => {
     return EMOJI_LIST.map((emojiItem, index) => {
-      return <option value={emojiItem} key={index}>{emoji.getUnicode(emojiItem)}</option>
+      return <option key={index} value={emojiItem}> {emoji.getUnicode(emojiItem)} </option>
     })
   }
 
