@@ -10,6 +10,7 @@ class Board extends Component {
   constructor(props) {
     super(props);
     this.state = { cards: [] };
+    console.log(props);
   }
 
   componentDidMount = () => {
