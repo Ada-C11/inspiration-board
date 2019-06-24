@@ -21,6 +21,8 @@ class Board extends Component {
       message: 'Loading Cards'
     });
 
+    this.getCards();
+
     axios
       .get(`${this.props.url}${this.props.boardName}/cards`)
       .then(response => {
@@ -39,20 +41,20 @@ class Board extends Component {
       })
       .catch(response => {
         this.setState({
-          message: `Error: ${response.data}`
+          message: `Problem! ${response.data}`
         });
       });
   }
 
   getCards = () => {
-    return this.state.cards.map((card, index) => {
+    return this.state.cards.map((card, i) => {
       return (
         <Card
-          key={index}
+          key={i}
           text={card.text}
           emoji={card.emoji}
           deleteCardCallback={this.deleteCard}
-          id={card.id === undefined ? null : card.id}
+          id={card.id}
         />
       );
     });
