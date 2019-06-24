@@ -5,7 +5,6 @@ import axios from 'axios';
 import './Board.css';
 import Card from './Card';
 import NewCardForm from './NewCardForm';
-import CARD_DATA from '../data/card-data.json';
 
 class Board extends Component {
   constructor(props) {
@@ -40,6 +39,7 @@ class Board extends Component {
       this.setState({ error: error.message });
     });
   }
+
   componentDidMount() {
     this.getCards();
   }
@@ -54,11 +54,29 @@ class Board extends Component {
     });
   }
 
+  addCard = (card) => {
+    axios.post(`${this.props.url}${this.props.boardName}/cards`, card)
+    .then((response) => {
+      const cardList = [...this.state.cards];
+      cardList.push(card);
+      this.setState({ cards: cardList });
+    })
+    .catch((error) => {
+      this.setState({ error: error.message });
+    });
+  }
+
   render() {
     return (
-      <div className="board">
-        {this.renderCards()}
+      <div>
+        <div className="board">
+          {this.renderCards()}
+        </div>
+        <section>
+          < NewCardForm newCardCallback={this.addCard}/>
+        </section>
       </div>
+      
     )
   }
 
