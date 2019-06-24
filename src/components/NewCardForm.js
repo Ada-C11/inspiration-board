@@ -20,7 +20,7 @@ class NewCardForm extends Component {
       text: this.state.text,
       emoji: this.state.emoji
     }
-    
+
     console.log(quote)
     this.props.addQuoteCallback(quote);
     this.clearForm();
