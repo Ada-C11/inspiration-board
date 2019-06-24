@@ -19,6 +19,7 @@ class Board extends Component {
   render() {
     let cards = this.state.cards.map(card => <Card
         text = {card.text}
+        emoji = {card.emoji}
       />);
 
     return (

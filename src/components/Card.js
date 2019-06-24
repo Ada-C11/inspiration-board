@@ -1,24 +1,27 @@
 import React, { Component } from 'react';
 //import PropTypes from 'prop-types';
-//import emoji from 'emoji-dictionary';
+import emoji from 'emoji-dictionary';
 
 import './Card.css';
 
 class Card extends Component {
 
-  // constructor(props) {
-  //   super(props);
-
-  //   // this.state = {
-  //   //   text: ,
-  //   //   //emoji://optional,
-  //   // };
-  // }
-
   render() {
+    let emojiSymbol = "";
+    if (this.props.emoji) {
+      emojiSymbol = emoji.getUnicode(this.props.emoji);
+    }
+
     return (
       <div className="card">
-        {this.props.text}
+        <div className="card__content">
+          <div className="card__content-text">
+            {this.props.text}
+          </div>
+          <div className="card__content-emoji">
+            {emojiSymbol}
+          </div>
+        </div>
       </div>
     )
   }
