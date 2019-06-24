@@ -43,6 +43,11 @@
 }
 
 .card__delete {
-  align-self: start;
+  align-self: flex-end;
   font-family: 'Permanent Marker', Helvetica, sans-serif;
+  background:  #F4FF81;
+  border: none;
+  padding-right: 20px;
+  margin-top: -35px;
+  font-size: 1.5em;
 }

@@ -12,6 +12,7 @@ class App extends Component {
           </h1>
         </header>
         <Board
+          base="https://inspiration-board.herokuapp.com/"
           url="https://inspiration-board.herokuapp.com/boards/"
           boardName={`SavvySav`}
         />

@@ -32,7 +32,7 @@ class Board extends Component {
       });
   };
 
-  postCards = cardPostParams => {
+  postCard = cardPostParams => {
     const { url, boardName } = this.props;
     axios
       .post(url.concat(boardName).concat('/cards'), cardPostParams)
@@ -49,9 +49,27 @@ class Board extends Component {
       });
   };
 
+  deleteCard = cardId => {
+    const { base } = this.props;
+    axios
+      .delete(base.concat('cards/').concat((1000000).toString()))
+      .then(response => {
+        const cardsState = this.state.cards.filter(card => {
+          return card.id !== cardId;
+        });
+        this.setState({ cards: cardsState });
+      })
+      .catch(error => {
+        if (error.response.data.cause) {
+          console.log(error.response.data);
+          this.setState({ errorMessages: error.response.data.cause });
+        }
+      });
+  };
+
   cardCollection = () => {
     return this.state.cards.map((card, i) => {
-      return <Card {...card} key={i} />;
+      return <Card {...card} key={i} deleteCardCallback={this.deleteCard} />;
     });
   };
 
@@ -59,7 +77,7 @@ class Board extends Component {
     return (
       <div className="board">
         <section>
-          <NewCardForm postCardCallback={this.postCards} />
+          <NewCardForm postCardCallback={this.postCard} />
         </section>
         <section className="board-card-container__display ">
           {this.cardCollection()}
