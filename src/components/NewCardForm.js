@@ -15,7 +15,7 @@ const EMOJI_LIST = [
 
 const emojiList = EMOJI_LIST.map((oneEmoji, i) => {
     return (
-        <option value={`${emoji}`}>{emoji.getUnicode(`${oneEmoji}`)}</option>
+        <option value={`${oneEmoji}`}>{emoji.getUnicode(`${oneEmoji}`)}</option>
     )
 });
 

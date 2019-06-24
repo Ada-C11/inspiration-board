@@ -5,7 +5,7 @@ import emoji from "emoji-dictionary";
 import "./Card.css";
 
 //class Card extends Component {
-const Card = props => {
+const Card = (props) => {
   //console.log(emoji.getUnicode("heart_eyes"));
   const { text, cardEmoji, deleteCardCallBack, id } = props;
 

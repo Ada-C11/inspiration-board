@@ -42,7 +42,13 @@ class Board extends Component {
       .then((response) => {
         console.log(card);
         let newcardsUpdate = this.state.cards;
-        newcardsUpdate.unshift({ card }); //add new items
+        newcardsUpdate.unshift({ 
+          card: {
+          text: card.text,
+          id: card.id,
+          emoji: card.cardEmoji,
+          } 
+        }); //add new items
         this.setState({
           cards: newcardsUpdate
         });
