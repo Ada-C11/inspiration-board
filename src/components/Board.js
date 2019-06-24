@@ -19,7 +19,7 @@ class Board extends Component {
 
   renderCards = () => {
     if (this.state.cards) {
-      const cards = this.state.cards.map(card => <Card text={card.text} emoji={card.emoji}/>);
+      const cards = this.state.cards.map(card => <Card text={card.card.text} emoji={card.card.emoji}/>);
       return cards; 
     }
   }
@@ -32,9 +32,10 @@ class Board extends Component {
 
   componentDidMount() {
     // this.addCards();
-    axios.get(`${this.props.url}${this.props.boardName}`)
+    axios.get(`${this.props.url}${this.props.boardName}/cards`)
       .then((response) => {
-        this.setState({ cards: response.data.cards });
+        console.log(response)
+        this.setState({ cards: response.data });
       })
       .catch((error) => {
         this.setState({ error: error.message });
