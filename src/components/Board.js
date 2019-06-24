@@ -14,6 +14,8 @@ class Board extends Component {
     this.state = {
       cards: [],
     };
+
+    this.deleteCardCallback = this.deleteCardCallback.bind(this);
   }
 
   componentDidMount() {
@@ -29,10 +31,27 @@ class Board extends Component {
     });
   }
 
+  deleteCardCallback(cardId) {
+    // remove card from the board
+    const index = this.state.cards.findIndex(
+      card => card.id === cardId);
+    const cards = this.state.cards;
+    cards.splice(index, 1);
+    this.setState({
+      cards: cards
+    })
+
+    // deleted from API
+    const url = " https://inspiration-board.herokuapp.com/cards/" + cardId
+    axios.delete(url)
+  }
+
   render() {
     let cards = this.state.cards.map(card => <Card
+        id = {card.id}
         text = {card.text}
         emoji = {card.emoji}
+        deleteCallback = {this.deleteCardCallback}
       />);
 
     return (

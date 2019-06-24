@@ -6,6 +6,15 @@ import './Card.css';
 
 class Card extends Component {
 
+  constructor(props) {
+    super(props);
+    this.onDeleteClicked = this.onDeleteClicked.bind(this);
+  }
+
+  onDeleteClicked() {
+    this.props.deleteCallback(this.props.id);
+  }
+
   render() {
     let emojiSymbol = "";
     if (this.props.emoji) {
@@ -21,6 +30,11 @@ class Card extends Component {
           <div className="card__content-emoji">
             {emojiSymbol}
           </div>
+        </div>
+        <div className="card__delete">
+          <button onClick={this.onDeleteClicked}>
+            delete
+          </button>
         </div>
       </div>
     )
