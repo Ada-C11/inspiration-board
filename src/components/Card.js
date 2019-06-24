@@ -7,25 +7,23 @@ import Axios from 'axios';
 
 class Card extends Component {
 
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      id: props.id, 
-      text: props.text, 
-      emoji: props.emoji ? props.emoji : '',
-    }
-  }
-
   render() {
-    
+    const id = this.props.id
+    const emojis = (this.props.emoji) ? this.props.emoji : ""
     return (
       <div className="card">
         <section className="card__content">
-          <p className="card__content-text">{this.state.text}</p>
-          <p className="card__content-text">{emoji.getUnicode(this.state.emoji)}</p>
+          <div className="card__content-text">
+            {this.props.text}
+          </div>
+          <div className="card__content-emoji">
+            {emoji.getUnicode(emojis)}
+          </div>
+          <div>
+            <button onClick={() => this.props.onDeleteCardCallback(id)}
+            className="card__delete"> Delete Card </button> 
+          </div>
         </section>
-        Card
       </div>
     )
   }

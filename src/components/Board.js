@@ -33,15 +33,32 @@ class Board extends Component {
         })
         this.setState({
           cards
-        })
+        });
       })
       .catch((error) => {
-        this.setState({ error: error.message })
-      })
+        this.setState({ errorMessage: error.message })
+      });
   }
 
-  onDeleteCard =(cardID) => {
+  onDeleteCard =(id) => {
+    const myURL = this.props.url + this.props.boardName + "/cards"; 
+    const updatedCards = this.state.cards.filter(card => card.id !== id);
 
+    this.setState({
+      cards: updatedCards
+    })
+
+    axios.delete(myURL/`${id}`)
+    .then((response) => {
+      console.log('Card deleted id:', response.data.card.id)
+    })
+    .catch((error) => {
+      this.setState({
+        errorMessage: error.message
+      })
+    })
+
+    
   }
   //from Ada Pets
   addCardCallback = (card) => {
@@ -59,7 +76,7 @@ class Board extends Component {
         this.setState({cards: updatedCard});
       })
       .catch((error) => {
-        this.setState({ error: error.message })
+        this.setState({ errorMessage: error.message })
     });
   }
 
@@ -68,13 +85,19 @@ class Board extends Component {
     const displayCards = this.state.cards.map((card, i) => {
       return (<Card
                 key={i}
-                id={card["card"].id}
-                text={text["card"].text}
-                emoji={emoji["card"].emoji} 
+                id={card.id}
+                text={card.text}
+                emoji={card.emoji} 
+                onDeleteCardCallback={this.onDeleteCard}
               />)
     })
+
+    const errors = this.state.error;
     return (
       <section>
+        <div className="validation-errors-display">
+          {errors ? errors : this.state.message}
+        </div>
         <div className="board">
           <NewCardForm addCardCallback={this.addCardCallback} />
           {displayCards}
