@@ -6,8 +6,7 @@ import './NewCardForm.css';
 class NewCardForm extends Component {
 
     static propTypes = {
-        text: PropTypes.string.isRequired,
-        emoji: PropTypes.string,
+        addCardCallback: PropTypes.func,
     }
 
     constructor(props) {
@@ -37,8 +36,8 @@ class NewCardForm extends Component {
 
     render(){
         const EMOJI_LIST = ["", "heart_eyes", "beer", "clap", "sparkling_heart", "heart_eyes_cat", "dog"]
-        const emojis = EMOJI_LIST.map((emoj) => {
-            return (<option value={emoj}>{emoji.getUnicode(emoj)}</option>)
+        const emojis = EMOJI_LIST.map((emoj, i) => {
+            return (<option key={i} value={emoj}>{emoji.getUnicode(emoj)}</option>)
         });
         return (
             <form className="new-card-form__form" onSubmit={this.addCard}>

@@ -6,12 +6,8 @@ import './Card.css';
 
 class Card extends Component {
 
-  // onDelete = () => {
-  //   this.props.deleteCallback(this.props.id)
-  // }
-
   render() {
-  const {id, text, emojiText, deleteCallback} = this.props;
+  const {text, emojiText, deleteCallback} = this.props;
 
     return (
       <div className="card card__content">
@@ -29,7 +25,7 @@ class Card extends Component {
 }
 
 Card.propTypes = {
-  id: PropTypes.number.isRequired,
+  id: PropTypes.number,
   text: PropTypes.string,
   emojiText: PropTypes.string,
   deleteCallback: PropTypes.func
