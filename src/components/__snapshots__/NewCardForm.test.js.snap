@@ -1,0 +1,81 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NewCardForm that it matches an existing snapshot 1`] = `
+<div
+  className="new-card-form"
+>
+  <form
+    className="new-card-form__form"
+    onSubmit={[Function]}
+  >
+    <header
+      className="new-card-form__header"
+    >
+      <h3>
+        Add a Card
+      </h3>
+    </header>
+    <label
+      className="new-card-form__form-label"
+    >
+      Text:
+      <input
+        className="new-card-form__form-textarea"
+        name="text"
+        onChange={[Function]}
+        type="text"
+      />
+    </label>
+    <label
+      className="new-card-form__form-label"
+    >
+      Emoji:
+      <select
+        className="new-card-form__form-select"
+        name="emoji"
+        onChange={[Function]}
+        value=""
+      >
+        <option
+          value=""
+        />
+        <option
+          value="heart_eyes"
+        >
+          😍
+        </option>
+        <option
+          value="beer"
+        >
+          🍺
+        </option>
+        <option
+          value="clap"
+        >
+          👏
+        </option>
+        <option
+          value="sparkling_heart"
+        >
+          💖
+        </option>
+        <option
+          value="heart_eyes_cat"
+        >
+          😻
+        </option>
+        <option
+          value="dog"
+        >
+          🐶
+        </option>
+      </select>
+    </label>
+    <input
+      className="new-card-form__form-button"
+      type="submit"
+      value="Add a Card"
+    />
+  </form>
+</div>
+`;
