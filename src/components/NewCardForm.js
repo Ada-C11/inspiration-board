@@ -43,6 +43,10 @@ class NewCardForm extends Component {
 
     render(){
         console.log(emoji)
+       
+       
+
+
         return(
             <form className='new-card-form'>
                 <h3 className='new-card-form__header'>
@@ -72,6 +76,7 @@ class NewCardForm extends Component {
                         onChange={this.onInputChange}
                         >
                         </input>
+                        
                     </label>
                     
                     <input className="new-card-form__form-button" type="submit" name="submit" value="Add a Card" onClick={this.onAddCard}/>
