@@ -5,15 +5,28 @@ import axios from 'axios';
 import './Board.css';
 import Card from './Card';
 import NewCardForm from './NewCardForm';
-import CARD_DATA from '../data/card-data.json';
+//import CARD_DATA from '../data/card-data.json';
 
 class Board extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
-      cards: CARD_DATA["cards"],
+      cards: [],
     };
+  }
+
+  componentDidMount() {
+    this.getCards();
+  }
+
+  getCards() {
+    const url = this.props.url + this.props.boardName + '/cards';
+    axios.get(url).then((response) => {
+      this.setState({
+        cards: response.data.map((card) => card.card)
+      });
+    });
   }
 
   render() {
@@ -32,7 +45,6 @@ class Board extends Component {
       </div>
     )
   }
-
 }
 
 Board.propTypes = {
