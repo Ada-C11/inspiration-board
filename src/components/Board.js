@@ -52,7 +52,7 @@ class Board extends Component {
   deleteCard = cardId => {
     const { base } = this.props;
     axios
-      .delete(base.concat('cards/').concat((1000000).toString()))
+      .delete(base.concat('cards/').concat(cardId.toString()))
       .then(response => {
         const cardsState = this.state.cards.filter(card => {
           return card.id !== cardId;
