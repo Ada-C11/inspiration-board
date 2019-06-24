@@ -1,0 +1,137 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<App /> that it renders App with shallow rendering 1`] = `
+<section>
+  <header
+    className="header"
+  >
+    <h1
+      className="header__h1"
+    >
+      <span
+        className="header__text"
+      >
+        Inspiration Board
+      </span>
+    </h1>
+  </header>
+  <Board
+    boardName="Faiza"
+    url="https://inspiration-board.herokuapp.com/"
+  />
+</section>
+`;
+
+exports[`<App /> will match the last snapshot with deep rendering 1`] = `
+<App>
+  <section>
+    <header
+      className="header"
+    >
+      <h1
+        className="header__h1"
+      >
+        <span
+          className="header__text"
+        >
+          Inspiration Board
+        </span>
+      </h1>
+    </header>
+    <Board
+      boardName="Faiza"
+      url="https://inspiration-board.herokuapp.com/"
+    >
+      <div
+        className="board"
+      >
+        <NewCardForm
+          addCardCallback={[Function]}
+        >
+          <form
+            className="new-card-form"
+            onSubmit={[Function]}
+          >
+            <h3>
+               Add a Card
+            </h3>
+            <div>
+              <label
+                htmlFor="text"
+              >
+                 Text: 
+              </label>
+              <input
+                name="text"
+                onChange={[Function]}
+                type="text"
+                value=""
+              />
+              <label
+                htmlFor="emoji"
+              />
+              <select
+                name="emoji"
+                onChange={[Function]}
+                type="text"
+                value=""
+              >
+                <option
+                  value=""
+                >
+                  Add emojis to your message!
+                </option>
+                <option
+                  value=""
+                >
+                  None
+                </option>
+                <option
+                  value="heart_eyes"
+                >
+                  Heart Eyes
+                </option>
+                <option
+                  value="beer"
+                >
+                  Beer
+                </option>
+                <option
+                  value="clap"
+                >
+                  Clap
+                </option>
+                <option
+                  value="sparkling_heart"
+                >
+                  Sparkling Heart
+                </option>
+                <option
+                  value="heart_eyes_cat"
+                >
+                  Heart Eyes Cat
+                </option>
+                <option
+                  value="dog"
+                >
+                  Dog
+                </option>
+              </select>
+            </div>
+            <div
+              className=".new-card-form__form-button"
+            >
+              <input
+                className="btn btn-success new-card-form--submit"
+                name="submit"
+                type="submit"
+                value="Add a Card"
+              />
+            </div>
+          </form>
+        </NewCardForm>
+      </div>
+    </Board>
+  </section>
+</App>
+`;

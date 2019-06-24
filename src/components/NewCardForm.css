@@ -4,6 +4,13 @@
   width: 50%;
   margin: auto;
   padding-bottom: 4rem;
+  padding-left: 20rem;
+  padding-right: 30rem; 
+}
+
+.new-card-form .title{
+  display: flex;
+  text-align: center;
 }
 
 .new-card-form__header {
