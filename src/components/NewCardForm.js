@@ -31,7 +31,7 @@ class NewCardForm extends Component {
     
     handleSubmit = (event) => {
         event.preventDefault();
-        this.props.newSubmissionCallback({
+        this.props.newCardCallback({
             text: this.state.text,
             emoji: this.state.emoji,
         });
@@ -59,13 +59,13 @@ class NewCardForm extends Component {
                     <div>
                     <label for="emoji" nameClass="new-card-form__form-label">
                         Emoji:
-                        <select value={this.state.emoji} onChange={this.onChangeHandler} className="new-card-form__form-select">
+                        <select name="emoji" value={this.state.emoji} onChange={this.onChangeHandler} className="new-card-form__form-select">
                             {this.createEmojis()}
                         </select>
                     </label>
                     </div>
                     <div>
-                        <input type="submit" value="Add Card" className="new-card-form__form-button" onClick={() => this.newCardCallback()}/>
+                        <input type="submit" value="Add Card" className="new-card-form__form-button"/>
                     </div>
                 </form>
             </div>

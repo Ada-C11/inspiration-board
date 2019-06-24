@@ -5,6 +5,7 @@ import axios from 'axios';
 import './Board.css';
 import Card from './Card';
 import NewCardForm from './NewCardForm';
+import { createReadStream } from 'fs';
 
 class Board extends Component {
   constructor(props) {
@@ -58,7 +59,9 @@ class Board extends Component {
     axios.post(`${this.props.url}${this.props.boardName}/cards`, card)
     .then((response) => {
       const cardList = [...this.state.cards];
-      cardList.push(card);
+      const newCard = response.data.card;
+      const objCard = {card: newCard}
+      cardList.push(objCard);
       this.setState({ cards: cardList });
     })
     .catch((error) => {
