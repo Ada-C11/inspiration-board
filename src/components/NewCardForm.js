@@ -61,9 +61,10 @@ class NewCardForm extends Component {
                   onChange={this.onChangeHandler}
                 >
                   <option value="" disabled>Optional emoji</option>
-                  {EMOJI_LIST.map(option => {
+                  {EMOJI_LIST.map((option, i) => {
                     return (
                       <option
+                        key={i}
                         value={option}
                         label={option}>{option}
                       </option>

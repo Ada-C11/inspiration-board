@@ -37,40 +37,47 @@ exports[`NewCardForm that it matches an existing snapshot 1`] = `
           Optional emoji
         </option>
         <option
+          key="0"
           label=""
           value=""
         />
         <option
+          key="1"
           label="heart_eyes"
           value="heart_eyes"
         >
           heart_eyes
         </option>
         <option
+          key="2"
           label="beer"
           value="beer"
         >
           beer
         </option>
         <option
+          key="3"
           label="clap"
           value="clap"
         >
           clap
         </option>
         <option
+          key="4"
           label="sparkling_heart"
           value="sparkling_heart"
         >
           sparkling_heart
         </option>
         <option
+          key="5"
           label="heart_eyes_cat"
           value="heart_eyes_cat"
         >
           heart_eyes_cat
         </option>
         <option
+          key="6"
           label="dog"
           value="dog"
         >
