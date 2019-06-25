@@ -1,8 +1,6 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import emoji from 'emoji-dictionary';
-import axios from 'axios';
-
 import './Card.css';
 
 const Card = (props) => {
@@ -12,7 +10,6 @@ const Card = (props) => {
   } 
 
   return (
-    //.card__delete somewhere
     <div className="card">
       <p onClick={ onClickDelete } className='card__delete'>x</p>
       <div className='card__content'>
