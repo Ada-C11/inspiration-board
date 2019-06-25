@@ -104,20 +104,10 @@ class Board extends Component {
 
 }
 
-// const cardForms = this.state.cards.map((card, i) => {
-//   return (
-//     <Card
-//       key={i}
-//       id={card.card.id}
-//       text={card.card.text}
-//       cardEmoji={card.card.emoji}
-//       deleteCardCallback={this.deleteCardCallback}
-//     />
-//   )
-// });
-
 Board.propTypes = {
-  cards: PropTypes.object
+  cards: PropTypes.object,
+  emoji: PropTypes.string,
+  text: PropTypes.string,
 };
 
 export default Board;
