@@ -107,7 +107,7 @@ class Board extends Component {
                  <NewCardForm addCardCallback={this.addCard}/>
                </span>
              {cardList}
-        </section
+        </section>
       </div>
     );
   }

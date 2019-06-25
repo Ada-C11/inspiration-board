@@ -10,7 +10,6 @@ describe('App', () => {
     ReactDOM.render(<App />, div);
     ReactDOM.unmountComponentAtNode(div);
   });
-
 });
 
 it('matches the snapshot', ()=>{
