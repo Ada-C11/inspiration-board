@@ -22,7 +22,8 @@ class Card extends Component {
   render() {
     return(
       <div className="card">
-        {this.props.text} {this.props.emoji}
+        {this.renderText()}
+        {this.renderEmoji()}
       </div>
     )
   }

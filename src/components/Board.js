@@ -4,8 +4,6 @@ import axios from 'axios';
 
 import './Board.css';
 import Card from './Card';
-import NewCardForm from './NewCardForm';
-import CARD_DATA from '../data/card-data.json';
 import emoji from 'emoji-dictionary';
 
 class Board extends Component {
@@ -13,24 +11,32 @@ class Board extends Component {
     super();
 
     this.state = {
-      cards: CARD_DATA,
+      // cards: CARD_DATA,
+      cards: []
     };
   }
 
+  renderBoard() {
+    axios.get(`${this.props.url}${this.props.boardName}/cards`)
+    .then((response) => {
+      console.log(response.data); 
+      this.setState({cards: response.data});
+      console.log(this.state.cards);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }
+
   componentDidMount() {
-    axios.get(`https://inspiration-board.herokuapp.com/boards/kan_test_board/cards`)
-  .then(function (response) {
-    console.log(response); 
-  })
-  .catch(function (error) {
-    console.log(error);    
-  });
+    this.renderBoard();
   }
 
   renderCards(data) {
-    return data.cards.map((card, i) => (
-      <Card key={i} text={card.text ? card.text : ''} emoji={card.emoji ? emoji.getUnicode(card.emoji) : ''}/>
-    ))
+    console.log(data);
+    return data ? data.map((elem, i) => (
+      <Card key={i} text={elem.card.text ? elem.card.text : ''} emoji={elem.card.emoji ? emoji.getUnicode(elem.card.emoji) : ''}/>
+    )) : ''
   }
 
   render() {
