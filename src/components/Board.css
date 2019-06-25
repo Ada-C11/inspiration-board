@@ -1,9 +1,11 @@
 .board {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
-.validation-errors-display {
+/* haven't dealt with validation errors */
+.validation-errors-display { 
   text-align: center;
   margin-bottom: 2em;
 }
