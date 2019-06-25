@@ -24,6 +24,7 @@ class Card extends Component {
       <div className="card">
         {this.renderText()}
         {this.renderEmoji()}
+        <button onClick={(e) => this.props.onDelete(this.props.id, e)}>Delete card</button>
       </div>
     )
   }

@@ -32,12 +32,31 @@ class Board extends Component {
     this.renderBoard();
   }
 
+  onDelete = (id, e) => {
+    e.preventDefault();
+    console.log(id);
+    axios.delete(`https://inspiration-board.herokuapp.com/cards/${id}`)
+    .then((response) => {
+      console.log(response.data);
+      this.renderBoard();
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }
+
   renderCards(data) {
     console.log(data);
     return data ? data.map((elem, i) => (
-      <Card key={i} text={elem.card.text ? elem.card.text : ''} emoji={elem.card.emoji ? emoji.getUnicode(elem.card.emoji) : ''}/>
+      <Card key={i}
+        id={elem.card.id}
+        text={elem.card.text ? elem.card.text : ''}
+        emoji={elem.card.emoji ? emoji.getUnicode(elem.card.emoji) : ''}
+        onDelete={this.onDelete}
+      />
     )) : ''
   }
+
 
   render() {
     return (
