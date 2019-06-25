@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import emoji from 'emoji-dictionary';
 
 import './Card.css';
 
@@ -22,10 +21,8 @@ class Card extends Component {
   }
   render() {
     return(
-      // <div>{this.renderText}</div>
-      // <div>{this.renderEmoji}</div>
       <div className="card">
-        {emoji.getUnicode('100')}
+        {this.props.text} {this.props.emoji}
       </div>
     )
   }

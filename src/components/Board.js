@@ -6,13 +6,14 @@ import './Board.css';
 import Card from './Card';
 import NewCardForm from './NewCardForm';
 import CARD_DATA from '../data/card-data.json';
+import emoji from 'emoji-dictionary';
 
 class Board extends Component {
   constructor() {
     super();
 
     this.state = {
-      cards: [],
+      cards: CARD_DATA,
     };
   }
 
@@ -24,11 +25,18 @@ class Board extends Component {
   .catch(function (error) {
     console.log(error);    
   });
-}
+  }
+
+  renderCards(data) {
+    return data.cards.map((card, i) => (
+      <Card key={i} text={card.text ? card.text : ''} emoji={card.emoji ? emoji.getUnicode(card.emoji) : ''}/>
+    ))
+  }
+
   render() {
     return (
       <div>
-        <Card text="hello"/>
+        {this.renderCards(this.state.cards)}
       </div>
     )
   }
@@ -48,7 +56,7 @@ class Board extends Component {
 // });
 
 Board.propTypes = {
-
+  cards: PropTypes.object
 };
 
 export default Board;
