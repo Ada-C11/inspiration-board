@@ -8,14 +8,30 @@ class Card extends Component {
   render() {
     return (
       <div className="card">
-        Card
+        <section className="card__content">
+          <p className="card__content-text">{this.props.text}</p>
+          {this.props.emoji && (
+           <p className="card__content-emoji"> {emoji.getUnicode(this.props.emoji) ? emoji.getUnicode(this.props.emoji) : this.props.emoji}</p>
+          )}
+          <button
+           onClick={() => this.props.deleteCardCallback(this.props.id)}
+           type="button"
+           className="card__content-delete-btn"
+           aria-label="Close"
+         >
+         Delete
+         </button>
+        </section>
       </div>
-    )
+    );
   }
 }
 
 Card.propTypes = {
-
+  text: PropTypes.string.isRequired,
+  emoji1: PropTypes.string,
+  id: PropTypes.number,
+  deleteCardCallback: PropTypes.func.isRequired
 };
 
 export default Card;

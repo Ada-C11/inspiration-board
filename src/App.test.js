@@ -10,5 +10,9 @@ describe('App', () => {
     ReactDOM.render(<App />, div);
     ReactDOM.unmountComponentAtNode(div);
   });
+});
 
+it('matches the snapshot', ()=>{
+  const wrapper = shallow(<App />);
+  expect(wrapper).toMatchSnapshot();
 });
