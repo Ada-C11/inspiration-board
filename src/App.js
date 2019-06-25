@@ -13,8 +13,8 @@ render() {
         
         <Board
           url="https://inspiration-board.herokuapp.com/boards/"
-          boardName={`jessica`}
-          />
+          boardName={`jessica`} />
+          
       </section>
     );
   }

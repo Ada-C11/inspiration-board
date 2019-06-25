@@ -6,7 +6,7 @@ import './Card.css';
 const Card = (props) => {
 
   const onClickDelete = () => {
-    this.props.deleteCardCallback(this.props.id);
+    props.deleteCardCallback(props.id);
   } 
 
   return (
