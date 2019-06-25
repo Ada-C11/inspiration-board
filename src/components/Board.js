@@ -45,14 +45,17 @@ class Board extends Component {
 
   addCard = (card) => {
     const cardIds = this.state.cards.map(card => card.id);
-    const newId = Math.max(...cardIds) + 1;
+
+    // this ID is NaN until manual refresh. bug?
+    const newCard = {...card, id: Math.max(...cardIds) + 1};
+
     this.setState({
-      cards: [{...card, id: newId}, ...this.state.cards]
+      cards: [newCard, ...this.state.cards]
     });
   }
 
-  cardComponents = () => {
-    const components = this.state.cards.map(card => {
+  render() {
+    const cardComponents = this.state.cards.map(card => {
       if(card.card) { card = card.card }
 
       card.text = card.text ? card.text : "";
@@ -60,24 +63,18 @@ class Board extends Component {
 
       return (
         <Card 
-          key={card.id}
-          id={card.id}
-          text={card.text}
-          emoji={card.emoji}
-          deleteCardCallback={this.deleteCard} />
+          key={ card.id }
+          id={ card.id }
+          text={ card.text }
+          emoji={ card.emoji }
+          deleteCardCallback={ this.deleteCard } />
       )
     })
 
-    return components;
-  } 
-
-  render() {
     return (
       <div className="board">
-        <NewCardForm 
-          addCardCallback={this.addCard} />
-
-        {this.cardComponents()}
+        <NewCardForm addCardCallback={ this.addCard } />
+        { cardComponents }
       </div>
     )
   }
