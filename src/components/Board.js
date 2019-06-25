@@ -17,19 +17,16 @@ class Board extends Component {
   }
 
   componentDidMount() {
+    this.getCards();
+  }
+
+  getCards = () => {
     axios.get('https://inspiration-board.herokuapp.com/boards/jessica/cards')
     .then((response) => {
       console.log("In .then!");
 
       const cardsFM = response.data.flatMap(card => {
-        // if (card.name && card.breed && card.about) {
-          return [{
-            ...card
-            // species: pet.breed.toLowerCase()
-          }];
-        // } else {
-        //   return [];
-        // }
+          return [{ ...card }];
       });
 
       this.setState({ cards: cardsFM });
@@ -71,16 +68,29 @@ class Board extends Component {
     })
   }
 
+  addCard = (card) => {
+    const cardIds = this.state.cards.map(card => card.id)
+
+    this.setState({
+      cards: [...this.state.cards, {...card, id: Math.max(...cardIds) + 1}]
+    });
+  }
+
   cardComponents = () => {
     const components = this.state.cards.map((card, i) => {
-      card.card.text = card.card.text ? card.card.text : "";
-      card.card.emoji = card.card.emoji ? card.card.emoji : "octopus";
+      if(card.card) {
+        card = card.card;
+      }
+      console.log(card)
+
+      card.text = card.text ? card.text : "";
+      card.emoji = card.emoji ? card.emoji : "octopus";
       return (
         <Card 
           key={i}
-          id={card.card.id}
-          text={card.card.text}
-          emoji={card.card.emoji}
+          id={card.id}
+          text={card.text}
+          emoji={card.emoji}
           deleteCardCallback={this.deleteCard} />
       )
     })
@@ -90,6 +100,8 @@ class Board extends Component {
   render() {
     return (
       <div>
+        <NewCardForm 
+          addCardCallback={this.addCard}/>
         {this.cardComponents()}
       </div>
     )
