@@ -16,6 +16,16 @@ class Board extends Component {
     };
   }
 
+  componentDidMount() {
+    axios.get(`${this.props.url}${this.props.boardName}/cards`)
+      .then((response) => {
+        this.setState({ cards: response.data });
+      })
+      .catch((error) => {
+        this.setState({ error: error.message });
+      });
+  }
+
   render() {
     const allCards = CARD_DATA.map((card, i) => {
       return <div key={i}><Card text={card.text} emoji={card.emoji}/></div>
