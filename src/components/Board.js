@@ -4,6 +4,7 @@ import axios from 'axios';
 
 import './Board.css';
 import Card from './Card';
+import NewCardForm from './NewCardForm'
 import emoji from 'emoji-dictionary';
 
 class Board extends Component {
@@ -11,8 +12,9 @@ class Board extends Component {
     super();
 
     this.state = {
-      // cards: CARD_DATA,
-      cards: []
+      cards: [],
+      emoji: '',
+      text: '',
     };
   }
 
@@ -30,6 +32,30 @@ class Board extends Component {
 
   componentDidMount() {
     this.renderBoard();
+  }
+
+  handleChange = (e) => {
+    e.preventDefault();
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+    console.log(this.state.text, this.state.emoji);
+  }
+
+  handleClick = (e) => {
+    e.preventDefault();
+    console.log(this.state.text, this.state.emoji);
+    axios.post(`${this.props.url}${this.props.boardName}/cards`, {
+      text: this.state.text, 
+      emoji: this.state.emoji
+    })
+    .then((response) => {
+      console.log("Submitted ", response.data);
+      this.renderBoard();
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
   }
 
   onDelete = (id, e) => {
@@ -61,7 +87,17 @@ class Board extends Component {
   render() {
     return (
       <div>
-        {this.renderCards(this.state.cards)}
+        <div>
+          <NewCardForm
+            emoji={this.props.emoji}
+            handleChange={this.handleChange}
+            handleClick={this.handleClick}
+            text={this.props.text}
+          />
+        </div>
+        <div>
+          {this.renderCards(this.state.cards)}
+        </div>
       </div>
     )
   }
