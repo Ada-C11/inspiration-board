@@ -46,17 +46,30 @@ class Board extends Component {
     })
   }
 
-  // cardComponents = CARD_DATA.cards.map((card, i) => {
-  //   // console.log(this)
-  //   card.text = card.text ? card.text : "";
-  //   card.emoji = card.emoji ? card.emoji : "octopus";
-  //   return (
-  //     <Card 
-  //       key={i}
-  //       text={card.text}
-  //       emoji={card.emoji} />
-  //   )
-  // })
+  deleteCard = (id) => {
+    axios.delete(`https://inspiration-board.herokuapp.com/cards/${id}`)
+    .then((response) => {
+      console.log("In .then!");
+      const newCards = this.state.cards
+      newCards.forEach((card, i) => {
+        if(card.card.id === id) {
+          newCards.splice(i, 1);
+        }
+      });
+    
+      this.setState({ cards: newCards });
+
+      console.log(this.state.cards)
+
+    })
+    .catch((error) => {
+      console.log("In .catch!");
+
+      this.setState({
+        errorMessage: error.message
+      })
+    })
+  }
 
   cardComponents = () => {
     const components = this.state.cards.map((card, i) => {
@@ -65,8 +78,10 @@ class Board extends Component {
       return (
         <Card 
           key={i}
+          id={card.card.id}
           text={card.card.text}
-          emoji={card.card.emoji} />
+          emoji={card.card.emoji}
+          deleteCardCallback={this.deleteCard} />
       )
     })
     return components
