@@ -19,21 +19,21 @@
   grid-gap: .8em;
 }
 
-.new-card-form__form-label  {
+.new-card-form__form label  {
   grid-column: labels;
   grid-row: auto;
 }
 
-.new-card-form__form-select,
-.new-card-form__form-textarea,
-.new-card-form__form-button {
+.new-card-form__form select,
+.new-card-form__form textarea,
+.new-card-form__form button {
   font-family: 'Raleway', sans-serif;
   font-size: 1.25em;
   grid-column: controls;
   grid-row: auto;
 }
 
-.new-card-form__form-button {
+.new-card-form__form button {
   background-color: inherit;
   border: 1px solid black;
   font-size: 1em;

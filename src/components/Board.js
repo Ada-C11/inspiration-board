@@ -1,33 +1,32 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import axios from 'axios';
+//import PropTypes from 'prop-types';
 
 import './Board.css';
 import Card from './Card';
-import NewCardForm from './NewCardForm';
-import CARD_DATA from '../data/card-data.json';
 
 class Board extends Component {
-  constructor() {
-    super();
-
-    this.state = {
-      cards: [],
-    };
-  }
-
   render() {
+    let cards = this.props.cards.map(card => <Card
+        id = {card.id}
+        text = {card.text}
+        emoji = {card.emoji}
+        deleteCallback = {this.props.deleteCardCallback}
+      />);
+
     return (
       <div>
-        Board
+        Chantal's Board
+        {/* displays the cards on the board */}
+        <div className="board">
+          {cards}
+        </div>
       </div>
     )
   }
-
 }
 
-Board.propTypes = {
+// Board.propTypes = {
 
-};
+// };
 
 export default Board;
