@@ -13,6 +13,14 @@ class Card extends Component {
           {this.props.emoji && (
            <p className="card__content-emoji"> {emoji.getUnicode(this.props.emoji) ? emoji.getUnicode(this.props.emoji) : this.props.emoji}</p>
           )}
+          <button
+           onClick={() => this.props.deleteCardCallback(this.props.id)}
+           type="button"
+           className="card__content-delete-btn"
+           aria-label="Close"
+         >
+         Delete
+         </button>
         </section>
       </div>
     );
