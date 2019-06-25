@@ -16,15 +16,36 @@ class Board extends Component {
     };
   }
 
+  componentDidMount() {
+    axios.get(`https://inspiration-board.herokuapp.com/boards/kan_test_board/cards`)
+  .then(function (response) {
+    console.log(response); 
+  })
+  .catch(function (error) {
+    console.log(error);    
+  });
+}
   render() {
     return (
       <div>
-        Board
+        <Card text="hello"/>
       </div>
     )
   }
 
 }
+
+// const cardForms = this.state.cards.map((card, i) => {
+//   return (
+//     <Card
+//       key={i}
+//       id={card.card.id}
+//       text={card.card.text}
+//       cardEmoji={card.card.emoji}
+//       deleteCardCallback={this.deleteCardCallback}
+//     />
+//   )
+// });
 
 Board.propTypes = {
 
