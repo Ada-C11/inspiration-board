@@ -12,10 +12,6 @@ class Board extends Component {
   }
 
   componentDidMount() {
-    this.getCards();
-  }
-
-  getCards = () => {
     axios.get('https://inspiration-board.herokuapp.com/boards/jessica/cards')
     .then((response) => {
       const cardsFM = response.data.flatMap(card => { return [{ ...card }] });
@@ -24,7 +20,7 @@ class Board extends Component {
     })
     .catch((error) => {
       this.setState({ errorMessage: error.message });
-    })
+    });
   }
 
   deleteCard = (id) => {
