@@ -45,9 +45,9 @@ class Board extends Component {
 
   addCard = (card) => {
     const cardIds = this.state.cards.map(card => card.id);
-
+    const newId = Math.max(...cardIds) + 1;
     this.setState({
-      cards: [...this.state.cards, {...card, id: Math.max(...cardIds) + 1}]
+      cards: [{...card, id: newId}, ...this.state.cards]
     });
   }
 
@@ -73,7 +73,7 @@ class Board extends Component {
 
   render() {
     return (
-      <div>
+      <div className="board">
         <NewCardForm 
           addCardCallback={this.addCard} />
 
