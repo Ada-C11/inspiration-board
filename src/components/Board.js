@@ -5,7 +5,7 @@ import axios from 'axios';
 import './Board.css';
 import Card from './Card';
 import NewCardForm from './NewCardForm';
-import CARD_DATA from '../data/card-data.json';
+// import CARD_DATA from '../data/card-data.json';
 
 class Board extends Component {
   constructor() {
@@ -17,7 +17,7 @@ class Board extends Component {
   }
 
   componentDidMount() {
-    axios.get(`${this.props.url}${this.props.boardName}/cards`)
+    axios.get(`${this.props.url}boards/${this.props.boardName}/cards`)
       .then((response) => {
         this.setState({ cards: response.data });
       })
@@ -26,9 +26,26 @@ class Board extends Component {
       });
   }
 
+  deleteCardCallback = (cardID) => {
+    axios.delete(`${this.props.url}cards/${cardID}`)
+    .then((prevState) => {
+      const newBoard = prevState.cards.flatMap(card => {
+        if (card.card.id !== cardID) {
+          return card
+        }
+        return []
+      })
+
+      this.setState({ cards: newBoard });
+    })
+    .catch((error) => {
+      this.setState({ error: error.message });
+    });
+  }
+
   render() {
-    const allCards = CARD_DATA.map((card, i) => {
-      return <div key={i}><Card text={card.text} emoji={card.emoji}/></div>
+    const allCards = this.state.cards.map((card, i) => {
+      return <div key={i}><Card id={card.card.id} text={card.card.text} emoji={card.card.emoji} deleteCardCallback={this.deleteCardCallback}/></div>
     });
 
     return (
